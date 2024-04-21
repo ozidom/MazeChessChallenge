@@ -1,0 +1,32 @@
+#chessboard {
+    border-collapse: collapse;
+    width: 400px;
+    height: 400px;
+}
+
+#chessboard td {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+}
+
+#chessboard tr:nth-child(odd) td:nth-child(odd) {
+    background-color: #f0d9b5; /* Light color for white squares */
+}
+
+#chessboard tr:nth-child(odd) td:nth-child(even) {
+    background-color: #b58863; /* Dark color for light grey squares */
+}
+
+#chessboard tr:nth-child(even) td:nth-child(odd) {
+    background-color: #b58863; /* Dark color for light grey squares */
+}
+
+#chessboard tr:nth-child(even) td:nth-child(even) {
+    background-color: #f0d9b5; /* Light color for white squares */
+}
+
+#chessboard .blocked {
+    background-color: #000 !important; /* Black color for blocked squares */
+    color: #fff; /* White text color */
+}
