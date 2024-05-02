@@ -49,22 +49,23 @@ class Bishop extends Piece {
 }
 
 // Define an array of available pieces
-const pieces = ['King', 'Rook', 'Knight', 'Bishop'];
+const pieces = ['K', 'R', 'N', 'B'];
 
 // Define an array to store blocked spaces
 let blockedSpaces = [];
 
-// Function to prompt player for initial piece selection
-function selectInitialPiece() {
-    let selectedPiece = prompt("Choose a piece to start at a1 (King, Rook, Knight, Bishop):");
-    if (!selectedPiece || !pieces.includes(selectedPiece)) {
-        alert("Invalid piece selection. Please choose from King, Rook, Knight, or Bishop.");
-        selectInitialPiece();
-        return;
-    }
 
-    // Set initial piece position
-    document.getElementById('a1').textContent = selectedPiece;
+// Function to generate random blocked spaces with types (LAVA, Water, etc.)
+function generateBlockedSpaces() {
+    blockedSpaces = []; // Reset blocked spaces array
+    for (let i = 0; i < 25; i++) {
+        let x = String.fromCharCode(97 + Math.floor(Math.random() * 8)); // Random letter from 'a' to 'h'
+        let y = Math.floor(Math.random() * 8) + 1; // Random number from 1 to 8
+        if (!(x=="h" && y==8) && !(x=="a" && y==1)){
+            let type = Math.random() < 0.5 ? 'LAVA' : 'Water'; // Randomly assign type
+            blockedSpaces.push({ space: `${x}${y}`, type: type });
+        }
+    }
 }
 
 // Function to generate the chessboard
@@ -82,9 +83,10 @@ function generateChessboard() {
             cell.setAttribute('id', position);
             cell.textContent = position;
 
-            // Apply styling for blocked spaces
-            if (isBlocked(position)) {
-                cell.classList.add('blocked');
+            // Apply styling for blocked spaces based on type
+            let spaceType = getSpaceType(position);
+            if (spaceType) {
+                cell.classList.add(spaceType); // Add class based on type
             }
 
             row.appendChild(cell);
@@ -95,15 +97,10 @@ function generateChessboard() {
     chessboard.appendChild(tbody);
 }
 
-
-// Function to generate random blocked spaces
-function generateBlockedSpaces() {
-    blockedSpaces = []; // Reset blocked spaces array
-    for (let i = 0; i < 10; i++) {
-        let x = String.fromCharCode(97 + Math.floor(Math.random() * 8)); // Random letter from 'a' to 'h'
-        let y = Math.floor(Math.random() * 8) + 1; // Random number from 1 to 8
-        blockedSpaces.push(`${x}${y}`);
-    }
+// Function to get the type of blocked space at a given position
+function getSpaceType(position) {
+    let space = blockedSpaces.find(blockedSpace => blockedSpace.space === position);
+    return space ? space.type : null;
 }
 
 // Function to move a piece
@@ -113,13 +110,13 @@ function movePiece() {
 
     // Validate inputs
     if (!isValidInput(current) || !isValidInput(destination)) {
-        alert("Invalid input. Please enter valid coordinates (e.g., a1).");
+        alertText("Invalid input. Please enter valid coordinates (e.g., a1).");
         return;
     }
 
     // Check if destination is blocked
     if (isBlocked(destination)) {
-        alert("Destination is blocked. Choose another destination.");
+        alertText("Destination is blocked. Choose another destination.");
         return;
     }
 
@@ -128,25 +125,25 @@ function movePiece() {
     // Validate move based on piece type
     let piece;
     switch (pieceName) {
-        case 'King':
+        case 'K':
             piece = new King();
             break;
-        case 'Rook':
+        case 'R':
             piece = new Rook();
             break;
-        case 'Knight':
+        case 'N':
             piece = new Knight();
             break;
-        case 'Bishop':
+        case 'B':
             piece = new Bishop();
             break;
         default:
-            alert("Invalid piece.");
+            alertText("Invalid piece.");
             return;
     }
 
     if (!piece.isValidMove(current, destination)) {
-        alert("Invalid move for the selected piece.");
+        alertText("Invalid move for the selected piece.");
         return;
     }
 
@@ -170,6 +167,21 @@ function isBlocked(space) {
     return blockedSpaces.includes(space);
 }
 
+// Function to prompt player for initial piece selection
+function selectInitialPiece() {
+    //let selectedPiece = document.getElementById('selectedPiece').value;
+    let selectedPiece = document.getElementById('selectedPiece').value;; 
+    //alert(selectedPiece);
+    if (!selectedPiece || !pieces.includes(selectedPiece)) {
+        alertText("Invalid piece selection. Please choose from K, R, N, or B.(" + selectedPiece + ")");
+        selectInitialPiece(); // Prompt again if selection is invalid
+        return;
+    }
+
+    // Set initial piece position
+    document.getElementById('a1').textContent = selectedPiece;
+}
+
 // Function to render the chessboard
 function renderChessboard() {
     let chessboard = document.getElementById('chessboard');
@@ -184,12 +196,34 @@ function renderChessboard() {
     }
 }
 
-// Initialize game
+function alertText(textBody){
+    document.getElementById('alertText').textContent = textBody;
+}
+
+function selectPiece() {
+
+    selectInitialPiece();
+    //document.getElementById('a1').textContent = selectedPiece;
+    document.getElementById('init').style.visibility = 'hidden' ;
+    document.getElementById('start').style.visibility = 'hidden' ;
+    document.getElementById('main').style.visibility = 'visible' ;
+}
+
 function startGame() {
+    //document.getElementById('a1').textContent = selectedPiece.value;
+}
+
+// Initialize game
+function initGame() {
+    
+    //document.getElementById('main').style.visibility='visible' ;
+    //document.getElementById('intro').style.visibility='hidden' ;
     generateBlockedSpaces(); // Call generateBlockedSpaces() before generating the chessboard
     generateChessboard(); // Generate the chessboard after generating blocked spaces
-    selectInitialPiece();
 }
 
 // Call startGame() when the page loads
-window.onload = startGame;
+document.getElementById('main').style.visibility = 'hidden' ;
+document.getElementById('start').style.visibility = 'hidden' ;
+//document.getElementById('intro').style.visibility='visible' ;
+window.onload = initGame;

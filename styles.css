@@ -1,8 +1,22 @@
+html *
+{
+   font-size: 1em !important;
+   color: #000 !important;   font-family: fantasy; !important;
+}
+
+
+h1
+{
+   font-size: 2em !important;
+}
+
 #chessboard {
     border-collapse: collapse;
     width: 400px;
     height: 400px;
+    font-family: fantasy;
 }
+
 
 #chessboard td {
     width: 50px;
@@ -28,5 +42,15 @@
 
 #chessboard .blocked {
     background-color: #000 !important; /* Black color for blocked squares */
+    color: #fff; /* White text color */
+}
+
+#chessboard .LAVA {
+    background-color: red !important; ; /* Red color for LAVA spaces */
+    color: #fff; /* White text color */
+}
+
+#chessboard .Water {
+    background-color: blue !important; /* Blue color for Water spaces */
     color: #fff; /* White text color */
 }

@@ -3,20 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Chess Game</title>
+    <title>MazeChess</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Simple Chess Game</h1>
-    <table id="chessboard"></table>
+    <h1>MazeChess</h1>
     <div id="input">
-        <label for="current">Current Location:</label>
-        <input type="text" id="current" placeholder="e.g., a1">
-        <label for="destination">Destination:</label>
-        <input type="text" id="destination" placeholder="e.g., c2">
-        <button onclick="movePiece()">Move</button>
+        <div id="init">
+                <label for="selectedPiece">Select Piece:</label>
+                <input type="text" id="selectedPiece" placeholder="e.g. K,B,N or R">
+            <button onclick="selectPiece()">Select Piece</button>
+        </div>
+        <div id="start">
+            <button onclick="startGame()">Select Piece</button>
+        </div>
+        <div id="main">
+            <div>
+                <label for="current">Current Location:</label>
+                <input type="text" id="current" placeholder="e.g., a1">
+            </div>
+            <div>
+                <label for="destination">Destination:</label>
+                <input type="text" id="destination" placeholder="e.g., c2">
+            </div>
+            <button onclick="movePiece()">Move</button>
+            <div id="statusDisplay">
+                <label id="alertText"></label>
+            </div>
+        </div>
     </div>
-
+    <div id="board">
+        <table id="chessboard"></table>
+    <div/>
     <script src="script.js"></script>
 </body>
 </html>
