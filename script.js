@@ -1,7 +1,13 @@
+
+
+
+
 // Define classes for each piece
 class Piece {
+
     constructor(name) {
         this.name = name;
+        this.moveCount = 0;
     }
 
     isValidMove(current, destination) {
@@ -58,7 +64,7 @@ let blockedSpaces = [];
 // Function to generate random blocked spaces with types (LAVA, Water, etc.)
 function generateBlockedSpaces() {
     blockedSpaces = []; // Reset blocked spaces array
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 15; i++) {
         let x = String.fromCharCode(97 + Math.floor(Math.random() * 8)); // Random letter from 'a' to 'h'
         let y = Math.floor(Math.random() * 8) + 1; // Random number from 1 to 8
         if (!(x=="h" && y==8) && !(x=="a" && y==1)){
@@ -107,7 +113,7 @@ function getSpaceType(position) {
 function movePiece() {
     let current = document.getElementById('current').value.toLowerCase();
     let destination = document.getElementById('destination').value.toLowerCase();
-
+   
     // Validate inputs
     if (!isValidInput(current) || !isValidInput(destination)) {
         alertText("Invalid input. Please enter valid coordinates (e.g., a1).");
@@ -150,11 +156,18 @@ function movePiece() {
     // Update destination cell with piece
     document.getElementById(destination).textContent = pieceName;
 
+    piece.moveCount++;
+
     // Clear current cell
-    document.getElementById(current).textContent = '';
+    document.getElementById(current).textContent = ''; 
+    //this should be set to the label of the cell not ''
 
     // Example: Update the chessboard
     renderChessboard();
+
+    if (destination=='h8') {
+        alertText("You have won - number of moves " + piece.moveCount);
+    }
 }
 
 // Function to validate input coordinates
@@ -215,9 +228,7 @@ function startGame() {
 
 // Initialize game
 function initGame() {
-    
-    //document.getElementById('main').style.visibility='visible' ;
-    //document.getElementById('intro').style.visibility='hidden' ;
+    alertText("hello");
     generateBlockedSpaces(); // Call generateBlockedSpaces() before generating the chessboard
     generateChessboard(); // Generate the chessboard after generating blocked spaces
 }

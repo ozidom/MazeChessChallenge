@@ -25,7 +25,7 @@ h1
 }
 
 #chessboard tr:nth-child(odd) td:nth-child(odd) {
-    background-color: #f0d9b5; /* Light color for white squares */
+    background-color: white; /* Light color for white squares */
 }
 
 #chessboard tr:nth-child(odd) td:nth-child(even) {
