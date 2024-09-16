@@ -10,6 +10,7 @@ html {
 body {
     vertical-align: top !important;
     padding: 10px; /* Add a small padding around the body */
+    box-sizing: border-box; /* Include padding in the width/height calculation */
 }
 
 h3 {
@@ -26,36 +27,49 @@ h3 {
     gap: 10px; /* Space between each section */
     align-items: start; /* Align items to the top */
     justify-items: start; /* Align items to the left */
-    max-width: 400px; /* Set max width to prevent stretching */
+    max-width: 100%; /* Use percentage to make it responsive */
+    box-sizing: border-box; /* Include padding in the width/height calculation */
 }
 
-#input, #init, #start {
-    margin: 0; /* Remove margins */
-    padding: 0; /* Remove padding */
-    text-align: left; /* Align text to the left in sections */
-    width: 100%; /* Ensure elements fill the width */
+/* Style for buttons */
+button {
+    background-color: #007bff; /* Primary button color */
+    border: none; /* Remove default border */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding inside the button */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Align buttons inline */
+    font-size: 1em; /* Font size for buttons */
+    margin: 4px 2px; /* Margin around buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
 }
 
-#main div {
-    margin-bottom: 5px; /* Reduce space between input elements */
+button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
 }
 
+/* Responsive chessboard */
 #chessboard {
     border-collapse: collapse;
-    width: 400px;
-    height: 400px;
+    width: 100%; /* Responsive width */
+    height: auto; /* Auto height to maintain aspect ratio */
     font-family: fantasy;
     border: 2px solid #333; /* Dark grey border around the chessboard */
     margin: 0; /* Remove margin */
+    box-sizing: border-box; /* Include border in the width/height calculation */
 }
 
 #chessboard td {
-    width: 50px;
-    height: 50px;
+    width: 12.5%; /* Percentage width for responsive design */
+    height: 12.5%; /* Percentage height for responsive design */
     text-align: center;
     font-weight: bold; /* Make text bold for visibility */
     border: 1px solid #444; /* Subtle border for each cell */
-    font-size: 1.2em; /* Slightly larger font size for better visibility */
+    font-size: 1em; /* Font size adjusted for responsiveness */
+    box-sizing: border-box; /* Include border in the width/height calculation */
 }
 
 /* Light squares: Light grey background with dark text */
