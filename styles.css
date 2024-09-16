@@ -1,10 +1,10 @@
-html, body {
+html {
     vertical-align: top !important;
     margin: 0; /* Remove default margin */
     padding: 0; /* Remove default padding */
     font-size: 1em !important;
     color: orange !important; /* Default text color */
-    font-family: fantasy !important;
+    font-family: Georgia, 'Times New Roman', Times, serif !important;
 }
 
 body {

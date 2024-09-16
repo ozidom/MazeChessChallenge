@@ -1,5 +1,5 @@
 
-
+let startTime;
 
 
 // Define classes for each piece
@@ -166,7 +166,9 @@ function movePiece() {
     renderChessboard();
 
     if (destination=='h8') {
-        alertText("You have won - number of moves " + piece.moveCount);
+        let endTime = new Date();
+        let completionTime = (endTime - startTime) / 1000; // Time in seconds
+        alertText("You have won - number of moves in a time (sec) : " + completionTime);
     }
 }
 
@@ -231,10 +233,40 @@ function initGame() {
     alertText("hello");
     generateBlockedSpaces(); // Call generateBlockedSpaces() before generating the chessboard
     generateChessboard(); // Generate the chessboard after generating blocked spaces
+    startTime = new Date(); 
 }
 
-// Call startGame() when the page loads
+function generateShareableText(completionTime) {
+    return `🏆 I completed the MazeChess Challenge in ${completionTime} seconds! Can you beat my time? #MazeChessChallenge #Chess`;
+}
+
+//SOCIAL MEDIA CODE
+
+function shareOnTwitter() {
+    const completionTime = 45; // Example time; replace with actual completion time
+    const text = generateShareableText(completionTime);
+    const url = encodeURIComponent(window.location.href); // Current page URL
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${url}`;
+    window.open(twitterUrl, '_blank');
+}
+
+function shareOnFacebook() {
+    const completionTime = 45; // Example time; replace with actual completion time
+    const text = generateShareableText(completionTime);
+    const url = encodeURIComponent(window.location.href); // Current page URL
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${encodeURIComponent(text)}`;
+    window.open(facebookUrl, '_blank');
+}
+
+function shareOnWhatsApp() {
+    const completionTime = 45; // Example time; replace with actual completion time
+    const text = generateShareableText(completionTime);
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+    window.open(whatsappUrl, '_blank');
+}
+
+// Call innitGame() when the page loads
+
 document.getElementById('main').style.visibility = 'hidden' ;
 document.getElementById('start').style.visibility = 'hidden' ;
-//document.getElementById('intro').style.visibility='visible' ;
 window.onload = initGame;

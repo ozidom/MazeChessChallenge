@@ -8,23 +8,19 @@
 </head>
 <body>
     <div class="container">
-        <!-- Input Section -->
-        <div id="input">
-            <div id="main">
-                <div>
-                    <label for="current">Current Location:</label>
-                    <input type="text" id="current" placeholder="e.g., a1">
-                </div>
-                <div>
-                    <label for="destination">Destination:</label>
-                    <input type="text" id="destination" placeholder="e.g., c2">
-                </div>
-                <button onclick="movePiece()">Move</button>
-                <div id="statusDisplay">
-                    <label id="alertText"></label>
-                </div>
-            </div>
+        <div>
+            <label for="current">Current Location:</label>
+            <input type="text" id="current" placeholder="e.g., a1">
         </div>
+        <div>
+            <label for="destination">Destination:</label>
+            <input type="text" id="destination" placeholder="e.g., c2">
+        </div>
+        <button onclick="movePiece()">Move</button>
+        <div id="statusDisplay">
+            <label id="alertText"></label>
+        </div>
+    </div>
 
         <!-- Chessboard Section -->
         <div id="board">
@@ -43,6 +39,12 @@
             <button onclick="startGame()">Start Game</button>
         </div>
     </div>
+    <div id="share-buttons">
+    <button onclick="shareOnTwitter()">Share on Twitter</button>
+    <button onclick="shareOnFacebook()">Share on Facebook</button>
+    <button onclick="shareOnWhatsApp()">Share on WhatsApp</button>
+</div>
+
 
     <script src="script.js"></script>
 </body>
