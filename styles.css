@@ -1,31 +1,43 @@
-html * {
+html, body {
+    vertical-align: top !important;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
     font-size: 1em !important;
     color: orange !important; /* Default text color */
     font-family: fantasy !important;
 }
 
 body {
-    margin: 0; /* Remove default margin */
-    padding: 0px; /* Add some padding around the body */
+    vertical-align: top !important;
+    padding: 10px; /* Add a small padding around the body */
 }
 
 h3 {
     font-size: 1.5em !important;
     color: #333 !important; /* Darker grey for headers */
-    margin-bottom: 0px; /* Reduce space below header */
+    margin: 0 0 10px 0; /* Remove top margin, add space below */
 }
 
-/* Main container to hold all elements and center align them */
+/* Main container to hold all elements and align them to the left */
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: left !imp;
-    gap: 0px; /* Space between input, board, and buttons */
+    vertical-align: top !important;
+    display: grid; /* Use grid for more control */
+    grid-template-columns: auto; /* Single column layout */
+    gap: 10px; /* Space between each section */
+    align-items: start; /* Align items to the top */
+    justify-items: start; /* Align items to the left */
+    max-width: 400px; /* Set max width to prevent stretching */
 }
 
 #input, #init, #start {
-    margin-bottom: 10px; /* Reduce margin below sections */
-    text-align: center; /* Center-align text in sections */
+    margin: 0; /* Remove margins */
+    padding: 0; /* Remove padding */
+    text-align: left; /* Align text to the left in sections */
+    width: 100%; /* Ensure elements fill the width */
+}
+
+#main div {
+    margin-bottom: 5px; /* Reduce space between input elements */
 }
 
 #chessboard {
@@ -34,7 +46,7 @@ h3 {
     height: 400px;
     font-family: fantasy;
     border: 2px solid #333; /* Dark grey border around the chessboard */
-    margin: 0 auto; /* Center the chessboard */
+    margin: 0; /* Remove margin */
 }
 
 #chessboard td {
