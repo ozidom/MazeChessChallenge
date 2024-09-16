@@ -1,9 +1,8 @@
-
+// Global Vars
 let startTime;
 let currentPiece;
 let currentLocation;
 let previousLocation;
-
 
 // Define classes for each piece
 class Piece {
@@ -19,7 +18,100 @@ class Piece {
     }
 }
 
+// NEW CODE
+// Function to check if a space is blocked
+function isBlocked2(space) {
+    return blockedSpaces.some(blockedSpace => blockedSpace.space === space);
+}
+
+// Function to check if a space is blocked due to Lava or Water
+function isBlocked(space) {
+    // Check if the space is listed in the blockedSpaces array
+    const isBlockedByGeneralRules = blockedSpaces.some(blockedSpace => blockedSpace.space === space);
+
+    // Check if the space contains Lava or Water
+    const terrain = terrainTypes.find(terrain => terrain.space === space);
+    const isBlockedByTerrain = terrain && (terrain.type === 'Lava' || terrain.type === 'Water');
+
+    return isBlockedByGeneralRules || isBlockedByTerrain;
+}
+
+// Function to check if the path between two spaces is clear
+function isPathClear(current, destination) {
+    let path = [];
+    let currentCol = current.charCodeAt(0);
+    let currentRow = parseInt(current[1]);
+    let destCol = destination.charCodeAt(0);
+    let destRow = parseInt(destination[1]);
+
+    if (currentCol === destCol) {
+        // Vertical movement
+        let minRow = Math.min(currentRow, destRow);
+        let maxRow = Math.max(currentRow, destRow);
+        for (let row = minRow + 1; row < maxRow; row++) {
+            path.push(String.fromCharCode(currentCol) + row);
+        }
+    } else if (currentRow === destRow) {
+        // Horizontal movement
+        let minCol = Math.min(currentCol, destCol);
+        let maxCol = Math.max(currentCol, destCol);
+        for (let col = minCol + 1; col < maxCol; col++) {
+            path.push(String.fromCharCode(col) + currentRow);
+        }
+    } else if (Math.abs(destCol - currentCol) === Math.abs(destRow - currentRow)) {
+        // Diagonal movement
+        let colStep = destCol > currentCol ? 1 : -1;
+        let rowStep = destRow > currentRow ? 1 : -1;
+        let col = currentCol + colStep;
+        let row = currentRow + rowStep;
+        while (col !== destCol && row !== destRow) {
+            path.push(String.fromCharCode(col) + row);
+            col += colStep;
+            row += rowStep;
+        }
+    }
+
+    return path.every(space => !isBlocked(space));
+}
+
+// Update piece classes to check for blocked spaces
 class King extends Piece {
+    isValidMove(current, destination) {
+        let dx = Math.abs(destination.charCodeAt(0) - current.charCodeAt(0));
+        let dy = Math.abs(parseInt(destination[1]) - parseInt(current[1]));
+        return dx <= 1 && dy <= 1;
+    }
+}
+
+class Rook extends Piece {
+    isValidMove(current, destination) {
+        // Rook can move horizontally or vertically
+        let isStraightMove = current[0] === destination[0] || current[1] === destination[1];
+        return isStraightMove && isPathClear(current, destination);
+    }
+}
+
+class Knight extends Piece {
+    isValidMove(current, destination) {
+        let dx = Math.abs(destination.charCodeAt(0) - current.charCodeAt(0));
+        let dy = Math.abs(parseInt(destination[1]) - parseInt(current[1]));
+        return (dx === 1 && dy === 2) || (dx === 2 && dy === 1);
+    }
+}
+
+class Bishop extends Piece {
+    isValidMove(current, destination) {
+        let dx = Math.abs(destination.charCodeAt(0) - current.charCodeAt(0));
+        let dy = Math.abs(parseInt(destination[1]) - parseInt(current[1]));
+        let isDiagonalMove = dx === dy;
+        return isDiagonalMove && isPathClear(current, destination);
+    }
+}
+
+
+//END OF NEW CODE
+
+class King2 extends Piece {
     isValidMove(current, destination) {
         // Implement King's movement validation
         // Example: King can move one square in any direction
@@ -29,7 +121,7 @@ class King extends Piece {
     }
 }
 
-class Rook extends Piece {
+class Rook2 extends Piece {
     isValidMove(current, destination) {
         // Implement Rook's movement validation
         // Example: Rook can move horizontally or vertically
@@ -37,7 +129,7 @@ class Rook extends Piece {
     }
 }
 
-class Knight extends Piece {
+class Knight2 extends Piece {
     isValidMove(current, destination) {
         // Implement Knight's movement validation
         // Example: Knight can move in L-shaped pattern
@@ -47,7 +139,7 @@ class Knight extends Piece {
     }
 }
 
-class Bishop extends Piece {
+class Bishop2 extends Piece {
     isValidMove(current, destination) {
         // Implement Bishop's movement validation
         // Example: Bishop can move diagonally
@@ -62,7 +154,6 @@ const pieces = ['K', 'R', 'N', 'B'];
 
 // Define an array to store blocked spaces
 let blockedSpaces = [];
-
 
 // Function to generate random blocked spaces with types (LAVA, Water, etc.)
 function generateBlockedSpaces() {
@@ -95,12 +186,20 @@ function generateChessboard() {
             let button = document.createElement('button');
             button.setAttribute('id', position);
             button.textContent = position;
-            button.onclick = () => handleCellClick(position); // Add click event handler
+            button.onclick = () => handleCellClick(position); 
+           // Add click event handler
 
             // Apply styling for blocked spaces based on type
             let spaceType = getSpaceType(position);
             if (spaceType) {
-                cell.classList.add(spaceType); // Add class based on type
+                //alert(spaceType);
+                cell.classList.add(spaceType);
+                if (spaceType == 'Water' || spaceType =='LAVA'){
+                    //button.textContent = "X";
+                    button.disabled = true;
+                }
+
+                //button.onclick = () => handleCellClick(position);  // Add class based on type
             }
 
             cell.appendChild(button); // Add button to cell
@@ -120,37 +219,7 @@ function getSpaceType(position) {
 }
 
 function handleCellClick(position) {
-    //alertText(position);
     movePiece(position);
-}
-
-//Function to generate the old chessboard
-function generateChessboard2() {
-    let chessboard = document.getElementById('chessboard');
-    chessboard.innerHTML = ''; // Clear existing content
-    let tbody = document.createElement('tbody');
-
-    for (let i = 8; i >= 1; i--) {
-        let row = document.createElement('tr');
-        for (let j = 0; j < 8; j++) {
-            let cell = document.createElement('td');
-            let colLabel = String.fromCharCode(97 + j);
-            let position = colLabel + i;
-            cell.setAttribute('id', position);
-            cell.textContent = position;
-
-            // Apply styling for blocked spaces based on type
-            let spaceType = getSpaceType(position);
-            if (spaceType) {
-                cell.classList.add(spaceType); // Add class based on type
-            }
-
-            row.appendChild(cell);
-        }
-        tbody.appendChild(row);
-    }
-
-    chessboard.appendChild(tbody);
 }
 
 // Function to get the type of blocked space at a given position
@@ -205,71 +274,6 @@ function movePiece(location) {
     // Update destination cell with piece
     document.getElementById(destination).textContent = pieceName;
     currentLocation = destination;
-    alert(currentLocation);
-    piece.moveCount++;
-
-    // Clear current cell
-    document.getElementById(current).textContent = ''; 
-    //this should be set to the label of the cell not ''
-
-    // Example: Update the chessboard
-    renderChessboard();
-
-    if (destination=='h8') {
-        let endTime = new Date();
-        let completionTime = (endTime - startTime) / 1000; // Time in seconds
-        alertText("You have won - number of moves in a time (sec) : " + completionTime);
-    }
-}
-
-// Function to move a piece
-function movePiece2() {
-    let current = document.getElementById('current').value.toLowerCase();
-    let destination = document.getElementById('destination').value.toLowerCase();
-   
-    // Validate inputs
-    if (!isValidInput(current) || !isValidInput(destination)) {
-        alertText("Invalid input. Please enter valid coordinates (e.g., a1).");
-        return;
-    }
-
-    // Check if destination is blocked
-    if (isBlocked(destination)) {
-        alertText("Destination is blocked. Choose another destination.");
-        return;
-    }
-
-    let pieceName = document.getElementById(current).textContent;
-   
-    // Validate move based on piece type
-    let piece;
-    switch (pieceName) {
-        case 'K':
-            piece = new King();
-            break;
-        case 'R':
-            piece = new Rook();
-            break;
-        case 'N':
-            piece = new Knight();
-            break;
-        case 'B':
-            piece = new Bishop();
-            break;
-        default:
-            alertText("Invalid piece.");
-            return;
-    }
-
-    if (!piece.isValidMove(current, destination)) {
-        alertText("Invalid move for the selected piece.");
-        return;
-    }
-
-    // Update destination cell with piece
-    document.getElementById(destination).textContent = pieceName;
-    currentLocation = destination;
-    alert(currentLocation);
     piece.moveCount++;
 
     // Clear current cell
@@ -362,7 +366,6 @@ function startGame() {
     //document.getElementById('a1').textContent = selectedPiece.value;
 }
 
-// Initialize game
 function initGame() {
     currentLocation = "a1";
     generateBlockedSpaces(); // Call generateBlockedSpaces() before generating the chessboard
@@ -399,8 +402,5 @@ function shareOnWhatsApp() {
     window.open(whatsappUrl, '_blank');
 }
 
-// Call innitGame() when the page loads
-
-//document.getElementById('main').style.visibility = 'hidden' ;
 document.getElementById('start').style.visibility = 'hidden' ;
 window.onload = initGame;
