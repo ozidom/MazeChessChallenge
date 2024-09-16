@@ -1,13 +1,31 @@
-html *
-{
-   font-size: 1em !important;
-   color: #000 !important;   font-family: fantasy; !important;
+html * {
+    font-size: 1em !important;
+    color: orange !important; /* Default text color */
+    font-family: fantasy !important;
 }
 
+body {
+    margin: 0; /* Remove default margin */
+    padding: 0px; /* Add some padding around the body */
+}
 
-h1
-{
-   font-size: 2em !important;
+h3 {
+    font-size: 1.5em !important;
+    color: #333 !important; /* Darker grey for headers */
+    margin-bottom: 0px; /* Reduce space below header */
+}
+
+/* Main container to hold all elements and center align them */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: left !imp;
+    gap: 0px; /* Space between input, board, and buttons */
+}
+
+#input, #init, #start {
+    margin-bottom: 10px; /* Reduce margin below sections */
+    text-align: center; /* Center-align text in sections */
 }
 
 #chessboard {
@@ -15,42 +33,45 @@ h1
     width: 400px;
     height: 400px;
     font-family: fantasy;
+    border: 2px solid #333; /* Dark grey border around the chessboard */
+    margin: 0 auto; /* Center the chessboard */
 }
-
 
 #chessboard td {
     width: 50px;
     height: 50px;
     text-align: center;
+    font-weight: bold; /* Make text bold for visibility */
+    border: 1px solid #444; /* Subtle border for each cell */
+    font-size: 1.2em; /* Slightly larger font size for better visibility */
 }
 
-#chessboard tr:nth-child(odd) td:nth-child(odd) {
-    background-color: white; /* Light color for white squares */
-}
-
-#chessboard tr:nth-child(odd) td:nth-child(even) {
-    background-color: #b58863; /* Dark color for light grey squares */
-}
-
-#chessboard tr:nth-child(even) td:nth-child(odd) {
-    background-color: #b58863; /* Dark color for light grey squares */
-}
-
+/* Light squares: Light grey background with dark text */
+#chessboard tr:nth-child(odd) td:nth-child(odd),
 #chessboard tr:nth-child(even) td:nth-child(even) {
-    background-color: #f0d9b5; /* Light color for white squares */
+    background-color: #ddd; /* Light grey for light squares */
+    color: #222; /* Dark grey text for visibility */
 }
 
+/* Dark squares: Dark grey background with light text */
+#chessboard tr:nth-child(odd) td:nth-child(even),
+#chessboard tr:nth-child(even) td:nth-child(odd) {
+    background-color: #666; /* Dark grey for dark squares */
+    color: #f0f0f0; /* Light grey text for visibility */
+}
+
+/* Special squares with custom colors */
 #chessboard .blocked {
     background-color: #000 !important; /* Black color for blocked squares */
     color: #fff; /* White text color */
 }
 
 #chessboard .LAVA {
-    background-color: red !important; ; /* Red color for LAVA spaces */
+    background-color: #b30000 !important; /* Darker red for LAVA spaces */
     color: #fff; /* White text color */
 }
 
 #chessboard .Water {
-    background-color: blue !important; /* Blue color for Water spaces */
+    background-color: #0066cc !important; /* Darker blue for Water spaces */
     color: #fff; /* White text color */
 }
