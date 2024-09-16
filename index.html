@@ -7,45 +7,45 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div>
-            <label for="current">Current Location:</label>
-            <input type="text" id="current" placeholder="e.g., a1">
-        </div>
-        <div>
-            <label for="destination">Destination:</label>
-            <input type="text" id="destination" placeholder="e.g., c2">
-        </div>
-        <button onclick="movePiece()">Move</button>
-        <div id="statusDisplay">
-            <label id="alertText"></label>
+    <h3>MazeChess Challenge Demo</h3>
+    <div id="input">
+        <div id="main">
+            <div>
+                <label for="current">Current Location:</label>
+                <input type="text" id="current" placeholder="e.g., a1">
+            </div>
+            <div>
+                <label for="destination">Destination:</label>
+                <input type="text" id="destination" placeholder="e.g., c2">
+            </div>
+            <button onclick="movePiece()">Move</button>
+            <div id="statusDisplay">
+                <label id="alertText"></label>
+            </div>
         </div>
     </div>
-
-        <!-- Chessboard Section -->
-        <div id="board">
-            <table id="chessboard"></table>
-        </div>
-
-        <!-- Piece Selection Section -->
-        <div id="init">
-            <label for="selectedPiece">Select Piece:</label>
-            <input type="text" id="selectedPiece" placeholder="e.g. K, B, N or R">
-            <button onclick="selectPiece()">Select Piece</button>
-        </div>
-
-        <!-- Start Game Section -->
-        <div id="start">
-            <button onclick="startGame()">Start Game</button>
-        </div>
+    <div id="board">
+        <table id="chessboard"></table>
+    <div/>
+    <div id="init">
+        <label for="selectedPiece">Select Piece:</label>
+        <input type="text" id="selectedPiece" placeholder="e.g. K,B,N or R">
+        <button onclick="selectPiece()">Select Piece</button>
+    </div>
+    <div id="select-piece-buttons">
+        <button onclick="selectKing()">Select King</button>
+        <button onclick="selectBishop()">Select Bishop</button>
+        <button onclick="selectRook()">Seclect Rook</button>
+        <button onclick="selectKnight()">Select Knight</button>
     </div>
     <div id="share-buttons">
-    <button onclick="shareOnTwitter()">Share on Twitter</button>
-    <button onclick="shareOnFacebook()">Share on Facebook</button>
-    <button onclick="shareOnWhatsApp()">Share on WhatsApp</button>
-</div>
-
-
+        <button onclick="shareOnTwitter()">Share on Twitter</button>
+        <button onclick="shareOnFacebook()">Share on Facebook</button>
+        <button onclick="shareOnWhatsApp()">Share on WhatsApp</button>
+    </div>
+    <div id="start">
+        <button onclick="startGame()">Select Piece</button>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

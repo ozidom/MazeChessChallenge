@@ -1,5 +1,8 @@
 
 let startTime;
+let currentPiece;
+let currentLocation;
+let previousLocation;
 
 
 // Define classes for each piece
@@ -87,6 +90,53 @@ function generateChessboard() {
             let colLabel = String.fromCharCode(97 + j);
             let position = colLabel + i;
             cell.setAttribute('id', position);
+
+            // Create a button element
+            let button = document.createElement('button');
+            button.setAttribute('id', position);
+            button.textContent = position;
+            button.onclick = () => handleCellClick(position); // Add click event handler
+
+            // Apply styling for blocked spaces based on type
+            let spaceType = getSpaceType(position);
+            if (spaceType) {
+                cell.classList.add(spaceType); // Add class based on type
+            }
+
+            cell.appendChild(button); // Add button to cell
+            row.appendChild(cell);
+        }
+        tbody.appendChild(row);
+    }
+
+    chessboard.appendChild(tbody);
+}
+
+// Example function to determine space type (blocked or not)
+function getSpaceType(position) {
+    // You can adjust this function to return different types based on your requirements
+    let blockedSpace = blockedSpaces.find(space => space.space === position);
+    return blockedSpace ? blockedSpace.type : null;
+}
+
+function handleCellClick(position) {
+    //alertText(position);
+    movePiece(position);
+}
+
+//Function to generate the old chessboard
+function generateChessboard2() {
+    let chessboard = document.getElementById('chessboard');
+    chessboard.innerHTML = ''; // Clear existing content
+    let tbody = document.createElement('tbody');
+
+    for (let i = 8; i >= 1; i--) {
+        let row = document.createElement('tr');
+        for (let j = 0; j < 8; j++) {
+            let cell = document.createElement('td');
+            let colLabel = String.fromCharCode(97 + j);
+            let position = colLabel + i;
+            cell.setAttribute('id', position);
             cell.textContent = position;
 
             // Apply styling for blocked spaces based on type
@@ -109,10 +159,9 @@ function getSpaceType(position) {
     return space ? space.type : null;
 }
 
-// Function to move a piece
-function movePiece() {
-    let current = document.getElementById('current').value.toLowerCase();
-    let destination = document.getElementById('destination').value.toLowerCase();
+function movePiece(location) {
+    let current = currentLocation;
+    let destination = location;
    
     // Validate inputs
     if (!isValidInput(current) || !isValidInput(destination)) {
@@ -127,7 +176,7 @@ function movePiece() {
     }
 
     let pieceName = document.getElementById(current).textContent;
-
+   
     // Validate move based on piece type
     let piece;
     switch (pieceName) {
@@ -155,7 +204,72 @@ function movePiece() {
 
     // Update destination cell with piece
     document.getElementById(destination).textContent = pieceName;
+    currentLocation = destination;
+    alert(currentLocation);
+    piece.moveCount++;
 
+    // Clear current cell
+    document.getElementById(current).textContent = ''; 
+    //this should be set to the label of the cell not ''
+
+    // Example: Update the chessboard
+    renderChessboard();
+
+    if (destination=='h8') {
+        let endTime = new Date();
+        let completionTime = (endTime - startTime) / 1000; // Time in seconds
+        alertText("You have won - number of moves in a time (sec) : " + completionTime);
+    }
+}
+
+// Function to move a piece
+function movePiece2() {
+    let current = document.getElementById('current').value.toLowerCase();
+    let destination = document.getElementById('destination').value.toLowerCase();
+   
+    // Validate inputs
+    if (!isValidInput(current) || !isValidInput(destination)) {
+        alertText("Invalid input. Please enter valid coordinates (e.g., a1).");
+        return;
+    }
+
+    // Check if destination is blocked
+    if (isBlocked(destination)) {
+        alertText("Destination is blocked. Choose another destination.");
+        return;
+    }
+
+    let pieceName = document.getElementById(current).textContent;
+   
+    // Validate move based on piece type
+    let piece;
+    switch (pieceName) {
+        case 'K':
+            piece = new King();
+            break;
+        case 'R':
+            piece = new Rook();
+            break;
+        case 'N':
+            piece = new Knight();
+            break;
+        case 'B':
+            piece = new Bishop();
+            break;
+        default:
+            alertText("Invalid piece.");
+            return;
+    }
+
+    if (!piece.isValidMove(current, destination)) {
+        alertText("Invalid move for the selected piece.");
+        return;
+    }
+
+    // Update destination cell with piece
+    document.getElementById(destination).textContent = pieceName;
+    currentLocation = destination;
+    alert(currentLocation);
     piece.moveCount++;
 
     // Clear current cell
@@ -185,7 +299,7 @@ function isBlocked(space) {
 // Function to prompt player for initial piece selection
 function selectInitialPiece() {
     //let selectedPiece = document.getElementById('selectedPiece').value;
-    let selectedPiece = document.getElementById('selectedPiece').value;; 
+    let selectedPiece = document.getElementById('selectedPiece').value;
     //alert(selectedPiece);
     if (!selectedPiece || !pieces.includes(selectedPiece)) {
         alertText("Invalid piece selection. Please choose from K, R, N, or B.(" + selectedPiece + ")");
@@ -195,6 +309,26 @@ function selectInitialPiece() {
 
     // Set initial piece position
     document.getElementById('a1').textContent = selectedPiece;
+}
+
+function selectKing() {
+    currentPiece = 'K';
+    document.getElementById(currentLocation).textContent = currentPiece;
+}
+
+function selectRook() {
+    currentPiece = 'R';
+    document.getElementById(currentLocation).textContent = currentPiece;
+}
+
+function selectKnight() {
+    currentPiece = 'N';
+    document.getElementById(currentLocation).textContent = currentPiece;
+}
+
+function selectBishop() {
+    currentPiece = 'B';
+    document.getElementById(currentLocation).textContent = currentPiece;
 }
 
 // Function to render the chessboard
@@ -230,7 +364,7 @@ function startGame() {
 
 // Initialize game
 function initGame() {
-    alertText("hello");
+    currentLocation = "a1";
     generateBlockedSpaces(); // Call generateBlockedSpaces() before generating the chessboard
     generateChessboard(); // Generate the chessboard after generating blocked spaces
     startTime = new Date(); 
@@ -267,6 +401,6 @@ function shareOnWhatsApp() {
 
 // Call innitGame() when the page loads
 
-document.getElementById('main').style.visibility = 'hidden' ;
+//document.getElementById('main').style.visibility = 'hidden' ;
 document.getElementById('start').style.visibility = 'hidden' ;
 window.onload = initGame;
