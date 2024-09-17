@@ -4,7 +4,7 @@ let currentPiece;
 let currentLocation;
 let previousLocation;
 // Define an array of available pieces
-const pieces = ['K', 'R', 'N', 'B'];
+const pieces = ['♚', 'R', 'N', 'B'];
 
 // Define an array to store blocked spaces
 let blockedSpaces = [];
@@ -263,7 +263,7 @@ function movePiece(location) {
     // Validate move based on piece type
     let piece;
     switch (pieceName) {
-        case 'K':
+        case '♚':
             piece = new King();
             break;
         case 'R':
@@ -290,7 +290,7 @@ function movePiece(location) {
     currentLocation = destination;
     piece.moveCount++;
 
-    // Clear current cell
+    // TODO : For a move involving multiple square lets mark them on the board
     //document.getElementById(current).textContent = ''; 
     //this should be set to the label of the cell not ''
 
@@ -330,7 +330,7 @@ function selectInitialPiece() {
 }
 
 function selectKing() {
-    currentPiece = 'K';
+    currentPiece = '♚';
     document.getElementById(currentLocation).textContent = currentPiece;
 }
 
@@ -401,6 +401,8 @@ function shareOnTwitter() {
     window.open(twitterUrl, '_blank');
 }
 
+
+
 function shareOnFacebook() {
     const completionTime = 45; // Example time; replace with actual completion time
     const text = generateShareableText(completionTime);
@@ -414,6 +416,33 @@ function shareOnWhatsApp() {
     const text = generateShareableText(completionTime);
     const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
     window.open(whatsappUrl, '_blank');
+}
+
+function downloadChessboard() {
+    const chessboardImage = captureChessboard();
+    const link = document.createElement('a');
+    link.href = chessboardImage;
+    link.download = 'chessboard.png'; // Name of the downloaded file
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+function captureChessboard() {
+    const chessboard = document.getElementById('chessboard');
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    const rect = chessboard.getBoundingClientRect();
+    
+    // Set canvas dimensions
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+
+    // Draw the chessboard onto the canvas
+    context.drawImage(chessboard, 0, 0);
+
+    // Return the data URL of the canvas image
+    return canvas.toDataURL('image/png');
 }
 
 document.getElementById('start').style.visibility = 'hidden' ;

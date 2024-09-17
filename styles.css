@@ -2,14 +2,13 @@ html {
     vertical-align: top !important;
     margin: 0; /* Remove default margin */
     padding: 0; /* Remove default padding */
-    font-size: 1em !important;
     color: orange !important; /* Default text color */
     font-family: Georgia, 'Times New Roman', Times, serif !important;
 }
 
 body {
     vertical-align: top !important;
-    padding: 10px; /* Add a small padding around the body */
+    /*padding: 10px;Add a small padding around the body */
 }
 
 h3 {
@@ -60,8 +59,9 @@ h3 {
     height: 40px;
     text-align: center;
     font-weight: bold; /* Make text bold for visibility */
-    border: 1px solid #444; /* Subtle border for each cell */
-    font-size: 1.2em; /* Slightly larger font size for better visibility */
+    border: 0; /* Subtle border for each cell */
+    font-size: 1.9em; /* Slightly larger font size for better visibility */
+    padding: 0; /* Remove padding */
 }
 
 /* Light squares: Light grey background with dark text */
@@ -82,37 +82,28 @@ h3 {
 button {
     width: 100%; /* Full width for buttons in their container */
     height: 100%; /* Full height for buttons in their container */
-    padding: 0px; /* Padding inside buttons */
+    padding: 0px !important; /* Padding inside buttons */
     text-align: center; /* Center text */
-    border: 1px solid #444; /* Default border */
-    font-size: 1em; /* Font size */
+    border: 0px solid #444; /* Default border */
+    font-size: 12pt; /* Font size */
     cursor: pointer; /* Pointer cursor on hover */
     border-radius: 0px; /* Rounded corners */
-    transition: background-color 0.3s ease; /* Smooth background color transition */
-    box-sizing: border-box; /* Include padding in width/height */
+    /* transition: background-color 0.3s ease;  Smooth background color transition */
+    /* box-sizing: border-box; */ /* Include padding in width/height */
 }
 
 /* Light buttons: Light grey background with dark text */
-#chessboard td:nth-child(even) button {
-    background-color: #ddd; /* Light grey for odd buttons */
+#chessboard tr:nth-child(odd) td:nth-child(odd) button,
+#chessboard tr:nth-child(even) td:nth-child(even) button {
+    background-color: #ddd; /* Light grey for light squares */
     color: #222; /* Dark grey text */
 }
 
 /* Dark buttons: Dark grey background with light text */
-#chessboard td:nth-child(odd) button {
-    background-color: #666; /* Dark grey for even buttons */
+#chessboard tr:nth-child(odd) td:nth-child(even) button,
+#chessboard tr:nth-child(even) td:nth-child(odd) button {
+    background-color: #666; /* Dark grey for dark squares */
     color: #f0f0f0; /* Light grey text */
-}
-
-/* Hover effects for buttons */
-button:hover {
-    opacity: 0.8; /* Slightly transparent on hover */
-}
-
-/* Focus effect for accessibility */
-button:focus {
-    outline: 3px solid #0056b3; /* Blue outline for focus state */
-    outline-offset: 2px; /* Offset outline slightly */
 }
 
 /* Special squares with custom colors */
