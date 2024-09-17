@@ -19,10 +19,6 @@ class Piece {
 }
 
 // NEW CODE
-// Function to check if a space is blocked
-function isBlocked2(space) {
-    return blockedSpaces.some(blockedSpace => blockedSpace.space === space);
-}
 
 // Function to check if a space is blocked due to Lava or Water
 function isBlocked(space) {
@@ -108,47 +104,6 @@ class Bishop extends Piece {
     }
 }
 
-
-//END OF NEW CODE
-
-class King2 extends Piece {
-    isValidMove(current, destination) {
-        // Implement King's movement validation
-        // Example: King can move one square in any direction
-        let dx = Math.abs(destination.charCodeAt(0) - current.charCodeAt(0));
-        let dy = Math.abs(parseInt(destination[1]) - parseInt(current[1]));
-        return dx <= 1 && dy <= 1;
-    }
-}
-
-class Rook2 extends Piece {
-    isValidMove(current, destination) {
-        // Implement Rook's movement validation
-        // Example: Rook can move horizontally or vertically
-        return current[0] === destination[0] || current[1] === destination[1];
-    }
-}
-
-class Knight2 extends Piece {
-    isValidMove(current, destination) {
-        // Implement Knight's movement validation
-        // Example: Knight can move in L-shaped pattern
-        let dx = Math.abs(destination.charCodeAt(0) - current.charCodeAt(0));
-        let dy = Math.abs(parseInt(destination[1]) - parseInt(current[1]));
-        return (dx === 1 && dy === 2) || (dx === 2 && dy === 1);
-    }
-}
-
-class Bishop2 extends Piece {
-    isValidMove(current, destination) {
-        // Implement Bishop's movement validation
-        // Example: Bishop can move diagonally
-        let dx = Math.abs(destination.charCodeAt(0) - current.charCodeAt(0));
-        let dy = Math.abs(parseInt(destination[1]) - parseInt(current[1]));
-        return dx === dy;
-    }
-}
-
 // Define an array of available pieces
 const pieces = ['K', 'R', 'N', 'B'];
 
@@ -194,8 +149,10 @@ function generateChessboard() {
             if (spaceType) {
                 //alert(spaceType);
                 cell.classList.add(spaceType);
+               
                 if (spaceType == 'Water' || spaceType =='LAVA'){
                     //button.textContent = "X";
+                    button.classList.add(spaceType);
                     button.disabled = true;
                 }
 
