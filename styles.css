@@ -93,13 +93,13 @@ button {
 }
 
 /* Light buttons: Light grey background with dark text */
-#chessboard td:nth-child(odd) button {
+#chessboard td:nth-child(even) button {
     background-color: #ddd; /* Light grey for odd buttons */
     color: #222; /* Dark grey text */
 }
 
 /* Dark buttons: Dark grey background with light text */
-#chessboard td:nth-child(even) button {
+#chessboard td:nth-child(odd) button {
     background-color: #666; /* Dark grey for even buttons */
     color: #f0f0f0; /* Light grey text */
 }
@@ -114,8 +114,6 @@ button:focus {
     outline: 3px solid #0056b3; /* Blue outline for focus state */
     outline-offset: 2px; /* Offset outline slightly */
 }
-
-
 
 /* Special squares with custom colors */
 #chessboard .blocked {

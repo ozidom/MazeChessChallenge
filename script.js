@@ -3,6 +3,11 @@ let startTime;
 let currentPiece;
 let currentLocation;
 let previousLocation;
+// Define an array of available pieces
+const pieces = ['K', 'R', 'N', 'B'];
+
+// Define an array to store blocked spaces
+let blockedSpaces = [];
 
 // Define classes for each piece
 class Piece {
@@ -32,8 +37,66 @@ function isBlocked(space) {
     return isBlockedByGeneralRules || isBlockedByTerrain;
 }
 
+// Function to check if a space is blocked
+function isBlocked2(space) {
+    return blockedSpaces.some(blockedSpace => blockedSpace.space === space);
+}
+
 // Function to check if the path between two spaces is clear
 function isPathClear(current, destination) {
+    let path = [];
+    let currentCol = current.charCodeAt(0);
+    let currentRow = parseInt(current[1]);
+    let destCol = destination.charCodeAt(0);
+    let destRow = parseInt(destination[1]);
+
+    if (currentCol === destCol) {
+        // Vertical movement
+        let minRow = Math.min(currentRow, destRow);
+        let maxRow = Math.max(currentRow, destRow);
+        for (let row = minRow + 1; row < maxRow; row++) {
+            let pos = String.fromCharCode(currentCol) + row;
+            if (isBlocked2(pos)) {
+                return false; // Blocked space encountered
+            }
+            path.push(pos);
+        }
+    } else if (currentRow === destRow) {
+        // Horizontal movement
+        let minCol = Math.min(currentCol, destCol);
+        let maxCol = Math.max(currentCol, destCol);
+        for (let col = minCol + 1; col < maxCol; col++) {
+            let pos = String.fromCharCode(col) + currentRow;
+            if (isBlocked2(pos)) {
+                return false; // Blocked space encountered
+            }
+            path.push(pos);
+        }
+    } else if (Math.abs(destCol - currentCol) === Math.abs(destRow - currentRow)) {
+        // Diagonal movement
+        let colStep = destCol > currentCol ? 1 : -1;
+        let rowStep = destRow > currentRow ? 1 : -1;
+        let col = currentCol + colStep;
+        let row = currentRow + rowStep;
+        while (col !== destCol && row !== destRow) {
+            let pos = String.fromCharCode(col) + row;
+            if (isBlocked2(pos)) {
+                return false; // Blocked space encountered
+            }
+            path.push(pos);
+            col += colStep;
+            row += rowStep;
+        }
+    } else {
+        return false; // Invalid move for this piece
+    }
+
+    return true; // Path is clear
+}
+
+
+// Function to check if the path between two spaces is clear
+function isPathClear2(current, destination) {
     let path = [];
     let currentCol = current.charCodeAt(0);
     let currentRow = parseInt(current[1]);
@@ -103,13 +166,6 @@ class Bishop extends Piece {
         return isDiagonalMove && isPathClear(current, destination);
     }
 }
-
-// Define an array of available pieces
-const pieces = ['K', 'R', 'N', 'B'];
-
-// Define an array to store blocked spaces
-let blockedSpaces = [];
-
 // Function to generate random blocked spaces with types (LAVA, Water, etc.)
 function generateBlockedSpaces() {
     blockedSpaces = []; // Reset blocked spaces array
