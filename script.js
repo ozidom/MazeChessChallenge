@@ -196,7 +196,8 @@ function generateChessboard() {
             // Create a button element
             let button = document.createElement('button');
             button.setAttribute('id', position);
-            button.textContent = position;
+            button.textContent = "";
+            //button.textContent.visibility = "hidden";
             button.onclick = () => handleCellClick(position); 
            // Add click event handler
 
@@ -290,7 +291,7 @@ function movePiece(location) {
     piece.moveCount++;
 
     // Clear current cell
-    document.getElementById(current).textContent = ''; 
+    //document.getElementById(current).textContent = ''; 
     //this should be set to the label of the cell not ''
 
     // Example: Update the chessboard
