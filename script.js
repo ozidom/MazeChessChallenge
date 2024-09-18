@@ -185,8 +185,73 @@ function generateBlockedSpaces() {
     }
 }
 
+async function loadChessboardData() {
+    try {
+        const response = await fetch('chessboards.txt'); // Update with your file path
+        const text = await response.text();
+        return parseChessboardData(text);
+    } catch (error) {
+        console.error("Error loading chessboard data: ", error);
+        return null;
+    }
+}
+
+function parseChessboardData(text) {
+    const lines = text.split('\n');
+    const chessboards = {};
+
+    lines.forEach(line => {
+        const [date, positions] = line.split(':');
+        chessboards[date.trim()] = positions.split(',').map(pos => pos.trim());
+    });
+
+    return chessboards;
+}
+
+
+async function generateChessboard() {
+    const chessboards = await loadChessboardData();
+    if (!chessboards) return; // Handle loading error
+
+    const today = new Date();
+    const dateKey = today.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+
+    const positions = chessboards[dateKey];
+    if (!positions) {
+        alert("No chessboard available for today.");
+        return;
+    }
+
+    const chessboard = document.getElementById('chessboard');
+    chessboard.innerHTML = ''; // Clear existing content
+    const tbody = document.createElement('tbody');
+
+    for (let i = 8; i >= 1; i--) {
+        const row = document.createElement('tr');
+        for (let j = 0; j < 8; j++) {
+            const cell = document.createElement('td');
+            const colLabel = String.fromCharCode(97 + j); // a-h
+            const position = colLabel + i;
+            cell.setAttribute('id', position);
+
+            // Create a button element
+            const button = document.createElement('button');
+            button.setAttribute('id', position);
+            button.textContent = positions[j] || ""; // Set piece based on loaded data
+
+            button.onclick = () => handleCellClick(position); // Add click event handler
+
+            cell.appendChild(button); // Add button to cell
+            row.appendChild(cell);
+        }
+        tbody.appendChild(row);
+    }
+
+    chessboard.appendChild(tbody);
+}
+
 // Function to generate the chessboard
-function generateChessboard() {
+function generateChessboard2() {
     let chessboard = document.getElementById('chessboard');
     chessboard.innerHTML = ''; // Clear existing content
     let tbody = document.createElement('tbody');
