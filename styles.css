@@ -116,8 +116,8 @@ button {
     }
 
     button {
-        width: 38px; /* Full width for buttons in their container */
-        height: 30px; /* Full height for buttons in their container */
+        width: 20px; /* Full width for buttons in their container */
+        height: 15px; /* Full height for buttons in their container */
         /*padding: 0px !important; /* Padding inside buttons */
         /*text-align: center; /* Center text */
         /*border: 0px solid #444; /* Default border */
