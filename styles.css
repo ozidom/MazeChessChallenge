@@ -109,20 +109,15 @@ button {
     /* transition: background-color 0.3s ease;  Smooth background color transition */
     /* box-sizing: border-box; */ /* Include padding in width/height */
 }
+@media (max-width: 600px) {
+    /* Mobile-specific styles here */
+    body {
+        background-color: lightblue; /* Example: change background color on mobile */
+    }
 
-@media (any-pointer: coarse) {
-    /* do your own styles */
-    button {
-        width: 18px; /* Full width for buttons in their container */
-        height: 14px; /* Full height for buttons in their container */
-        /*padding: 0px !important; /* Padding inside buttons */
-        /*text-align: center; /* Center text */
-        /*border: 0px solid #444; /* Default border */
-        /*font-size: 12pt; /* Font size */
-        cursor: pointer; /* Pointer cursor on hover */
-        border: 0;
-        /* transition: background-color 0.3s ease;  Smooth background color transition */
-        /* box-sizing: border-box; */ /* Include padding in width/height */
+    #chessboard td {
+        width: 25%; /* Adjust the size of table cells */
+        height: auto; /* Let height adjust based on content */
     }
 }
 
