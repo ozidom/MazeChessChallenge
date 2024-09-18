@@ -80,14 +80,14 @@ h3 {
 /*Button */
 /* Base button styles */
 button {
-    width: 100%; /* Full width for buttons in their container */
-    height: 100%; /* Full height for buttons in their container */
-    padding: 0px !important; /* Padding inside buttons */
-    text-align: center; /* Center text */
-    border: 0px solid #444; /* Default border */
-    font-size: 12pt; /* Font size */
-    cursor: pointer; /* Pointer cursor on hover */
-    border-radius: 0px; /* Rounded corners */
+    width: 38px; /* Full width for buttons in their container */
+    height: 38px; /* Full height for buttons in their container */
+    /*padding: 0px !important; /* Padding inside buttons */
+    /*text-align: center; /* Center text */
+    /*border: 0px solid #444; /* Default border */
+    /*font-size: 12pt; /* Font size */
+    /*cursor: pointer; /* Pointer cursor on hover */
+    border: 0;
     /* transition: background-color 0.3s ease;  Smooth background color transition */
     /* box-sizing: border-box; */ /* Include padding in width/height */
 }
