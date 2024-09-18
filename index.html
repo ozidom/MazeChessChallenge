@@ -8,13 +8,7 @@
 </head>
 <body>
     <h3>MazeChess Challenge Demo</h3>
-    <div id="input">
-        <div id="main">
-            <div id="statusDisplay">
-                <label id="alertText"></label>
-            </div>
-        </div>
-    </div>
+
     <div id="board">
         <table id="chessboard"></table>
     <div/>
@@ -22,16 +16,23 @@
     </div>
     <div id="controls">
         <div id="select-piece-buttons">
-            <button onclick="selectKing()">Select King (1 space anywhere)</button>
-            <button onclick="selectBishop()">Select Bishop (Diagonal)</button>
-            <button onclick="selectRook()">Select Rook (Horizontal and Vertical) </button>
-            <button onclick="selectKnight()">Select Knight (L shape)</button>
+            <button class="buttonControlClass" onclick="selectKing()">Select King</button>
+            <button class="buttonControlClass" onclick="selectBishop()">Select Bishop</button>
+            <button class="buttonControlClass" onclick="selectRook()">Select Rook </button>
+            <button class="buttonControlClass" onclick="selectKnight()">Select Knight</button>
         </div>
         <div id="share-buttons">
-            <button onclick="shareOnTwitter()">Share on Twitter</button>
-            <button onclick="shareOnFacebook()">Share on Facebook</button>
-            <button onclick="shareOnWhatsApp()">Share on WhatsApp</button>
-            <button onclick="downloadChessboard()">Download Chessboard</button>
+            <button class="buttonControlClass" onclick="shareOnTwitter()">Share-Twitter</button>
+            <button class="buttonControlClass" onclick="shareOnFacebook()">Share-Facebook</button>
+            <button class="buttonControlClass" onclick="shareOnWhatsApp()">Share-WhatsApp</button>
+            <button class="buttonControlClass" onclick="copyClipboard()">Copy Clipboard</button>
+        </div>
+        <div id="input">
+            <div id="main">
+                <div id="statusDisplay">
+                    <label id="alertText"></label>
+                </div>
+            </div>
         </div>
         <div id="start">
             <button onclick="startGame()">Select Piece</button>

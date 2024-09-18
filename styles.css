@@ -78,10 +78,22 @@ h3 {
     color: #f0f0f0; /* Light grey text for visibility */
 }
 /*Button */
+.buttonControlClass {
+    width: 83px; /* Full width for buttons in their container */
+    height: 38px; /* Full height for buttons in their container */
+    padding: 0px !important; /* Padding inside buttons */
+    font-family:"Times New Roman', Times, serif";
+    text-align: center; /* Center text */
+    border: 1px solid #444; /* Default border */
+    font-size: 8pt; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease;  /*Smooth background color transition */
+    box-sizing: border-box;  /* Include padding in width/height */
+}
 /* Base button styles */
 button {
     width: 38px; /* Full width for buttons in their container */
-    height: 38px; /* Full height for buttons in their container */
+    height: 30px; /* Full height for buttons in their container */
     /*padding: 0px !important; /* Padding inside buttons */
     /*text-align: center; /* Center text */
     /*border: 0px solid #444; /* Default border */

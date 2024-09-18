@@ -197,6 +197,14 @@ function generateChessboard() {
             let button = document.createElement('button');
             button.setAttribute('id', position);
             button.textContent = "";
+
+            if (i===8 && j===7) {
+                button.textContent = "end";
+            }
+
+            if (i===1 && j===0) {
+                button.textContent = "start";
+            }
             //button.textContent.visibility = "hidden";
             button.onclick = () => handleCellClick(position); 
            // Add click event handler
@@ -215,7 +223,7 @@ function generateChessboard() {
 
                 //button.onclick = () => handleCellClick(position);  // Add class based on type
             }
-
+            //button.className = "buttonBoardClass";
             cell.appendChild(button); // Add button to cell
             row.appendChild(cell);
         }
@@ -418,31 +426,40 @@ function shareOnWhatsApp() {
     window.open(whatsappUrl, '_blank');
 }
 
-function downloadChessboard() {
-    const chessboardImage = captureChessboard();
-    const link = document.createElement('a');
-    link.href = chessboardImage;
-    link.download = 'chessboard.png'; // Name of the downloaded file
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+async function captureChessboard() {
+    const chessboard = document.getElementById('chessboard');
+
+    // Check if the chessboard exists
+    if (!chessboard) {
+        console.error("Chessboard element not found.");
+        return null; // Return early if the chessboard is not found
+    }
+
+    try {
+        const canvas = await html2canvas(chessboard); // Capture the chessboard as a canvas
+        return canvas.toDataURL('image/png'); // Returns the data URL of the canvas
+    } catch (error) {
+        console.error("Error capturing chessboard: ", error);
+        return null; // Handle errors gracefully
+    }
 }
 
-function captureChessboard() {
-    const chessboard = document.getElementById('chessboard');
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    const rect = chessboard.getBoundingClientRect();
-    
-    // Set canvas dimensions
-    canvas.width = rect.width;
-    canvas.height = rect.height;
+async function copyChessboardToClipboard() {
+    const chessboardImage = captureChessboard();
+    const response = await fetch(chessboardImage);
+    const blob = await response.blob(); // Create a Blob from the image data
 
-    // Draw the chessboard onto the canvas
-    context.drawImage(chessboard, 0, 0);
+    const clipboardItem = new ClipboardItem({
+        'image/png': blob // Specify the type of the Blob
+    });
 
-    // Return the data URL of the canvas image
-    return canvas.toDataURL('image/png');
+    try {
+        await navigator.clipboard.write([clipboardItem]);
+        alert("Chessboard image copied to clipboard!");
+    } catch (err) {
+        console.error("Failed to copy: ", err);
+        alert("Failed to copy the image. Please try again.");
+    }
 }
 
 document.getElementById('start').style.visibility = 'hidden' ;
