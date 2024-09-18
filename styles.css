@@ -110,6 +110,21 @@ button {
     /* box-sizing: border-box; */ /* Include padding in width/height */
 }
 
+@media (pointer:none), (pointer:coarse) {
+    button {
+        width: 18px; /* Full width for buttons in their container */
+        height: 14px; /* Full height for buttons in their container */
+        /*padding: 0px !important; /* Padding inside buttons */
+        /*text-align: center; /* Center text */
+        /*border: 0px solid #444; /* Default border */
+        /*font-size: 12pt; /* Font size */
+        cursor: pointer; /* Pointer cursor on hover */
+        border: 0;
+        /* transition: background-color 0.3s ease;  Smooth background color transition */
+        /* box-sizing: border-box; */ /* Include padding in width/height */
+    }
+}
+
 /* Light buttons: Light grey background with dark text */
 #chessboard tr:nth-child(odd) td:nth-child(odd) button,
 #chessboard tr:nth-child(even) td:nth-child(even) button {
