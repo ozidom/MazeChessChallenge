@@ -25,7 +25,7 @@ h3 {
     gap: 10px; /* Space between each section */
     align-items: start; /* Align items to the top */
     justify-items: start; /* Align items to the left */
-    max-width: 400px; /* Set max width to prevent stretching */
+    max-width: 350px; /* Set max width to prevent stretching */
 }
 
 #input, #init, #start {
@@ -37,6 +37,12 @@ h3 {
 
 #main div {
     margin-bottom: 5px; /* Reduce space between input elements */
+}
+
+.board {
+    border-collapse: collapse;
+    width: 350px;
+    height: 350px;
 }
 
 #chessboard {
@@ -98,7 +104,7 @@ button {
     /*text-align: center; /* Center text */
     /*border: 0px solid #444; /* Default border */
     /*font-size: 12pt; /* Font size */
-    /*cursor: pointer; /* Pointer cursor on hover */
+    cursor: pointer; /* Pointer cursor on hover */
     border: 0;
     /* transition: background-color 0.3s ease;  Smooth background color transition */
     /* box-sizing: border-box; */ /* Include padding in width/height */
@@ -132,4 +138,33 @@ button {
 #chessboard .Water {
     background-color: #0066cc !important; /* Darker blue for Water spaces */
     color: #fff; /* White text color */
+}
+
+.explanationText
+{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: blue;
+    font-size: 10pt;
+    width: 350px;
+    border: 2px solid #333; /* Dark grey border around the chessboard */
+    margin: 0; /* Remove margin */
+
+}
+
+#controls {
+    border-collapse: collapse;
+    width: 350px;
+    height: 100px;
+    font-family: fantasy;
+    border: 2px solid #333; /* Dark grey border around the chessboard */
+    margin: 0; /* Remove margin */
+}
+
+#board {
+    border-collapse: collapse;
+    width: 350px;
+    height: 380px;
+    font-family: fantasy;
+    border: 2px solid #333; /* Dark grey border around the chessboard */
+    margin: 0; /* Remove margin */
 }

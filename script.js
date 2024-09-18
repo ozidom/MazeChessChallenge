@@ -3,8 +3,14 @@ let startTime;
 let currentPiece;
 let currentLocation;
 let previousLocation;
+
+let kingImage = "♚";
+let rookImage = "♜";
+let knightmage = "♞";
+let bishopImage = "♝";
+
 // Define an array of available pieces
-const pieces = ['♚', 'R', 'N', 'B'];
+const pieces = ['♚', '♜', '♞', '♝'];
 
 // Define an array to store blocked spaces
 let blockedSpaces = [];
@@ -271,16 +277,16 @@ function movePiece(location) {
     // Validate move based on piece type
     let piece;
     switch (pieceName) {
-        case '♚':
+        case kingImage:
             piece = new King();
             break;
-        case 'R':
+        case rookImage:
             piece = new Rook();
             break;
-        case 'N':
+        case knightImage:
             piece = new Knight();
             break;
-        case 'B':
+        case 'bishopImage':
             piece = new Bishop();
             break;
         default:
@@ -338,22 +344,22 @@ function selectInitialPiece() {
 }
 
 function selectKing() {
-    currentPiece = '♚';
+    currentPiece = kingImage;
     document.getElementById(currentLocation).textContent = currentPiece;
 }
 
 function selectRook() {
-    currentPiece = 'R';
+    currentPiece = rookImage;
     document.getElementById(currentLocation).textContent = currentPiece;
 }
 
 function selectKnight() {
-    currentPiece = 'N';
+    currentPiece =  knightImage;
     document.getElementById(currentLocation).textContent = currentPiece;
 }
 
 function selectBishop() {
-    currentPiece = 'B';
+    currentPiece = bishopImage;
     document.getElementById(currentLocation).textContent = currentPiece;
 }
 
