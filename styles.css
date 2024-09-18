@@ -110,7 +110,8 @@ button {
     /* box-sizing: border-box; */ /* Include padding in width/height */
 }
 
-@media (pointer:none), (pointer:coarse) {
+@media (any-pointer: coarse) {
+    /* do your own styles */
     button {
         width: 18px; /* Full width for buttons in their container */
         height: 14px; /* Full height for buttons in their container */
