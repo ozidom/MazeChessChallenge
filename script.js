@@ -208,8 +208,8 @@ function parseChessboardData(text) {
     return chessboards;
 }
 
-
-async function generateChessboard() {
+//todo fix this so that we can debug and run via textfile locally and fix it so that it loads logical maps but it is loading something
+async function generateChessboard2() {
     const chessboards = await loadChessboardData();
     if (!chessboards) return; // Handle loading error
 
@@ -251,7 +251,7 @@ async function generateChessboard() {
 }
 
 // Function to generate the chessboard
-function generateChessboard2() {
+function generateChessboard() {
     let chessboard = document.getElementById('chessboard');
     chessboard.innerHTML = ''; // Clear existing content
     let tbody = document.createElement('tbody');
