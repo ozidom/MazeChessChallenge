@@ -113,6 +113,17 @@ button {
     /* Mobile-specific styles here */
     body {
         background-color: lightblue; /* Example: change background color on mobile */
+        
+    }
+
+    .board {
+        width: 150px;
+        height: 150px;
+    }
+    
+    #chessboard {
+        width: 150px;
+        height: 150px;
     }
 
     button {
