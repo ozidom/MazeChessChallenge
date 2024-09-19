@@ -7,37 +7,29 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h3>MazeChess Challenge Demo</h3>
-    <div class="explanationText">
-        Select King,Bishop,Kinght or Rook and then move from start square to the end square in the shortest moves and least time. You can change your chess piece at any time. Red squares represent Lava and blue squares represent water and these cannot be crossed.
-    </div>
-    <div id="board">
-        <table id="chessboard"></table>
-    <div/>
-    <div id="controls">
-        <div id="select-piece-buttons">
-            <button class="buttonControlClass" onclick="selectKing()">Select King</button>
-            <button class="buttonControlClass" onclick="selectBishop()" disabled="true">Select Bishop</button>
-            <button class="buttonControlClass" onclick="selectRook()">Select Rook </button>
-            <button class="buttonControlClass" onclick="selectKnight()" disabled="true">Select Knight</button>
+    <div class="container">
+        <!-- Text Area above chessboard -->
+        <textarea class="textbox" id="inputText" rows="4" cols="30" placeholder="Enter text here..."></textarea>
+      
+        <!-- Chessboard -->
+        <div class="chessboard" id="chessboard"></div>
+      
+        <!-- Buttons below chessboard -->
+        <div class="button-box">
+          <div class="button-row">
+            <button onclick="selectKing()">Select King</button>
+            <button onclick="selectBishop()">Select Bishop</button>
+            <button onclick="selectKnight()">Select Knight</button>
+            <button onclick="selectRook()">Select Rook</button>
+          </div>
+          <div class="button-row">
+            <button onclick="shareOnFacebook()">Facebook</button>
+            <button onclick="shareOnTwitter()">Twitter</button>
+            <button onclick="shareOnWhatsApp()">WhatsApp</button>
+            <button onclick="alert('Button 8 pressed!')">Clipboard</button>
+          </div>
         </div>
-        <div id="share-buttons">
-            <button class="buttonControlClass" onclick="shareOnTwitter()">Share-Twitter</button>
-            <button class="buttonControlClass" onclick="shareOnFacebook()">Share-Facebook</button>
-            <button class="buttonControlClass" onclick="shareOnWhatsApp()">Share-WhatsApp</button>
-            <button class="buttonControlClass" onclick="copyClipboard()">Copy Clipboard</button>
-        </div>
-        <div id="input">
-            <div id="main">
-                <div id="statusDisplay">
-                    <label id="alertText"></label>
-                </div>
-            </div>
-        </div>
-        <div id="start">
-            <button onclick="startGame()">Select Piece</button>
-        </div>
-    </div>
+      </div>
     <script src="script.js"></script>
 </body>
 </html>

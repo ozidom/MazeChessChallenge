@@ -1,262 +1,62 @@
-html {
-    vertical-align: top !important;
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
-    color: orange !important; /* Default text color */
-    font-family: Georgia, 'Times New Roman', Times, serif !important;
-}
-
 body {
-    vertical-align: top !important;
-    /*padding: 10px;Add a small padding around the body */
-}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+  }
 
-h3 {
-    font-size: 1.5em !important;
-    color: #333 !important; /* Darker grey for headers */
-    margin: 0 0 10px 0; /* Remove top margin, add space below */
-}
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-/* Main container to hold all elements and align them to the left */
-.container {
-    vertical-align: top !important;
-    display: grid; /* Use grid for more control */
-    grid-template-columns: auto; /* Single column layout */
-    gap: 10px; /* Space between each section */
-    align-items: start; /* Align items to the top */
-    justify-items: start; /* Align items to the left */
-    max-width: 350px; /* Set max width to prevent stretching */
-}
+  .chessboard {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    width: 100vw;
+    max-width: 320px;
+    aspect-ratio: 1;
+    border: 2px solid black;
+  }
 
-#input, #init, #start {
-    margin: 0; /* Remove margins */
-    padding: 0; /* Remove padding */
-    text-align: left; /* Align text to the left in sections */
-    width: 100%; /* Ensure elements fill the width */
-}
+  .chessboard div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-#main div {
-    margin-bottom: 5px; /* Reduce space between input elements */
-}
+  .black {
+    background-color: #769656;
+  }
 
-.board {
-    border-collapse: collapse;
-    width: 350px;
-    height: 350px;
-}
+  .white {
+    background-color: #eeeed2;
+  }
 
-#chessboard {
-    border-collapse: collapse;
-    width: 350px;
-    height: 350px;
-    font-family: fantasy;
-    border: 2px solid #333; /* Dark grey border around the chessboard */
-    margin: 0; /* Remove margin */
-}
+  .textbox {
+    margin-bottom: 10px;
+    width: 90%;
+    max-width: 320px;
+  }
 
-#controls {
-    border-collapse: collapse;
-    width: 350px;
-    height: 350px;
-}
+  .button-box {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 
-#chessboard td {
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    font-weight: bold; /* Make text bold for visibility */
-    border: 0; /* Subtle border for each cell */
-    font-size: 1.9em; /* Slightly larger font size for better visibility */
-    padding: 0; /* Remove padding */
-}
+  .button-row {
+    display: flex;
+    gap: 10px;
+  }
 
-/* Light squares: Light grey background with dark text */
-#chessboard tr:nth-child(odd) td:nth-child(odd),
-#chessboard tr:nth-child(even) td:nth-child(even) {
-    background-color: #ddd; /* Light grey for light squares */
-    color: #222; /* Dark grey text for visibility */
-}
-
-/* Dark squares: Dark grey background with light text */
-#chessboard tr:nth-child(odd) td:nth-child(even),
-#chessboard tr:nth-child(even) td:nth-child(odd) {
-    background-color: #666; /* Dark grey for dark squares */
-    color: #f0f0f0; /* Light grey text for visibility */
-}
-/*Button */
-.buttonControlClass {
-    width: 83px; /* Full width for buttons in their container */
-    height: 38px; /* Full height for buttons in their container */
-    padding: 0px !important; /* Padding inside buttons */
-    font-family:"Times New Roman', Times, serif";
-    text-align: center; /* Center text */
-    border: 1px solid #444; /* Default border */
-    font-size: 8pt; /* Font size */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s ease;  /*Smooth background color transition */
-    box-sizing: border-box;  /* Include padding in width/height */
-}
-/* Base button styles */
-button {
-    width: 38px; /* Full width for buttons in their container */
-    height: 30px; /* Full height for buttons in their container */
-    /*padding: 0px !important; /* Padding inside buttons */
-    /*text-align: center; /* Center text */
-    /*border: 0px solid #444; /* Default border */
-    /*font-size: 12pt; /* Font size */
-    cursor: pointer; /* Pointer cursor on hover */
-    border: 0;
-    /* transition: background-color 0.3s ease;  Smooth background color transition */
-    /* box-sizing: border-box; */ /* Include padding in width/height */
-}
-
-
-/* Light buttons: Light grey background with dark text */
-#chessboard tr:nth-child(odd) td:nth-child(odd) button,
-#chessboard tr:nth-child(even) td:nth-child(even) button {
-    background-color: #ddd; /* Light grey for light squares */
-    color: #222; /* Dark grey text */
-}
-
-/* Dark buttons: Dark grey background with light text */
-#chessboard tr:nth-child(odd) td:nth-child(even) button,
-#chessboard tr:nth-child(even) td:nth-child(odd) button {
-    background-color: #666; /* Dark grey for dark squares */
-    color: #f0f0f0; /* Light grey text */
-}
-
-/* Special squares with custom colors */
-#chessboard .blocked {
-    background-color: #000 !important; /* Black color for blocked squares */
-    color: #fff; /* White text color */
-}
-
-#chessboard .LAVA {
-    background-color: #b30000 !important; /* Darker red for LAVA spaces */
-    color: #fff; /* White text color */
-}
-
-#chessboard .Water {
-    background-color: #0066cc !important; /* Darker blue for Water spaces */
-    color: #fff; /* White text color */
-}
-
-.explanationText
-{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: blue;
-    font-size: 10pt;
-    width: 350px;
-    border: 2px solid #333; /* Dark grey border around the chessboard */
-    margin: 0; /* Remove margin */
-
-}
-
-#controls {
-    border-collapse: collapse;
-    width: 350px;
-    height: 100px;
-    font-family: fantasy;
-    border: 2px solid #333; /* Dark grey border around the chessboard */
-    margin: 0; /* Remove margin */
-}
-
-#board {
-    border-collapse: collapse;
-    width: 350px;
-    height: 380px;
-    font-family: fantasy;
-    border: 2px solid #333; /* Dark grey border around the chessboard */
-    margin: 0; /* Remove margin */
-}
-
-@media (max-width: 600px) {
-    /* Mobile-specific styles here */
-    body {
-        background-color: lightblue; /* Example: change background color on mobile */
-        /*padding: 10px;Add a small padding around the body */
-    }
-    
-    /* Main container to hold all elements and align them to the left */
-    .container {
-        max-width: 150px; /* Set max width to prevent stretching */
-    }
-    
-    #input, #init, #start {
-        margin: 0; /* Remove margins */
-        padding: 0; /* Remove padding */
-        text-align: left; /* Align text to the left in sections */
-        width: 100%; /* Ensure elements fill the width */
-    }
-    
-    #main div {
-        margin-bottom: 5px; /* Reduce space between input elements */
-    }
-    
-    .board {
-        border-collapse: collapse;
-        width: 150px;
-        height: 150px;
-    }
-    
-    #chessboard {
-        width: 150px;
-        height: 150px;
-    }
-    
-    #controls {
-        width: 150px;
-        height: 150px;
-    }
-    
-    #chessboard td {
-        width: 20px;
-        height: 20px;
-        text-align: center;
-        font-weight: bold; /* Make text bold for visibility */
-        border: 0; /* Subtle border for each cell */
-        font-size: 1.9em; /* Slightly larger font size for better visibility */
-        padding: 0; /* Remove padding */
-    }
-    
-
-    /*Button */
-    .buttonControlClass {
-        width: 43px; /* Full width for buttons in their container */
-        height: 18px; /* Full height for buttons in their container */
-    }
-    /* Base button styles */
-    button {
-        width: 18px; /* Full width for buttons in their container */
-        height: 15px; /* Full height for buttons in their container */
-        /*padding: 0px !important; /* Padding inside buttons */
-        /*text-align: center; /* Center text */
-        /*border: 0px solid #444; /* Default border */
-        /*font-size: 12pt; /* Font size */
-        cursor: pointer; /* Pointer cursor on hover */
-        border: 0;
-        /* transition: background-color 0.3s ease;  Smooth background color transition */
-        /* box-sizing: border-box; */ /* Include padding in width/height */
-    }
-    
-    
-
-    
-    .explanationText
-    {
-        width: 150px;
-    }
-    
-    #controls {
-        width: 150px;
-        height: 50px;
-    }
-    
-    #board {
-        width: 150px;
-        height: 180px;
-    }
-
-  
-
-}
+  .button-row button {
+    padding: 10px;
+    font-size: 14px;
+    flex: 1;
+  }

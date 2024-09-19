@@ -29,8 +29,15 @@ class Piece {
     }
 }
 
-// NEW CODE
+function initGame() {
+    alert("init game");
+    currentLocation = "a1";
+    generateBlockedSpaces(); // Call generateBlockedSpaces() before generating the chessboard
+    generateChessboard(); // Generate the chessboard after generating blocked spaces
+    startTime = new Date(); 
+}
 
+ 
 // Function to check if a space is blocked due to Lava or Water
 function isBlocked(space) {
     // Check if the space is listed in the blockedSpaces array
@@ -41,11 +48,6 @@ function isBlocked(space) {
     const isBlockedByTerrain = terrain && (terrain.type === 'Lava' || terrain.type === 'Water');
 
     return isBlockedByGeneralRules || isBlockedByTerrain;
-}
-
-// Function to check if a space is blocked
-function isBlocked2(space) {
-    return blockedSpaces.some(blockedSpace => blockedSpace.space === space);
 }
 
 // Function to check if the path between two spaces is clear
@@ -100,45 +102,6 @@ function isPathClear(current, destination) {
     return true; // Path is clear
 }
 
-
-// Function to check if the path between two spaces is clear
-function isPathClear2(current, destination) {
-    let path = [];
-    let currentCol = current.charCodeAt(0);
-    let currentRow = parseInt(current[1]);
-    let destCol = destination.charCodeAt(0);
-    let destRow = parseInt(destination[1]);
-
-    if (currentCol === destCol) {
-        // Vertical movement
-        let minRow = Math.min(currentRow, destRow);
-        let maxRow = Math.max(currentRow, destRow);
-        for (let row = minRow + 1; row < maxRow; row++) {
-            path.push(String.fromCharCode(currentCol) + row);
-        }
-    } else if (currentRow === destRow) {
-        // Horizontal movement
-        let minCol = Math.min(currentCol, destCol);
-        let maxCol = Math.max(currentCol, destCol);
-        for (let col = minCol + 1; col < maxCol; col++) {
-            path.push(String.fromCharCode(col) + currentRow);
-        }
-    } else if (Math.abs(destCol - currentCol) === Math.abs(destRow - currentRow)) {
-        // Diagonal movement
-        let colStep = destCol > currentCol ? 1 : -1;
-        let rowStep = destRow > currentRow ? 1 : -1;
-        let col = currentCol + colStep;
-        let row = currentRow + rowStep;
-        while (col !== destCol && row !== destRow) {
-            path.push(String.fromCharCode(col) + row);
-            col += colStep;
-            row += rowStep;
-        }
-    }
-
-    return path.every(space => !isBlocked(space));
-}
-
 // Update piece classes to check for blocked spaces
 class King extends Piece {
     isValidMove(current, destination) {
@@ -185,134 +148,46 @@ function generateBlockedSpaces() {
     }
 }
 
-async function loadChessboardData() {
-    try {
-        const response = await fetch('chessboards.txt'); // Update with your file path
-        const text = await response.text();
-        return parseChessboardData(text);
-    } catch (error) {
-        console.error("Error loading chessboard data: ", error);
-        return null;
-    }
-}
-
-function parseChessboardData(text) {
-    const lines = text.split('\n');
-    const chessboards = {};
-
-    lines.forEach(line => {
-        const [date, positions] = line.split(':');
-        chessboards[date.trim()] = positions.split(',').map(pos => pos.trim());
-    });
-
-    return chessboards;
-}
-
-//todo fix this so that we can debug and run via textfile locally and fix it so that it loads logical maps but it is loading something
-async function generateChessboard2() {
-    const chessboards = await loadChessboardData();
-    if (!chessboards) return; // Handle loading error
-
-    const today = new Date();
-    const dateKey = today.toISOString().split('T')[0]; // Format: YYYY-MM-DD
-
-    const positions = chessboards[dateKey];
-    if (!positions) {
-        alert("No chessboard available for today.");
-        return;
-    }
-
-    const chessboard = document.getElementById('chessboard');
-    chessboard.innerHTML = ''; // Clear existing content
-    const tbody = document.createElement('tbody');
-
-    for (let i = 8; i >= 1; i--) {
-        const row = document.createElement('tr');
-        for (let j = 0; j < 8; j++) {
-            const cell = document.createElement('td');
-            const colLabel = String.fromCharCode(97 + j); // a-h
-            const position = colLabel + i;
-            cell.setAttribute('id', position);
-
-            // Create a button element
-            const button = document.createElement('button');
-            button.setAttribute('id', position);
-            button.textContent = positions[j] || ""; // Set piece based on loaded data
-
-            button.onclick = () => handleCellClick(position); // Add click event handler
-
-            cell.appendChild(button); // Add button to cell
-            row.appendChild(cell);
-        }
-        tbody.appendChild(row);
-    }
-
-    chessboard.appendChild(tbody);
-}
-
-// Function to generate the chessboard
 function generateChessboard() {
-    let chessboard = document.getElementById('chessboard');
-    chessboard.innerHTML = ''; // Clear existing content
-    let tbody = document.createElement('tbody');
-
-    for (let i = 8; i >= 1; i--) {
-        let row = document.createElement('tr');
-        for (let j = 0; j < 8; j++) {
-            let cell = document.createElement('td');
-            let colLabel = String.fromCharCode(97 + j);
-            let position = colLabel + i;
-            cell.setAttribute('id', position);
-
-            // Create a button element
-            let button = document.createElement('button');
-            button.setAttribute('id', position);
-            button.textContent = "";
-
-            if (i===8 && j===7) {
-                button.textContent = "end";
-            }
-
-            if (i===1 && j===0) {
-                button.textContent = "start";
-            }
-            //button.textContent.visibility = "hidden";
-            button.onclick = () => handleCellClick(position); 
-           // Add click event handler
-
-            // Apply styling for blocked spaces based on type
-            let spaceType = getSpaceType(position);
-            if (spaceType) {
-                //alert(spaceType);
-                cell.classList.add(spaceType);
-               
-                if (spaceType == 'Water' || spaceType =='LAVA'){
-                    //button.textContent = "X";
-                    button.classList.add(spaceType);
-                    button.disabled = true;
-                }
-
-                //button.onclick = () => handleCellClick(position);  // Add class based on type
-            }
-            //button.className = "buttonBoardClass";
-            cell.appendChild(button); // Add button to cell
-            row.appendChild(cell);
+    const chessboard = document.getElementById('chessboard');
+    const columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    
+    for (let row = 8; row >= 1; row--) {  // Row from 8 to 1 (bottom to top)
+      for (let col = 0; col < 8; col++) {
+        const square = document.createElement('div');
+        square.className = (row + col) % 2 === 0 ? 'white' : 'black';
+        square.setAttribute('id', columns[col]+row);
+        square.setAttribute('data-column', columns[col]);
+        square.setAttribute('data-row', row);  // Row from 1 to 8
+        //
+        if (row===8 && col===7) {
+            square.textContent = "end";
         }
-        tbody.appendChild(row);
-    }
 
-    chessboard.appendChild(tbody);
-}
+        if (row===1 && col===0) {
+            square.textContent = "start";
+        }
+        square.addEventListener('click', handleClick);
+        chessboard.appendChild(square);
+      }
+    }
+  }
+
+  function handleClick(event) {
+    const column = event.target.getAttribute('data-column');
+    const row = event.target.getAttribute('data-row');
+    const textarea = document.getElementById('inputText');
+    textarea.value = `You clicked on: ${column}${row}`;
+
+    var position =`${column}${row}`;
+    movePiece(position);
+  }
 
 // Example function to determine space type (blocked or not)
 function getSpaceType(position) {
     // You can adjust this function to return different types based on your requirements
     let blockedSpace = blockedSpaces.find(space => space.space === position);
     return blockedSpace ? blockedSpace.type : null;
-}
-
-function handleCellClick(position) {
-    movePiece(position);
 }
 
 // Function to get the type of blocked space at a given position
@@ -405,8 +280,16 @@ function selectInitialPiece() {
     }
 
     // Set initial piece position
-    document.getElementById('a1').textContent = selectedPiece;
+    getElementByLocation('a1').textContent = selectedPiece;
 }
+
+function getElementByLocation(location) {
+    const column = location.charAt(0).toUpperCase(); // Extract column letter, capitalize to match data-column
+    const row = location.charAt(1); // Extract row number
+    
+    // Query selector to find the element with matching data attributes
+    return document.querySelector(`[data-column="${column}"][data-row="${row}"]`);
+  }
 
 function selectKing() {
     currentPiece = kingImage;
@@ -459,12 +342,7 @@ function startGame() {
     //document.getElementById('a1').textContent = selectedPiece.value;
 }
 
-function initGame() {
-    currentLocation = "a1";
-    generateBlockedSpaces(); // Call generateBlockedSpaces() before generating the chessboard
-    generateChessboard(); // Generate the chessboard after generating blocked spaces
-    startTime = new Date(); 
-}
+
 
 function generateShareableText(completionTime) {
     return `🏆 I completed the MazeChess Challenge in ${completionTime} seconds! Can you beat my time? #MazeChessChallenge #Chess`;
@@ -479,8 +357,6 @@ function shareOnTwitter() {
     const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${url}`;
     window.open(twitterUrl, '_blank');
 }
-
-
 
 function shareOnFacebook() {
     const completionTime = 45; // Example time; replace with actual completion time
@@ -497,41 +373,7 @@ function shareOnWhatsApp() {
     window.open(whatsappUrl, '_blank');
 }
 
-async function captureChessboard() {
-    const chessboard = document.getElementById('chessboard');
+document.addEventListener('DOMContentLoaded', function() {
+    initGame(); // Call init when DOM is ready
+  });
 
-    // Check if the chessboard exists
-    if (!chessboard) {
-        console.error("Chessboard element not found.");
-        return null; // Return early if the chessboard is not found
-    }
-
-    try {
-        const canvas = await html2canvas(chessboard); // Capture the chessboard as a canvas
-        return canvas.toDataURL('image/png'); // Returns the data URL of the canvas
-    } catch (error) {
-        console.error("Error capturing chessboard: ", error);
-        return null; // Handle errors gracefully
-    }
-}
-
-async function copyChessboardToClipboard() {
-    const chessboardImage = captureChessboard();
-    const response = await fetch(chessboardImage);
-    const blob = await response.blob(); // Create a Blob from the image data
-
-    const clipboardItem = new ClipboardItem({
-        'image/png': blob // Specify the type of the Blob
-    });
-
-    try {
-        await navigator.clipboard.write([clipboardItem]);
-        alert("Chessboard image copied to clipboard!");
-    } catch (err) {
-        console.error("Failed to copy: ", err);
-        alert("Failed to copy the image. Please try again.");
-    }
-}
-
-document.getElementById('start').style.visibility = 'hidden' ;
-window.onload = initGame;
