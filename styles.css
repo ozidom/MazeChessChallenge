@@ -61,8 +61,8 @@ h3 {
 }
 
 #chessboard td {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
     text-align: center;
     font-weight: bold; /* Make text bold for visibility */
     border: 0; /* Subtle border for each cell */
@@ -116,8 +116,8 @@ button {
     }
 
     button {
-        width: 20px; /* Full width for buttons in their container */
-        height: 15px; /* Full height for buttons in their container */
+        width: 10px; /* Full width for buttons in their container */
+        height: 10px; /* Full height for buttons in their container */
         /*padding: 0px !important; /* Padding inside buttons */
         /*text-align: center; /* Center text */
         /*border: 0px solid #444; /* Default border */
