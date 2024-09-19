@@ -61,8 +61,8 @@ h3 {
 }
 
 #chessboard td {
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     text-align: center;
     font-weight: bold; /* Make text bold for visibility */
     border: 0; /* Subtle border for each cell */
@@ -109,36 +109,7 @@ button {
     /* transition: background-color 0.3s ease;  Smooth background color transition */
     /* box-sizing: border-box; */ /* Include padding in width/height */
 }
-@media (max-width: 600px) {
-    /* Mobile-specific styles here */
-    body {
-        background-color: lightblue; /* Example: change background color on mobile */
-        
-    }
 
-    .board {
-        width: 150px;
-        height: 150px;
-    }
-    
-    #chessboard {
-        width: 150px;
-        height: 150px;
-    }
-
-    button {
-        width: 10px; /* Full width for buttons in their container */
-        height: 10px; /* Full height for buttons in their container */
-        /*padding: 0px !important; /* Padding inside buttons */
-        /*text-align: center; /* Center text */
-        /*border: 0px solid #444; /* Default border */
-        /*font-size: 12pt; /* Font size */
-        cursor: pointer; /* Pointer cursor on hover */
-        border: 0;
-        /* transition: background-color 0.3s ease;  Smooth background color transition */
-        /* box-sizing: border-box; */ /* Include padding in width/height */
-    }
-}
 
 /* Light buttons: Light grey background with dark text */
 #chessboard tr:nth-child(odd) td:nth-child(odd) button,
@@ -197,4 +168,95 @@ button {
     font-family: fantasy;
     border: 2px solid #333; /* Dark grey border around the chessboard */
     margin: 0; /* Remove margin */
+}
+
+@media (max-width: 600px) {
+    /* Mobile-specific styles here */
+    body {
+        background-color: lightblue; /* Example: change background color on mobile */
+        /*padding: 10px;Add a small padding around the body */
+    }
+    
+    /* Main container to hold all elements and align them to the left */
+    .container {
+        max-width: 150px; /* Set max width to prevent stretching */
+    }
+    
+    #input, #init, #start {
+        margin: 0; /* Remove margins */
+        padding: 0; /* Remove padding */
+        text-align: left; /* Align text to the left in sections */
+        width: 100%; /* Ensure elements fill the width */
+    }
+    
+    #main div {
+        margin-bottom: 5px; /* Reduce space between input elements */
+    }
+    
+    .board {
+        border-collapse: collapse;
+        width: 150px;
+        height: 150px;
+    }
+    
+    #chessboard {
+        width: 150px;
+        height: 150px;
+    }
+    
+    #controls {
+        width: 150px;
+        height: 150px;
+    }
+    
+    #chessboard td {
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        font-weight: bold; /* Make text bold for visibility */
+        border: 0; /* Subtle border for each cell */
+        font-size: 1.9em; /* Slightly larger font size for better visibility */
+        padding: 0; /* Remove padding */
+    }
+    
+
+    /*Button */
+    .buttonControlClass {
+        width: 43px; /* Full width for buttons in their container */
+        height: 18px; /* Full height for buttons in their container */
+    }
+    /* Base button styles */
+    button {
+        width: 18px; /* Full width for buttons in their container */
+        height: 15px; /* Full height for buttons in their container */
+        /*padding: 0px !important; /* Padding inside buttons */
+        /*text-align: center; /* Center text */
+        /*border: 0px solid #444; /* Default border */
+        /*font-size: 12pt; /* Font size */
+        cursor: pointer; /* Pointer cursor on hover */
+        border: 0;
+        /* transition: background-color 0.3s ease;  Smooth background color transition */
+        /* box-sizing: border-box; */ /* Include padding in width/height */
+    }
+    
+    
+
+    
+    .explanationText
+    {
+        width: 150px;
+    }
+    
+    #controls {
+        width: 150px;
+        height: 50px;
+    }
+    
+    #board {
+        width: 150px;
+        height: 180px;
+    }
+
+  
+
 }
