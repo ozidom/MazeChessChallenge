@@ -4,9 +4,10 @@ let currentPiece;
 let currentLocation;
 let previousLocation;
 
+// Game images
 let kingImage = "♚";
 let rookImage = "♜";
-let knightmage = "♞";
+let knightImage = "♞";
 let bishopImage = "♝";
 
 // Define an array of available pieces
@@ -17,7 +18,6 @@ let blockedSpaces = [];
 
 // Define classes for each piece
 class Piece {
-
     constructor(name) {
         this.name = name;
         this.moveCount = 0;
@@ -30,13 +30,11 @@ class Piece {
 }
 
 function initGame() {
-    alert("init game");
     currentLocation = "a1";
     generateBlockedSpaces(); // Call generateBlockedSpaces() before generating the chessboard
     generateChessboard(); // Generate the chessboard after generating blocked spaces
     startTime = new Date(); 
 }
-
  
 // Function to check if a space is blocked due to Lava or Water
 function isBlocked(space) {
@@ -64,7 +62,7 @@ function isPathClear(current, destination) {
         let maxRow = Math.max(currentRow, destRow);
         for (let row = minRow + 1; row < maxRow; row++) {
             let pos = String.fromCharCode(currentCol) + row;
-            if (isBlocked2(pos)) {
+            if (isBlocked(pos)) {
                 return false; // Blocked space encountered
             }
             path.push(pos);
@@ -75,7 +73,7 @@ function isPathClear(current, destination) {
         let maxCol = Math.max(currentCol, destCol);
         for (let col = minCol + 1; col < maxCol; col++) {
             let pos = String.fromCharCode(col) + currentRow;
-            if (isBlocked2(pos)) {
+            if (isBlocked(pos)) {
                 return false; // Blocked space encountered
             }
             path.push(pos);
@@ -88,7 +86,7 @@ function isPathClear(current, destination) {
         let row = currentRow + rowStep;
         while (col !== destCol && row !== destRow) {
             let pos = String.fromCharCode(col) + row;
-            if (isBlocked2(pos)) {
+            if (isBlocked(pos)) {
                 return false; // Blocked space encountered
             }
             path.push(pos);
@@ -155,11 +153,24 @@ function generateChessboard() {
     for (let row = 8; row >= 1; row--) {  // Row from 8 to 1 (bottom to top)
       for (let col = 0; col < 8; col++) {
         const square = document.createElement('div');
+        const alphaCoords = columns[col]+row;
         square.className = (row + col) % 2 === 0 ? 'white' : 'black';
-        square.setAttribute('id', columns[col]+row);
+        square.setAttribute('id', alphaCoords);
         square.setAttribute('data-column', columns[col]);
         square.setAttribute('data-row', row);  // Row from 1 to 8
-        //
+        
+        // Apply styling for blocked spaces based on type
+        let spaceType = getSpaceType(alphaCoords);
+        if (spaceType) {
+            if (spaceType == 'Water')  {
+                square.className = "blue";
+            } 
+            else if (spaceType == 'LAVA') {
+                square.className =  "red";
+            }
+        }
+
+        //create the labels
         if (row===8 && col===7) {
             square.textContent = "end";
         }
@@ -190,11 +201,11 @@ function getSpaceType(position) {
     return blockedSpace ? blockedSpace.type : null;
 }
 
-// Function to get the type of blocked space at a given position
-function getSpaceType(position) {
-    let space = blockedSpaces.find(blockedSpace => blockedSpace.space === position);
-    return space ? space.type : null;
-}
+// // Function to get the type of blocked space at a given position
+// function getSpaceType(position) {
+//     let space = blockedSpaces.find(blockedSpace => blockedSpace.space === position);
+//     return space ? space.type : null;
+// }
 
 function movePiece(location) {
     let current = currentLocation;
@@ -226,7 +237,7 @@ function movePiece(location) {
         case knightImage:
             piece = new Knight();
             break;
-        case 'bishopImage':
+        case bishopImage:
             piece = new Bishop();
             break;
         default:
@@ -249,7 +260,7 @@ function movePiece(location) {
     //this should be set to the label of the cell not ''
 
     // Example: Update the chessboard
-    renderChessboard();
+    //renderChessboard();
 
     if (destination=='h8') {
         let endTime = new Date();
@@ -268,20 +279,6 @@ function isBlocked(space) {
     return blockedSpaces.includes(space);
 }
 
-// Function to prompt player for initial piece selection
-function selectInitialPiece() {
-    //let selectedPiece = document.getElementById('selectedPiece').value;
-    let selectedPiece = document.getElementById('selectedPiece').value;
-    //alert(selectedPiece);
-    if (!selectedPiece || !pieces.includes(selectedPiece)) {
-        alertText("Invalid piece selection. Please choose from K, R, N, or B.(" + selectedPiece + ")");
-        selectInitialPiece(); // Prompt again if selection is invalid
-        return;
-    }
-
-    // Set initial piece position
-    getElementByLocation('a1').textContent = selectedPiece;
-}
 
 function getElementByLocation(location) {
     const column = location.charAt(0).toUpperCase(); // Extract column letter, capitalize to match data-column
@@ -311,38 +308,14 @@ function selectBishop() {
     document.getElementById(currentLocation).textContent = currentPiece;
 }
 
-// Function to render the chessboard
-function renderChessboard() {
-    let chessboard = document.getElementById('chessboard');
-    for (let i = 8; i >= 1; i--) {
-        for (let j = 0; j < 8; j++) {
-            let cell = document.getElementById(String.fromCharCode(97 + j) + i);
-            cell.classList.remove('blocked'); // Remove blocked class from all cells
-            if (isBlocked(cell.id)) {
-                cell.classList.add('blocked'); // Add blocked class to blocked cells
-            }
-        }
-    }
-}
-
 function alertText(textBody){
-    document.getElementById('alertText').textContent = textBody;
-}
-
-function selectPiece() {
-
-    selectInitialPiece();
-    //document.getElementById('a1').textContent = selectedPiece;
-    document.getElementById('init').style.visibility = 'hidden' ;
-    document.getElementById('start').style.visibility = 'hidden' ;
-    document.getElementById('main').style.visibility = 'visible' ;
+    const textarea = document.getElementById('inputText');
+    textarea.value = textBody;
 }
 
 function startGame() {
     //document.getElementById('a1').textContent = selectedPiece.value;
 }
-
-
 
 function generateShareableText(completionTime) {
     return `🏆 I completed the MazeChess Challenge in ${completionTime} seconds! Can you beat my time? #MazeChessChallenge #Chess`;
@@ -373,7 +346,41 @@ function shareOnWhatsApp() {
     window.open(whatsappUrl, '_blank');
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+function createChessboard() {
+    const chessboard = document.getElementById('chessboard');
+    const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+    
+    for (let row = 7; row >= 0; row--) {
+      for (let col = 0; col < 8; col++) {
+        const square = document.createElement('div');
+        square.className = (row + col) % 2 === 0 ? 'white' : 'black';
+        chessboard.appendChild(square);
+      }
+    }
+  }
+
+  // Function to copy the chessboard as an image to the clipboard
+  function copyChessboardToClipboard() {
+    const chessboardElement = document.getElementById('chessboard');
+
+    // Use html2canvas to convert the chessboard div to a canvas
+    html2canvas(chessboardElement).then(canvas => {
+      canvas.toBlob(blob => {
+        const item = new ClipboardItem({ 'image/png': blob });
+        navigator.clipboard.write([item]).then(() => {
+          alert('Chessboard copied to clipboard as an image!');
+        }).catch(err => {
+          console.error('Error copying to clipboard: ', err);
+        });
+      });
+    });
+  }
+
+
+
+  // Event listener for the copy button
+  //document.getElementById('copyButton').addEventListener('click', copyChessboardToClipboard);
+  document.addEventListener('DOMContentLoaded', function() {
     initGame(); // Call init when DOM is ready
   });
 

@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MazeChess Deploy Test</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+ 
 </head>
 <body>
     <div class="container">
         <!-- Text Area above chessboard -->
-        <textarea class="textbox" id="inputText" rows="4" cols="30" placeholder="Enter text here..."></textarea>
+        <textarea class="textbox" id="inputText" rows="4" cols="30" placeholder="Welcome to mazechess. Move any piece to END square to win. Least time and shortest moves are best. Switch to anoher piece at any time..." readonly="true"></textarea>
       
         <!-- Chessboard -->
         <div class="chessboard" id="chessboard"></div>
@@ -26,7 +28,7 @@
             <button onclick="shareOnFacebook()">Facebook</button>
             <button onclick="shareOnTwitter()">Twitter</button>
             <button onclick="shareOnWhatsApp()">WhatsApp</button>
-            <button onclick="alert('Button 8 pressed!')">Clipboard</button>
+            <button id="btnClipboard" onclick="copyChessboardToClipboard()">Clipboard</button>
           </div>
         </div>
       </div>
