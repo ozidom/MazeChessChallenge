@@ -31,7 +31,8 @@ class Piece {
 
 function initGame() {
     currentLocation = "a1";
-    generateBlockedSpaces(); // Call generateBlockedSpaces() before generating the chessboard
+    //generateBlockedSpaces(); // Call generateBlockedSpaces() before generating the chessboard
+    loadChessboardConfig();
     generateChessboard(); // Generate the chessboard after generating blocked spaces
     const textarea = document.getElementById('inputText');
     textarea.value =  "Select a Knight, Rook, Bishop or King and move any piece to END square to win in the least time and shortest moves are best. Switch to another piece at any time..."
@@ -136,6 +137,38 @@ class Bishop extends Piece {
         return isDiagonalMove && isPathClear(current, destination);
     }
 }
+//FUNCTIONS TO LOAD THE TEXT FILE
+function loadChessboardConfig() {
+    fetch('Chessboards.txt')
+        .then(response => response.text()) // Read the text content
+        .then(content => {
+            const today = new Date().toISOString().split('T')[0];  // Get today's date in YYYY-MM-DD format
+            const blockedSquares = parseChessboardFile(content, today);
+            if (blockedSquares.length > 0) {
+                applyBlockedSquares(blockedSquares);
+            } else {
+                alert("No blocked squares for today's date.");
+            }
+        })
+        .catch(error => {
+            console.error('Error loading CHESSBOARD.TXT:', error);
+        });
+}
+
+// Parse the chessboard file and return blocked squares for the current date
+function parseChessboardFile(content, date) {
+    const lines = content.split('\n');
+    for (const line of lines) {
+        const [lineDate, squares] = line.split(':');
+        if (lineDate.trim() === date) {
+            return squares.trim().split(','); // Return the blocked squares for today
+        }
+    }
+    return []; // No match for the date
+}
+
+
+
 // Function to generate random blocked spaces with types (LAVA, Water, etc.)
 function generateBlockedSpaces() {
     blockedSpaces = []; // Reset blocked spaces array
@@ -377,7 +410,7 @@ function createChessboard() {
 function showHome() {
     document.getElementById('inputText').style.display = 'flex'; // Show chessboard area
     document.getElementById('chessboard').style.display = 'grid'; // Show chessboard
-    document.getElementById('content').style.display = 'flex'; // Hide dynamic content
+    document.getElementById('content').style.display = 'none'; // Hide dynamic content
 }
 
 // Function to show the "Help" section

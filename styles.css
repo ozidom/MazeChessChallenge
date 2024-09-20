@@ -32,7 +32,7 @@ body {
   }
 
   .black {
-    background-color: #769656;
+    background-color: hsla(60, 1%, 21%, 0.363);
   }
 
   .white {
@@ -40,7 +40,7 @@ body {
   }
 
   .blue {
-    background-color: #36a6e2;
+    background-color:  #d73b06;
   }
 
   .red {
@@ -50,7 +50,7 @@ body {
   .textbox {
     margin-bottom: 10px;
     width: 90%;
-    max-width: 340px;
+    width: 340px;
   }
 
   .button-box {
