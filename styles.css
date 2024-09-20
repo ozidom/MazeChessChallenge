@@ -27,6 +27,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 25px;
   }
 
   .black {
@@ -38,7 +39,7 @@ body {
   }
 
   .blue {
-    background-color: #190378;
+    background-color: #36a6e2;
   }
 
   .red {

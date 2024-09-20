@@ -37,7 +37,7 @@ function initGame() {
 }
  
 // Function to check if a space is blocked due to Lava or Water
-function isBlocked(space) {
+function isBlocked2(space) {
     // Check if the space is listed in the blockedSpaces array
     const isBlockedByGeneralRules = blockedSpaces.some(blockedSpace => blockedSpace.space === space);
 
@@ -46,6 +46,11 @@ function isBlocked(space) {
     const isBlockedByTerrain = terrain && (terrain.type === 'Lava' || terrain.type === 'Water');
 
     return isBlockedByGeneralRules || isBlockedByTerrain;
+}
+
+// Function to check if a space is blocked
+function isBlocked(space) {
+    return blockedSpaces.some(blockedSpace => blockedSpace.space === space);
 }
 
 // Function to check if the path between two spaces is clear
@@ -274,10 +279,6 @@ function isValidInput(input) {
     return /^[a-h][1-8]$/.test(input);
 }
 
-// Function to check if a space is blocked
-function isBlocked(space) {
-    return blockedSpaces.includes(space);
-}
 
 
 function getElementByLocation(location) {
