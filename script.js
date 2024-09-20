@@ -33,19 +33,17 @@ function initGame() {
     currentLocation = "a1";
     generateBlockedSpaces(); // Call generateBlockedSpaces() before generating the chessboard
     generateChessboard(); // Generate the chessboard after generating blocked spaces
+    const textarea = document.getElementById('inputText');
+    textarea.value =  "Select a Knight, Rook, Bishop or King and move any piece to END square to win in the least time and shortest moves are best. Switch to another piece at any time..."
     startTime = new Date(); 
-}
- 
-// Function to check if a space is blocked due to Lava or Water
-function isBlocked2(space) {
-    // Check if the space is listed in the blockedSpaces array
-    const isBlockedByGeneralRules = blockedSpaces.some(blockedSpace => blockedSpace.space === space);
+    
+    //disable buttons
+    //document.getElementById("btnShareFB").disabled = true;
+    document.getElementById('btnShareFB').disabled = true; 
+    document.getElementById("btnShareWA").disabled = true;
+    document.getElementById("btnShareTw").disabled = true;
+    document.getElementById("btnClipboard").disabled = true;
 
-    // Check if the space contains Lava or Water
-    const terrain = terrainTypes.find(terrain => terrain.space === space);
-    const isBlockedByTerrain = terrain && (terrain.type === 'Lava' || terrain.type === 'Water');
-
-    return isBlockedByGeneralRules || isBlockedByTerrain;
 }
 
 // Function to check if a space is blocked
@@ -141,7 +139,7 @@ class Bishop extends Piece {
 // Function to generate random blocked spaces with types (LAVA, Water, etc.)
 function generateBlockedSpaces() {
     blockedSpaces = []; // Reset blocked spaces array
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 30; i++) {
         let x = String.fromCharCode(97 + Math.floor(Math.random() * 8)); // Random letter from 'a' to 'h'
         let y = Math.floor(Math.random() * 8) + 1; // Random number from 1 to 8
         if (!(x=="h" && y==8) && !(x=="a" && y==1)){
@@ -279,8 +277,6 @@ function isValidInput(input) {
     return /^[a-h][1-8]$/.test(input);
 }
 
-
-
 function getElementByLocation(location) {
     const column = location.charAt(0).toUpperCase(); // Extract column letter, capitalize to match data-column
     const row = location.charAt(1); // Extract row number
@@ -369,7 +365,7 @@ function createChessboard() {
       canvas.toBlob(blob => {
         const item = new ClipboardItem({ 'image/png': blob });
         navigator.clipboard.write([item]).then(() => {
-          alert('Chessboard copied to clipboard as an image!');
+          alertText('Chessboard copied to clipboard as an image!');
         }).catch(err => {
           console.error('Error copying to clipboard: ', err);
         });
@@ -377,6 +373,42 @@ function createChessboard() {
     });
   }
 
+  // Function to show the "Home" content
+function showHome() {
+    document.getElementById('inputText').style.display = 'flex'; // Show chessboard area
+    document.getElementById('chessboard').style.display = 'grid'; // Show chessboard
+    document.getElementById('content').style.display = 'flex'; // Hide dynamic content
+}
+
+// Function to show the "Help" section
+function showHelp() {
+    hideGameArea();
+    const contentDiv = document.getElementById('content');
+    contentDiv.innerHTML = "<h2>Help</h2><p>This is where you can provide help information on how to play the game, rules, controls, etc.</p>";
+    contentDiv.style.display = 'block';
+}
+
+// Function to show the "Training" section
+function showTraining() {
+    hideGameArea();
+    const contentDiv = document.getElementById('content');
+    contentDiv.innerHTML = "<h2>Training</h2><p>This section will offer training tips, tutorials, and practice games for beginners.</p>";
+    contentDiv.style.display = 'block';
+}
+
+// Function to show the "Contact Us" section
+function showContact() {
+    hideGameArea();
+    const contentDiv = document.getElementById('content');
+    contentDiv.innerHTML = "<h2>Contact Us</h2><p>For any inquiries, please email us at support@mazechess.com.</p>";
+    contentDiv.style.display = 'block';
+}
+
+// Helper function to hide the game area
+function hideGameArea() {
+    document.getElementById('inputText').style.display = 'none'; // Hide chessboard area
+    document.getElementById('chessboard').style.display = 'none'; // Hide chessboard
+}
 
 
   // Event listener for the copy button

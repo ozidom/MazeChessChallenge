@@ -3,6 +3,7 @@ body {
     flex-direction: column;
     align-items: center;
     font-family: Arial, sans-serif;
+    background-color: lightcyan;
   }
 
   .container {
@@ -49,7 +50,7 @@ body {
   .textbox {
     margin-bottom: 10px;
     width: 90%;
-    max-width: 320px;
+    max-width: 340px;
   }
 
   .button-box {
@@ -57,6 +58,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 340px;
   }
 
   .button-row {
@@ -69,3 +71,43 @@ body {
     font-size: 14px;
     flex: 1;
   }
+
+  /* Navigation bar */
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    padding: 10px 0;
+    text-align: center;
+    width: 340px;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li {
+    display: inline;
+    padding: 5px 10px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
+.navbar ul li a:hover {
+    background-color: #575757;
+    border-radius: 5px;
+}
+
+/* Dynamic content section */
+.content-section {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    display: none; /* Hidden by default */
+}

@@ -6,32 +6,46 @@
     <title>MazeChess Deploy Test</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
- 
 </head>
 <body>
+
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="#" onclick="showHome()">Home</a></li>
+            <li><a href="#" onclick="showHelp()">Help</a></li>
+            <li><a href="#" onclick="showTraining()">Learn</a></li>
+            <li><a href="#" onclick="showContact()">Why</a></li>
+        </ul>
+    </nav>
+
     <div class="container">
         <!-- Text Area above chessboard -->
-        <textarea class="textbox" id="inputText" rows="4" cols="30" placeholder="Welcome to mazechess. Move any piece to END square to win. Least time and shortest moves are best. Switch to anoher piece at any time..." readonly="true"></textarea>
-      
+        <textarea class="textbox" id="inputText" rows="4" cols="30" readonly="true"></textarea>
+
         <!-- Chessboard -->
         <div class="chessboard" id="chessboard"></div>
-      
+
         <!-- Buttons below chessboard -->
         <div class="button-box">
-          <div class="button-row">
-            <button onclick="selectKing()">Select King</button>
-            <button onclick="selectBishop()">Select Bishop</button>
-            <button onclick="selectKnight()">Select Knight</button>
-            <button onclick="selectRook()">Select Rook</button>
-          </div>
-          <div class="button-row">
-            <button onclick="shareOnFacebook()">Facebook</button>
-            <button onclick="shareOnTwitter()">Twitter</button>
-            <button onclick="shareOnWhatsApp()">WhatsApp</button>
-            <button id="btnClipboard" onclick="copyChessboardToClipboard()">Clipboard</button>
-          </div>
+            <div class="button-row">
+                <button onclick="selectKing()">Select King</button>
+                <button onclick="selectBishop()">Select Bishop</button>
+                <button onclick="selectKnight()">Select Knight</button>
+                <button onclick="selectRook()">Select Rook</button>
+            </div>
+            <div class="button-row">
+                <button id="btnShareFB" onclick="shareOnFacebook()">Facebook</button>
+                <button id="btnShareTw" onclick="shareOnTwitter()">Twitter</button>
+                <button id="btnShareWA" onclick="shareOnWhatsApp()">WhatsApp</button>
+                <button id="btnClipboard" onclick="copyChessboardToClipboard()">Clipboard</button>
+            </div>
         </div>
-      </div>
+    </div>
+
+    <!-- Dynamic Content Area -->
+    <div id="content" class="content-section"></div>
+
     <script src="script.js"></script>
 </body>
 </html>
