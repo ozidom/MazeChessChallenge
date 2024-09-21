@@ -29,22 +29,22 @@ class Piece {
     }
 }
 
+function getTodayDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-based, so +1
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`; // Format: YYYY-MM-DD
+}
+
 function initGame() {
     currentLocation = "a1";
     //generateBlockedSpaces(); // Call generateBlockedSpaces() before generating the chessboard
-    loadChessboardConfig();
+    loadBlockedSpaces();
     generateChessboard(); // Generate the chessboard after generating blocked spaces
     const textarea = document.getElementById('inputText');
     textarea.value =  "Select a Knight, Rook, Bishop or King and move any piece to END square to win in the least time and shortest moves are best. Switch to another piece at any time..."
     startTime = new Date(); 
-    
-    //disable buttons
-    //document.getElementById("btnShareFB").disabled = true;
-    document.getElementById('btnShareFB').disabled = true; 
-    document.getElementById("btnShareWA").disabled = true;
-    document.getElementById("btnShareTw").disabled = true;
-    document.getElementById("btnClipboard").disabled = true;
-
 }
 
 // Function to check if a space is blocked
@@ -137,22 +137,23 @@ class Bishop extends Piece {
         return isDiagonalMove && isPathClear(current, destination);
     }
 }
-//FUNCTIONS TO LOAD THE TEXT FILE
-function loadChessboardConfig() {
-    fetch('Chessboards.txt')
-        .then(response => response.text()) // Read the text content
-        .then(content => {
-            const today = new Date().toISOString().split('T')[0];  // Get today's date in YYYY-MM-DD format
-            const blockedSquares = parseChessboardFile(content, today);
-            if (blockedSquares.length > 0) {
-                applyBlockedSquares(blockedSquares);
-            } else {
-                alert("No blocked squares for today's date.");
-            }
-        })
-        .catch(error => {
-            console.error('Error loading CHESSBOARD.TXT:', error);
-        });
+//FUNCTIONS TO LOAD THE BLOCKED SPACES
+function loadBlockedSpaces() {
+    blockedSpaces = []; 
+    const chessboardConfig = new ChessboardBlockedSpaces();
+    const today = getTodayDate(); // You can replace this with dynamic date logic if needed
+    const rawSpaces = chessboardConfig.getBoardByDate(today);
+    if (rawSpaces.length > 0) {
+        alertText("FILE LOEADED OK");
+        for(var blockedSpace of rawSpaces)
+        {
+            var coord = blockedSpace.split('');
+            blockedSpaces.push({ space: `${coord[0]}${coord[1]}`, type: 'LAVA' });
+        }
+    } 
+    else {
+        alertText("No blocked squares for today's date.");
+    }   
 }
 
 // Parse the chessboard file and return blocked squares for the current date
@@ -184,7 +185,7 @@ function generateBlockedSpaces() {
 
 function generateChessboard() {
     const chessboard = document.getElementById('chessboard');
-    const columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
     
     for (let row = 8; row >= 1; row--) {  // Row from 8 to 1 (bottom to top)
       for (let col = 0; col < 8; col++) {
