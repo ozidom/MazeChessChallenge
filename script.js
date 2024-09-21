@@ -43,7 +43,7 @@ function initGame() {
     loadBlockedSpaces();
     generateChessboard(); // Generate the chessboard after generating blocked spaces
     const textarea = document.getElementById('inputText');
-    textarea.value =  "Select a Knight, Rook, Bishop or King and move any piece to END square to win in the least time and shortest moves are best. Switch to another piece at any time..."
+    textarea.innerHTML =  "Select a Knight, Rook, Bishop or King and move any piece to END square to win in the least time and shortest moves are best. Switch to another piece at any time..."
     startTime = new Date(); 
     
     //disable buttons
@@ -348,7 +348,7 @@ function selectBishop() {
 
 function alertText(textBody){
     const textarea = document.getElementById('inputText');
-    textarea.value = textBody;
+    textarea.innerHTML = textBody;
 }
 
 function startGame() {
@@ -425,7 +425,7 @@ function showHome() {
 function showHelp() {
     hideGameArea();
     const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = "<h2>Help</h2><p>This is where you can provide help information on how to play the game, rules, controls, etc.</p>";
+    contentDiv.innerHTML = HELP_TEXT;
     contentDiv.style.display = 'block';
 }
 

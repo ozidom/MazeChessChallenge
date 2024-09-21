@@ -21,7 +21,7 @@
 
     <div class="container">
         <!-- Text Area above chessboard -->
-        <textarea class="textbox" id="inputText" rows="4" cols="30" readonly="true"></textarea>
+        <label class="textbox" id="inputText" readonly="true"></label>
 
         <!-- Chessboard -->
         <div class="chessboard" id="chessboard"></div>
@@ -29,10 +29,10 @@
         <!-- Buttons below chessboard -->
         <div class="button-box">
             <div class="button-row">
-                <button onclick="selectKing()">Select King</button>
-                <button onclick="selectBishop()">Select Bishop</button>
-                <button onclick="selectKnight()">Select Knight</button>
-                <button onclick="selectRook()">Select Rook</button>
+                <button onclick="selectKing()">King</button>
+                <button onclick="selectBishop()">Bishop</button>
+                <button onclick="selectKnight()">Knight</button>
+                <button onclick="selectRook()">Rook</button>
             </div>
             <div class="button-row">
                 <button id="btnShareFB" onclick="shareOnFacebook()">Facebook</button>
