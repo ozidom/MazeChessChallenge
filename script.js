@@ -38,13 +38,20 @@ function getTodayDate() {
 }
 
 function initGame() {
-    currentLocation = "a1";
+    currentLocation = "A1";
     //generateBlockedSpaces(); // Call generateBlockedSpaces() before generating the chessboard
     loadBlockedSpaces();
     generateChessboard(); // Generate the chessboard after generating blocked spaces
     const textarea = document.getElementById('inputText');
     textarea.value =  "Select a Knight, Rook, Bishop or King and move any piece to END square to win in the least time and shortest moves are best. Switch to another piece at any time..."
     startTime = new Date(); 
+    
+    //disable buttons
+    // document.getElementById('btnShareFB').disabled = true; 
+    // document.getElementById("btnShareWA").disabled = true;
+    // document.getElementById("btnShareTw").disabled = true;
+    // document.getElementById("btnClipboard").disabled = true;
+
 }
 
 // Function to check if a space is blocked
@@ -250,7 +257,7 @@ function movePiece(location) {
    
     // Validate inputs
     if (!isValidInput(current) || !isValidInput(destination)) {
-        alertText("Invalid input. Please enter valid coordinates (e.g., a1).");
+        alertText("Invalid input. Please enter valid coordinates (e.g., A1).");
         return;
     }
 
@@ -299,16 +306,16 @@ function movePiece(location) {
     // Example: Update the chessboard
     //renderChessboard();
 
-    if (destination=='h8') {
+    if (destination=='H8') {
         let endTime = new Date();
         let completionTime = (endTime - startTime) / 1000; // Time in seconds
-        alertText("You have won - number of moves in a time (sec) : " + completionTime);
+        alertText("🏆🏆🏆You have won - number of moves in a time (sec) : " + completionTime + "🏆🏆🏆");
     }
 }
 
 // Function to validate input coordinates
 function isValidInput(input) {
-    return /^[a-h][1-8]$/.test(input);
+    return /^[A-H][1-8]$/.test(input);
 }
 
 function getElementByLocation(location) {
@@ -426,7 +433,7 @@ function showHelp() {
 function showTraining() {
     hideGameArea();
     const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = "<h2>Training</h2><p>This section will offer training tips, tutorials, and practice games for beginners.</p>";
+    contentDiv.innerHTML = TRAINING_TEXT;
     contentDiv.style.display = 'block';
 }
 
@@ -434,12 +441,13 @@ function showTraining() {
 function showContact() {
     hideGameArea();
     const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = "<h2>Contact Us</h2><p>For any inquiries, please email us at support@mazechess.com.</p>";
+    contentDiv.innerHTML = CONTACT_TEXT;
     contentDiv.style.display = 'block';
 }
 
 // Helper function to hide the game area
 function hideGameArea() {
+
     document.getElementById('inputText').style.display = 'none'; // Hide chessboard area
     document.getElementById('chessboard').style.display = 'none'; // Hide chessboard
 }
