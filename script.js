@@ -216,11 +216,11 @@ function generateChessboard() {
 
         //create the labels
         if (row===8 && col===7) {
-            square.textContent = "end";
+            square.textContent = "🏁";
         }
 
         if (row===1 && col===0) {
-            square.textContent = "start";
+            square.textContent = "🚩";
         }
         square.addEventListener('click', handleClick);
         chessboard.appendChild(square);
