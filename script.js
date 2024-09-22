@@ -3,12 +3,14 @@ let startTime;
 let currentPiece;
 let currentLocation;
 let previousLocation;
+let isTrainingRoom;
 
 // Game images
 let kingImage = "♚";
 let rookImage = "♜";
 let knightImage = "♞";
 let bishopImage = "♝";
+
 
 // Define an array of available pieces
 const pieces = ['♚', '♜', '♞', '♝'];
@@ -38,20 +40,16 @@ function getTodayDate() {
 }
 
 function initGame() {
+    document.getElementById("chessboard").innerHTML = "";;
     currentLocation = "A1";
-    //generateBlockedSpaces(); // Call generateBlockedSpaces() before generating the chessboard
-    loadBlockedSpaces();
+    if (isTrainingRoom)
+        generateBlockedSpaces(); // Call generateBlockedSpaces() before generating the chessboard
+    else 
+        loadBlockedSpaces();
+    
     generateChessboard(); // Generate the chessboard after generating blocked spaces
     const textarea = document.getElementById('inputText');
-    textarea.innerHTML =  "Select a Knight, Rook, Bishop or King and move any piece to END square to win in the least time and shortest moves are best. Switch to another piece at any time..."
     startTime = new Date(); 
-    
-    //disable buttons
-    // document.getElementById('btnShareFB').disabled = true; 
-    // document.getElementById("btnShareWA").disabled = true;
-    // document.getElementById("btnShareTw").disabled = true;
-    // document.getElementById("btnClipboard").disabled = true;
-
 }
 
 // Function to check if a space is blocked
@@ -181,7 +179,7 @@ function parseChessboardFile(content, date) {
 function generateBlockedSpaces() {
     blockedSpaces = []; // Reset blocked spaces array
     for (let i = 0; i < 30; i++) {
-        let x = String.fromCharCode(97 + Math.floor(Math.random() * 8)); // Random letter from 'a' to 'h'
+        let x = String.fromCharCode(65 + Math.floor(Math.random() * 8)); // Random letter from 'a' to 'h'
         let y = Math.floor(Math.random() * 8) + 1; // Random number from 1 to 8
         if (!(x=="h" && y==8) && !(x=="a" && y==1)){
             let type = Math.random() < 0.5 ? 'LAVA' : 'Water'; // Randomly assign type
@@ -377,11 +375,9 @@ function shareOnFacebook() {
     window.open(facebookUrl, '_blank');
 }
 
-function shareOnWhatsApp() {
-    const completionTime = 45; // Example time; replace with actual completion time
-    const text = generateShareableText(completionTime);
-    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
-    window.open(whatsappUrl, '_blank');
+function btnTrainingGrounds() {
+    isTrainingRoom = true;
+    initGame(); 
 }
 
 function createChessboard() {
@@ -403,7 +399,7 @@ function createChessboard() {
 
     // Use html2canvas to convert the chessboard div to a canvas
     html2canvas(chessboardElement).then(canvas => {
-      canvas.toBlob(blob => {
+      canvas.toBlob(blob => {   
         const item = new ClipboardItem({ 'image/png': blob });
         navigator.clipboard.write([item]).then(() => {
           alertText('Chessboard copied to clipboard as an image!');
@@ -456,6 +452,7 @@ function hideGameArea() {
   // Event listener for the copy button
   //document.getElementById('copyButton').addEventListener('click', copyChessboardToClipboard);
   document.addEventListener('DOMContentLoaded', function() {
+    isTrainingRoom = false;
     initGame(); // Call init when DOM is ready
   });
 
