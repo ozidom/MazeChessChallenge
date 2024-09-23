@@ -63,7 +63,7 @@ body {
 .textbox {
   display: block;              /* Ensures the label takes up the full width */
   width: 340px;                /* Set a constant width */
-  height: 100px;               /* Set a constant height */
+  height: 70px;               /* Set a constant height */
             /* Add some padding for better readability */
   overflow: hidden;            /* Hide overflow if text exceeds the height */
   text-overflow: ellipsis;     /* Show an ellipsis (...) if the text is too long */
@@ -90,12 +90,19 @@ body {
   gap: 10px;                   /* Space between buttons */
   justify-content: center;     /* Center the buttons horizontally */
   align-items: center;         /* Vertically align buttons to the center */
-  padding: 2px;
+  padding: 2px; 
 }
 
 .social-button-row {
   border-radius: 5px;
   background-color: #DDDDFF;
+  margin-top: 6px;
+  padding: 9px;
+}
+
+.training-grounds-row {
+  border-radius: 5px;
+  background-color: #e9eaba;
   margin-top: 6px;
   padding: 9px;
 }
@@ -147,4 +154,8 @@ body {
   padding: 20px;
   background-color: #f4f4f4;
   display: none; /* Hidden by default */
+}
+
+.training-grounds-text {
+  font-size: 10pt;
 }
