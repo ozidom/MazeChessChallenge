@@ -39,14 +39,14 @@ function getTodayDate() {
     return `${year}-${month}-${day}`; // Format: YYYY-MM-DD
 }
 
-function initGame() {
+function initGame(level) {
     document.getElementById("inputText").innerHTML = GAME_TEXT;
     
     currentLocation = "A1";
     if (isTrainingRoom){
 
         document.getElementById("chessboard").value = "";
-        generateBlockedSpaces(); // Call generateBlockedSpaces() before generating the chessboard
+        generateBlockedSpaces(level); // Call generateBlockedSpaces() before generating the chessboard
     }
         else {
         document.getElementById("chessboard").value = "";
@@ -181,12 +181,12 @@ function parseChessboardFile(content, date) {
 
 
 // Function to generate random blocked spaces with types (LAVA, Water, etc.)
-function generateBlockedSpaces() {
+function generateBlockedSpaces(level) {
     blockedSpaces = []; // Reset blocked spaces array
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < level*17; i++) {
         let x = String.fromCharCode(65 + Math.floor(Math.random() * 8)); // Random letter from 'a' to 'h'
         let y = Math.floor(Math.random() * 8) + 1; // Random number from 1 to 8
-        if (!(x=="h" && y==8) && !(x=="a" && y==1)){
+        if (!(x=="H" && y==8) && !(x=="A" && y==1)){
             let type = Math.random() < 0.5 ? 'LAVA' : 'Water'; // Randomly assign type
             blockedSpaces.push({ space: `${x}${y}`, type: type });
         }
@@ -195,6 +195,7 @@ function generateBlockedSpaces() {
 
 function generateChessboard() {
     const chessboard = document.getElementById('chessboard');
+    chessboard.innerHTML = "";
     const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
     
     for (let row = 8; row >= 1; row--) {  // Row from 8 to 1 (bottom to top)
@@ -381,9 +382,7 @@ function shareOnFacebook() {
 }
 
 function btnTrainingGrounds() {
-    blockedSpaces =  [];
-    isTrainingRoom = true;
-    initGame(); 
+    document.getElementById("training-grounds-row").style.display = true;
 }
 
 function createChessboard() {
@@ -454,11 +453,18 @@ function hideGameArea() {
     document.getElementById('chessboard').style.display = 'none'; // Hide chessboard
 }
 
+function btnTG(level){
+    blockedSpaces =  [];
+    isTrainingRoom = true;
+    initGame(level); 
+}
+
 
   // Event listener for the copy button
   //document.getElementById('copyButton').addEventListener('click', copyChessboardToClipboard);
-  document.addEventListener('DOMContentLoaded', function() {
-    isTrainingRoom = false;
-    initGame(); // Call init when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        //document.getElementByClass("training-grounds-row").style.visibility = false;
+        isTrainingRoom = false;
+        initGame(0); // Call init when DOM is ready
   });
 
