@@ -13,8 +13,8 @@
     <nav class="navbar">
         <ul>
             <li><a href="#" onclick="showHome()">Home</a></li>
-            <li><a href="#" onclick="showHelp()">Help</a></li>
-            <li><a href="#" onclick="showTraining()">Learn</a></li>
+            <li><a href="#" onclick="showHelp()">Help You</a></li>
+            <li><a href="#" onclick="showTraining()">Help Us</a></li>
             <li><a href="#" onclick="showContact()">Why</a></li>
         </ul>
     </nav>
@@ -29,12 +29,12 @@
         <!-- Buttons below chessboard -->
         <div class="button-box">
             <div class="button-row">
-                <button onclick="selectKing()">♚ King</button>
-                <button onclick="selectBishop()">♝ Bishop</button>
-                <button onclick="selectKnight()">♞ Knight</button>
-                <button onclick="selectRook()">♜ Rook</button>
+                <button onclick="selectKing()"><span class="button-chess-icon">♚</span> King</button>
+                <button onclick="selectBishop()"><span class="button-chess-icon">♝</span> Bishop</button>
+                <button onclick="selectKnight()"><span class="button-chess-icon">♞</span> Knight</button>
+                <button onclick="selectRook()"><span class="button-chess-icon">♜</span> Rook</button>
             </div>
-            <div class="button-row">
+            <div class="social-button-row">
                 <button id="btnShareTw" onclick="shareOnTwitter()">Twitter</button>
                 <button id="btnShareFB" onclick="shareOnFacebook()">Facebook</button>
                 <button id="btnTrainingGrounds" onclick="btnTrainingGrounds()">Training Grounds</button>

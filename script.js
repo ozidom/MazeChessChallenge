@@ -149,7 +149,6 @@ function loadBlockedSpaces() {
     const today = getTodayDate(); // You can replace this with dynamic date logic if needed
     const rawSpaces = chessboardConfig.getBoardByDate(today);
     if (rawSpaces.length > 0) {
-        alertText("FILE LOEADED OK");
         for(var blockedSpace of rawSpaces)
         {
             var coord = blockedSpace.split('');
@@ -214,11 +213,11 @@ function generateChessboard() {
 
         //create the labels
         if (row===8 && col===7) {
-            square.textContent = "end";
+            square.textContent = "🏁";
         }
 
         if (row===1 && col===0) {
-            square.textContent = "start";
+            square.textContent = "🚩";
         }
         square.addEventListener('click', handleClick);
         chessboard.appendChild(square);
@@ -429,7 +428,7 @@ function showHelp() {
 function showTraining() {
     hideGameArea();
     const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = TRAINING_TEXT;
+    contentDiv.innerHTML = HELP_US_TEXT;
     contentDiv.style.display = 'block';
 }
 

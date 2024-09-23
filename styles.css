@@ -1,124 +1,150 @@
+
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: lightcyan;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background-color: lightcyan;
+}
 
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+}
 
-  .chessboard {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    width: 100vw;
-    max-width: 340px;
-    aspect-ratio: 1;
-    border: 1px solid black;
-  }
+.chessboard {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  width: 100vw;
+  max-width: 340px;
+  aspect-ratio: 1;
+  border: 1px solid black;
+  box-shadow: 4px 7px 14px -8px black;
+  box-sizing: border-box;
+}
 
-  .chessboard div {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 25px;
-  }
+.chessboard div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+}
 
-  .black {
-    background-color: hsla(60, 1%, 21%, 0.363);
-  }
+.chessboard div:hover {
+  opacity: 0.75;
+  cursor: pointer;
+}
 
-  .white {
-    background-color: #eeeed2;
-  }
+.black {
+  background-color: hsla(60, 1%, 21%, 0.363);
+}
 
-  .blue {
-    background-color:  #d73b06;
-  }
+.white {
+  background-color: #eeeed2;
+}
 
-  .red {
-    background-color: #d73b06;
-  }
+.blue {
+  background-color:  #d73b06;
+}
 
-  .textbox {
-    display: block;              /* Ensures the label takes up the full width */
-    width: 340px;                /* Set a constant width */
-    height: 100px;               /* Set a constant height */
-              /* Add some padding for better readability */
-    overflow: hidden;            /* Hide overflow if text exceeds the height */
-    text-overflow: ellipsis;     /* Show an ellipsis (...) if the text is too long */
-    word-wrap: break-word;       /* Allow words to break at the end of lines */
-    border: 1px solid black;     /* Optional: Add a border */
-    background-color: #f0f0f0;   /* Optional: Add a background color */
-    font-size: 14px;  
-    align-self: center;   
-  }
+.red {
+  background-color: #d73b06;
+}
 
-  .button-box {
-    margin-top: 10px;
-    display: block;
-    width: 340px;
-    overflow: hidden;
-    align-content: center;
-    }
+.button-chess-icon {
+  font-size: 16px;
+}
 
-.button-row {
-    display: flex;               /* Use flexbox for button alignment */
-    gap: 10px;                   /* Space between buttons */
-    justify-content: center;     /* Center the buttons horizontally */
-    align-items: center;         /* Vertically align buttons to the center */
-    flex-wrap: wrap;             /* Ensure buttons wrap onto a new line if needed */
-    }
+.textbox {
+  display: block;              /* Ensures the label takes up the full width */
+  width: 340px;                /* Set a constant width */
+  height: 100px;               /* Set a constant height */
+            /* Add some padding for better readability */
+  overflow: hidden;            /* Hide overflow if text exceeds the height */
+  text-overflow: ellipsis;     /* Show an ellipsis (...) if the text is too long */
+  word-wrap: break-word;       /* Allow words to break at the end of lines */
+  border: 1px solid black;     /* Optional: Add a border */
+  background-color: #f0f0f0;   /* Optional: Add a background color */
+  font-size: 14px;  
+  align-self: center;  
+  padding: 8px; 
+  box-sizing: border-box;
+}
 
-.button-row button {
-    padding: 10px;
-    font-size: 12px;
-    }
+.button-box {
+  margin-top: 10px;
+  display: block;
+  width: 340px;
+  overflow: hidden;
+  align-content: center;
+  
+}
 
-  /* Navigation bar */
+.chess-button-row,.social-button-row {
+  display: flex;               /* Use flexbox for button alignment */
+  gap: 10px;                   /* Space between buttons */
+  justify-content: center;     /* Center the buttons horizontally */
+  align-items: center;         /* Vertically align buttons to the center */
+  padding: 2px;
+}
+
+.social-button-row {
+  border-radius: 5px;
+  background-color: #DDDDFF;
+  margin-top: 6px;
+  padding: 9px;
+}
+
+.button-box button {
+  padding: 6px;
+  font-size: 12px;
+  flex-grow: 1;
+}
+
+
+/* Navigation bar */
 .navbar {
-    background-color: #333;
-    overflow: hidden;
-    padding: 10px 0;
-    text-align: center;
-    width: 340px;
-    border: 1px solid black; 
+  background-color: #333;
+  overflow: hidden;
+  padding: 10px 0;
+  text-align: center;
+  width: 340px;
+  border: 1px solid black; 
+  box-sizing: border-box;
 }
 
 .navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar ul li {
-    display: inline;
-    padding: 5px 10px;
+  display: inline;
+  padding: 5px 10px;
 }
 
 .navbar ul li a {
-    text-decoration: none;
-    color: white;
-    font-size: 14px;
-    padding: 5px 10px;
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  padding: 5px 10px;
 }
 
 .navbar ul li a:hover {
-    background-color: #575757;
-    border-radius: 5px;
+  background-color: #575757;
+  border-radius: 5px;
 }
 
 /* Dynamic content section */
 .content-section {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #f4f4f4;
-    display: none; /* Hidden by default */
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f4f4f4;
+  display: none; /* Hidden by default */
 }
