@@ -40,12 +40,18 @@ function getTodayDate() {
 }
 
 function initGame() {
-    document.getElementById("chessboard").innerHTML = "";;
+    document.getElementById("inputText").innerHTML = GAME_TEXT;
+    
     currentLocation = "A1";
-    if (isTrainingRoom)
+    if (isTrainingRoom){
+
+        document.getElementById("chessboard").value = "";
         generateBlockedSpaces(); // Call generateBlockedSpaces() before generating the chessboard
-    else 
+    }
+        else {
+        document.getElementById("chessboard").value = "";
         loadBlockedSpaces();
+    }
     
     generateChessboard(); // Generate the chessboard after generating blocked spaces
     const textarea = document.getElementById('inputText');
@@ -375,6 +381,7 @@ function shareOnFacebook() {
 }
 
 function btnTrainingGrounds() {
+    blockedSpaces =  [];
     isTrainingRoom = true;
     initGame(); 
 }
