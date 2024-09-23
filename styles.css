@@ -91,18 +91,19 @@ body {
   justify-content: center;     /* Center the buttons horizontally */
   align-items: center;         /* Vertically align buttons to the center */
   padding: 2px; 
+  background-color: #eeeed2;
 }
 
 .social-button-row {
   border-radius: 5px;
-  background-color: #DDDDFF;
+  background-color: hsla(60, 1%, 21%, 0.363);
   margin-top: 6px;
   padding: 9px;
 }
 
 .training-grounds-row {
   border-radius: 5px;
-  background-color: #e9eaba;
+  background-color: #eeeed2;
   margin-top: 6px;
   padding: 9px;
 }
