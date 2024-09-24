@@ -356,7 +356,8 @@ function alertText(textBody){
 }
 
 function startGame() {
-    //document.getElementById('a1').textContent = selectedPiece.value;
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('content').style.display = 'block'; 
 }
 
 function generateShareableText(completionTime) {
@@ -448,7 +449,6 @@ function showContact() {
 
 // Helper function to hide the game area
 function hideGameArea() {
-
     document.getElementById('inputText').style.display = 'none'; // Hide chessboard area
     document.getElementById('chessboard').style.display = 'none'; // Hide chessboard
 }
