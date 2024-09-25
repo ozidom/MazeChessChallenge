@@ -183,7 +183,7 @@ function parseChessboardFile(content, date) {
 // Function to generate random blocked spaces with types (LAVA, Water, etc.)
 function generateBlockedSpaces(level) {
     blockedSpaces = []; // Reset blocked spaces array
-    for (let i = 0; i < level*17; i++) {
+    for (let i = 0; i < level*20; i++) {
         let x = String.fromCharCode(65 + Math.floor(Math.random() * 8)); // Random letter from 'a' to 'h'
         let y = Math.floor(Math.random() * 8) + 1; // Random number from 1 to 8
         if (!(x=="H" && y==8) && !(x=="A" && y==1)){
@@ -357,7 +357,12 @@ function alertText(textBody){
 
 function startGame() {
     document.getElementById('startScreen').style.display = 'none';
-    document.getElementById('content').style.display = 'block'; 
+    document.getElementById('content').style.display = 'none'; 
+    //document.getElementById('container').style.display = 'block'; 
+    document.getElementById('sponsors').style.display = 'block'; 
+    document.getElementById('sponsors').innerHTML = SPONSOR_TEXT;
+    //document.getElementById('inputText').style.display = 'inline'; // Hide chessboard area
+    //document.getElementById('chessboard').style.display = 'inline'; // Hide chessboard
 }
 
 function generateShareableText(completionTime) {
@@ -458,7 +463,6 @@ function btnTG(level){
     isTrainingRoom = true;
     initGame(level); 
 }
-
 
   // Event listener for the copy button
   //document.getElementById('copyButton').addEventListener('click', copyChessboardToClipboard);

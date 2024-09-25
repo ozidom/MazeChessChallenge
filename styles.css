@@ -49,11 +49,11 @@ body {
 }
 
 .blue {
-  background-color:  #d73b06;
+  background-image: url('images/water.png');
 }
 
 .red {
-  background-color: #d73b06;
+  background-image: url('images/lava.png');
 }
 
 .button-chess-icon {
@@ -64,7 +64,6 @@ body {
   display: block;              /* Ensures the label takes up the full width */
   width: 340px;                /* Set a constant width */
   height: 70px;               /* Set a constant height */
-            /* Add some padding for better readability */
   overflow: hidden;            /* Hide overflow if text exceeds the height */
   text-overflow: ellipsis;     /* Show an ellipsis (...) if the text is too long */
   word-wrap: break-word;       /* Allow words to break at the end of lines */
@@ -117,7 +116,7 @@ body {
 
 /* Navigation bar */
 .navbar {
-  background-color: #333;
+  background-color: grey;
   overflow: hidden;
   padding: 10px 0;
   text-align: center;
@@ -178,16 +177,16 @@ body {
 .start-screen button {
   padding: 10px 20px;        /* Add some padding to the button */
   font-size: 24px;           /* Make the button text larger */
-  background-color: #4CAF50; /* Green background */
-  color: white;              /* White text */
-  border: none;              /* No border */
-  border-radius: 5px;       /* Rounded corners */
+  background-color: black; /* Green background */
+  color: green;              /* White text */
+  border: 2px;              /* No border */
+  border-radius: 10px;       /* Rounded corners */
   cursor: pointer;           /* Change cursor on hover */
   top : 180px;
   height: 60px;
-  width: 340px;
+  width: 360px;
 }
 
 .start-screen button:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background-color: grey; /* Darker green on hover */
 }

@@ -1,6 +1,12 @@
 class ChessboardBlockedSpaces {
     constructor() {
         // Store the raw data within the class as an array of objects
+
+        //proposed change each location to be:
+        // "A1,L" indicating LAVA
+        // "A2,W" indicating Water
+        // "A2,C" indicating Chasm
+
         this.data = [
             { date: "2024-09-16", locations: ["A1", "B1", "C1", "D1", "E1", "F1", "G1", "H1"] },
             { date: "2024-09-17", locations: ["A2", "B2", "C2", "D2", "E2", "F2", "G2", "H2"] },
