@@ -49,11 +49,13 @@ body {
 }
 
 .blue {
-  background-image: url('images/water.png');
+  /* background-image: url('images/water.png'); */
+  background-color: blue;
 }
 
 .red {
-  background-image: url('images/Lava.png');
+  /* background-image: url('images/Lava.png'); */
+  background-color: blue;
 }
 
 .button-chess-icon {

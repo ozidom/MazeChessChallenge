@@ -15,10 +15,10 @@
     </div>
     <nav class="navbar">
         <ul>
-            <li><a href="#" onclick="showHome()">Home</a></li>
-            <li><a href="#" onclick="showHelp()">Help</a></li>
-            <li><a href="#" onclick="showTraining()">Help Us</a></li>
-            <li><a href="#" onclick="showContact()">Why</a></li>
+            <li><a href="#" onclick="showHome()" title="Home">🏠</a></li>
+            <li><a href="#" onclick="showHelp()" title="Help">？</a></li>
+            <li><a href="#" onclick="showTraining()" title="Support Us">🎗️</a></li>
+            <li><a href="#" onclick="showContact()" title="Contact (first)">👽</a></li>
         </ul>
     </nav>
 
@@ -27,20 +27,20 @@
         <label class="textbox" id="inputText" readonly="true"></label>
 
         <!-- Chessboard -->
-        <div class="chessboard" id="chessboard"></div>
+        <div id="chessboardcontainer">
+            <div class="chessboard" id="chessboard"></div>
+            <label class="training-grounds-text">Mazechess Challenge - mazechesschallenge.com</label>
+        </div>
+        
 
         <!-- Buttons below chessboard -->
-        <div class="button-box">
+        <div id="button-box-container">
             <div class="chess-button-row">
-                <label class="training-grounds-text">Select:</label>
+                <label class="training-grounds-text">Pick:</label>
                 <button onclick="selectKing()"><span class="button-chess-icon">♚</span> King</button>
                 <button onclick="selectBishop()"><span class="button-chess-icon">♝</span> Bishop</button>
                 <button onclick="selectKnight()"><span class="button-chess-icon">♞</span> Knight</button>
                 <button onclick="selectRook()"><span class="button-chess-icon">♜</span> Rook</button>
-            </div>
-            <div class="social-button-row">
-                <button id="btnShareTw" onclick="shareOnTwitter()">Twitter</button>
-                <button id="btnShareFB" onclick="shareOnFacebook()">Facebook</button>
                 <button id="btnClipboard" onclick="copyChessboardToClipboard()">Clipboard</button>
             </div>
             <div class="training-grounds-row">

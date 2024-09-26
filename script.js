@@ -406,7 +406,7 @@ function createChessboard() {
 
   // Function to copy the chessboard as an image to the clipboard
   function copyChessboardToClipboard() {
-    const chessboardElement = document.getElementById('chessboard');
+    const chessboardElement = document.getElementById('chessboardcontainer');
 
     // Use html2canvas to convert the chessboard div to a canvas
     html2canvas(chessboardElement).then(canvas => {
@@ -454,8 +454,9 @@ function showContact() {
 
 // Helper function to hide the game area
 function hideGameArea() {
-    document.getElementById('inputText').style.display = 'none'; // Hide chessboard area
+    //document.getElementById('inputText').style.display = 'none'; // Hide chessboard area
     document.getElementById('chessboard').style.display = 'none'; // Hide chessboard
+    document.getElementById('button-box-container').style.display = 'none'; // Hide chessboard
 }
 
 function btnTG(level){
