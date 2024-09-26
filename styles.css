@@ -50,12 +50,12 @@ body {
 
 .blue {
   /* background-image: url('images/water.png'); */
-  background-color: rgb(82, 82, 187);
+  background-color: black;
 }
 
 .red {
   /* background-image: url('images/Lava.png'); */
-  background-color: rgb(255, 64, 0);
+  background-color: black;
 }
 
 .button-chess-icon {
@@ -142,7 +142,7 @@ body {
 .navbar ul li a {
   text-decoration: none;
   color: white;
-  font-size: 14px;
+  font-size: 18px;
   padding: 5px 10px;
 }
 
