@@ -357,6 +357,11 @@ function alertText(textBody){
 }
 
 function startGame() {
+    if (isTrainingRoom)
+    {
+        isTrainingRoom = false;
+        initGame(0);
+    }
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('content').style.display = 'none'; 
     isGameStarted = true;
@@ -429,7 +434,7 @@ function showHome() {
         document.getElementById('startScreen').style.display = 'flex';
     else    
         document.getElementById('startScreen').style.display = 'none';
-
+    document.getElementById("training-grounds-row").style.display = 'none';
     document.getElementById('inputText').style.display = 'flex'; // Show chessboard area
     document.getElementById('button-box').style.display = 'grid'; // Show chessboard area
     document.getElementById('chessboard').style.display = 'grid'; // Show chessboard
@@ -471,11 +476,31 @@ function showContact() {
     contentDiv.style.display = 'block';
 }
 
+function showTrainingGrounds() {
+    if (!isGameStarted) {
+        document.getElementById('inputText').style.display = 'flex'; // Show chessboard area
+        document.getElementById('button-box').style.display = 'grid'; // Show chessboard area
+        document.getElementById('chessboard').style.display = 'grid'; // Show chessboard
+        document.getElementById('content').style.display = 'none'; // Hide dynamic content
+        document.getElementById("startScreen").style.display = 'none';
+        document.getElementById("training-grounds-row").style.display = 'flex';
+        if (!isTrainingRoom)
+        {
+            isTrainingRoom = true;
+            btnTG(1);
+        }
+    }
+    else
+    {
+        alertText("You can't start a traing ground while you are playing a game");
+    }
+}
 
 
 // Helper function to hide the game area
 function hideGameArea() {
     //document.getElementById("startButton").style.visibility = !isGameStarted;
+    document.getElementById("training-grounds-row").style.display = 'none';
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('chessboard').style.display = 'none'; // Hide chessboard
     document.getElementById('button-box').style.display = 'none'; // Hide chessboard
