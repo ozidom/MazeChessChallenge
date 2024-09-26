@@ -93,6 +93,7 @@ body {
   align-items: center;         /* Vertically align buttons to the center */
   padding: 2px; 
   background-color: #eeeed2;
+
 }
 
 .social-button-row {
@@ -157,10 +158,17 @@ body {
   background-color: #f4f4f4;
   display: none; /* Hidden by default */
   width: 340px;
+  overflow: hidden;
 }
 
 .training-grounds-text {
   font-size: 10pt;
+}
+
+.chess-board-label{
+  font-size: 12pt;
+  font-weight: bold;
+  justify-content: center;   
 }
 
 .start-screen {
@@ -169,24 +177,24 @@ body {
   left: 0;
   width: 100vw;              /* Full width */
   height: 100vh;             /* Full height */
-  background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent background */
+  background-color: rgba(0, 0, 0  , 0.15); /* Semi-transparent background */
   display: flex;             /* Use flexbox to center the button */
   justify-content: center;   /* Center horizontally */
-  /*align-items: center;       /* Center vertically */
+  align-items:first baseline;       /* Center vertically */
   z-index: 1000;             /* Ensure it appears on top of other content */
 }
 
 .start-screen button {
   padding: 10px 20px;        /* Add some padding to the button */
   font-size: 24px;           /* Make the button text larger */
-  background-color: black; /* Green background */
-  color: green;              /* White text */
+  background-color: rgb(197, 84, 84); /* Green background */
+  color: black;             /* White text */
   border: 2px;              /* No border */
   border-radius: 10px;       /* Rounded corners */
   cursor: pointer;           /* Change cursor on hover */
-  top : 180px;
   height: 60px;
-  width: 360px;
+  width: 160px;
+  margin-top: 150px; 
 }
 
 .start-screen button:hover {

@@ -4,6 +4,7 @@ let currentPiece;
 let currentLocation;
 let previousLocation;
 let isTrainingRoom;
+let isGameStarted = false;  
 
 // Game images
 let kingImage = "♚";
@@ -358,6 +359,7 @@ function alertText(textBody){
 function startGame() {
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('content').style.display = 'none'; 
+    isGameStarted = true;
     //document.getElementById('container').style.display = 'block'; 
     document.getElementById('sponsors').style.display = 'block'; 
     document.getElementById('sponsors').innerHTML = SPONSOR_TEXT;
@@ -423,7 +425,13 @@ function createChessboard() {
 
   // Function to show the "Home" content
 function showHome() {
+    if (!isGameStarted)
+        document.getElementById('startScreen').style.display = 'flex';
+    else    
+        document.getElementById('startScreen').style.display = 'none';
+
     document.getElementById('inputText').style.display = 'flex'; // Show chessboard area
+    document.getElementById('button-box').style.display = 'grid'; // Show chessboard area
     document.getElementById('chessboard').style.display = 'grid'; // Show chessboard
     document.getElementById('content').style.display = 'none'; // Hide dynamic content
 }
@@ -431,14 +439,17 @@ function showHome() {
 // Function to show the "Help" section
 function showHelp() {
     hideGameArea();
+    document.getElementById("startScreen").style.display = 'none';
     const contentDiv = document.getElementById('content');
     contentDiv.innerHTML = HELP_TEXT;
     contentDiv.style.display = 'block';
+    //document.getElementById("startScreen").style.visibility = !isGameStarted;
 }
 
 // Function to show the "Training" section
 function showTraining() {
     hideGameArea();
+    document.getElementById("startScreen").style.display = 'none';
     const contentDiv = document.getElementById('content');
     contentDiv.innerHTML = HELP_US_TEXT;
     contentDiv.style.display = 'block';
@@ -447,6 +458,7 @@ function showTraining() {
 // Function to show the "Contact Us" section
 function showContact() {
     hideGameArea();
+    document.getElementById("startScreen").style.display = 'none';
     const contentDiv = document.getElementById('content');
     contentDiv.innerHTML = CONTACT_TEXT;
     contentDiv.style.display = 'block';
@@ -454,9 +466,10 @@ function showContact() {
 
 // Helper function to hide the game area
 function hideGameArea() {
-    //document.getElementById('inputText').style.display = 'none'; // Hide chessboard area
+    //document.getElementById("startButton").style.visibility = !isGameStarted;
+    document.getElementById('startScreen').style.display = 'none';
     document.getElementById('chessboard').style.display = 'none'; // Hide chessboard
-    document.getElementById('button-box-container').style.display = 'none'; // Hide chessboard
+    document.getElementById('button-box').style.display = 'none'; // Hide chessboard
 }
 
 function btnTG(level){
@@ -470,6 +483,7 @@ function btnTG(level){
     document.addEventListener('DOMContentLoaded', function() {
         //document.getElementByClass("training-grounds-row").style.visibility = false;
         isTrainingRoom = false;
+        
         initGame(0); // Call init when DOM is ready
   });
 
