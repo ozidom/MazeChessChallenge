@@ -445,9 +445,17 @@ function showHelp() {
     contentDiv.style.display = 'block';
     //document.getElementById("startScreen").style.visibility = !isGameStarted;
 }
+// Function to show the "Y" section
+function showWhy() {
+    hideGameArea();
+    document.getElementById("startScreen").style.display = 'none';
+    const contentDiv = document.getElementById('content');
+    contentDiv.innerHTML = WHY_TEXT;
+    contentDiv.style.display = 'block';
+}
 
-// Function to show the "Training" section
-function showTraining() {
+// Function to show the "Support" section
+function showSupport() {
     hideGameArea();
     document.getElementById("startScreen").style.display = 'none';
     const contentDiv = document.getElementById('content');
@@ -455,7 +463,6 @@ function showTraining() {
     contentDiv.style.display = 'block';
 }
 
-// Function to show the "Contact Us" section
 function showContact() {
     hideGameArea();
     document.getElementById("startScreen").style.display = 'none';
@@ -463,6 +470,8 @@ function showContact() {
     contentDiv.innerHTML = CONTACT_TEXT;
     contentDiv.style.display = 'block';
 }
+
+
 
 // Helper function to hide the game area
 function hideGameArea() {

@@ -18,7 +18,7 @@ class ChessboardBlockedSpaces {
             { date: "2024-09-23", locations: ["A3", "B3", "C4", "D8", "E3", "F3", "G3", "H3"] },
             { date: "2024-09-24", locations: ["A4", "B4", "C3", "D3", "E3", "F3", "G3", "H3"] },
             { date: "2024-09-25", locations: ["A5", "B8", "C5", "D3", "E3", "F3", "G3", "H3"] },
-            { date: "2024-09-26", locations: ["A6", "B9", "C3", "D3", "E3", "F3", "G3", "H3"] },
+            { date: "2024-09-26", locations: ["A8", "B2","B3","B8","C3", "D3", "E3", "F3", "G3", "H3"] },
             { date: "2024-09-27", locations: ["A7", "B3", "C3", "D3", "E3", "F3", "G3", "H3"] },
             { date: "2024-09-28", locations: ["A8", "B3", "C3", "D3", "E3", "F3", "G3", "H3"] },
         ];
