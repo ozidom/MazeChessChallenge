@@ -5,6 +5,7 @@ let currentLocation;
 let previousLocation;
 let isTrainingRoom;
 let isGameStarted = false;  
+let moveCount = 0;
 
 // Game images
 let kingImage = "♚";
@@ -241,6 +242,7 @@ function generateChessboard() {
 
     var position =`${column}${row}`;
     movePiece(position);
+    moveCount++;
   }
 
 // Example function to determine space type (blocked or not)
@@ -314,7 +316,7 @@ function movePiece(location) {
     if (destination=='H8') {
         let endTime = new Date();
         let completionTime = (endTime - startTime) / 1000; // Time in seconds
-        alertText("🏆🏆🏆You have won - number of moves in a time (sec) : " + completionTime + "🏆🏆🏆");
+        alertText("🏆🏆🏆You have won - number of moves " + moveCount+ " in a time (sec) : " + completionTime + "🏆🏆🏆");
     }
 }
 
@@ -332,21 +334,25 @@ function getElementByLocation(location) {
   }
 
 function selectKing() {
+    moveCount++;
     currentPiece = kingImage;
     document.getElementById(currentLocation).textContent = currentPiece;
 }
 
 function selectRook() {
+    moveCount++;
     currentPiece = rookImage;
     document.getElementById(currentLocation).textContent = currentPiece;
 }
 
 function selectKnight() {
+    moveCount++;
     currentPiece =  knightImage;
     document.getElementById(currentLocation).textContent = currentPiece;
 }
 
 function selectBishop() {
+    moveCount++;
     currentPiece = bishopImage;
     document.getElementById(currentLocation).textContent = currentPiece;
 }
@@ -496,7 +502,6 @@ function showTrainingGrounds() {
     }
 }
 
-
 // Helper function to hide the game area
 function hideGameArea() {
     //document.getElementById("startButton").style.visibility = !isGameStarted;
@@ -507,6 +512,7 @@ function hideGameArea() {
 }
 
 function btnTG(level){
+    moveCount = 0;
     blockedSpaces =  [];
     isTrainingRoom = true;
     initGame(level); 
