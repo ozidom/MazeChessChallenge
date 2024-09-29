@@ -316,7 +316,7 @@ function movePiece(location) {
     if (destination=='H8') {
         let endTime = new Date();
         let completionTime = (endTime - startTime) / 1000; // Time in seconds
-        alertText("🏆🏆🏆You have won - number of moves " + moveCount+ " in a time (sec) : " + completionTime + "🏆🏆🏆");
+        alertText("🏆🏆🏆You have won - number of moves " + moveCount + " in a time (sec) : " + completionTime + "🏆🏆🏆");
     }
 }
 
@@ -417,22 +417,36 @@ function createChessboard() {
     }
   }
 
-  // Function to copy the chessboard as an image to the clipboard
   function copyChessboardToClipboard() {
     const chessboardElement = document.getElementById('chessboardcontainer');
 
     // Use html2canvas to convert the chessboard div to a canvas
     html2canvas(chessboardElement).then(canvas => {
-      canvas.toBlob(blob => {   
-        const item = new ClipboardItem({ 'image/png': blob });
-        navigator.clipboard.write([item]).then(() => {
-          alertText('Chessboard copied to clipboard as an image!');
-        }).catch(err => {
-          console.error('Error copying to clipboard: ', err);
+        canvas.toBlob(blob => {
+            if (blob) {
+                const item = new ClipboardItem({ 'image/png': blob });
+                navigator.clipboard.write([item]).then(() => {
+                    alertText('Chessboard copied to clipboard as an image!');
+                }).catch(err => {
+                    console.error('Error copying to clipboard: ', err);
+                    fallbackCopyToClipboard(canvas.toDataURL()); // Fallback for mobile browsers
+                });
+            } else {
+                console.error('Error creating blob from canvas');
+            }
         });
-      });
     });
-  }
+}
+
+function fallbackCopyToClipboard(dataUrl) {
+    const tempLink = document.createElement('a');
+    tempLink.href = dataUrl;
+    tempLink.download = 'chessboard.png';
+    document.body.appendChild(tempLink);
+    tempLink.click();
+    document.body.removeChild(tempLink);
+    alertText('Chessboard copied to clipboard as an image! (Fallback method)');
+}
 
   // Function to show the "Home" content
 function showHome() {
