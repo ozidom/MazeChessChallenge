@@ -4,7 +4,8 @@ body {
   flex-direction: column;
   align-items: center;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  background-color: lightcyan;
+  background-color: black;
+  color: white;
 }
 
 .container {
@@ -41,21 +42,24 @@ body {
 }
 
 .black {
-  background-color: hsla(60, 1%, 21%, 0.363);
+  background-color: rgb(58, 67, 90);
 }
 
 .white {
-  background-color: #eeeed2;
+  background-color: #6e979e;
 }
 
 .blue {
   /* background-image: url('images/water.png'); */
-  background-color: black;
+  background-color: rgb(14, 10, 10);
 }
 
 .red {
   /* background-image: url('images/Lava.png'); */
-  background-color: black;
+ /* background-color:  rgb(32, 30, 30);*/
+  box-shadow: 0 0 2px black;
+
+
 }
 
 .button-chess-icon {
@@ -70,7 +74,7 @@ body {
   text-overflow: ellipsis;     /* Show an ellipsis (...) if the text is too long */
   word-wrap: break-word;       /* Allow words to break at the end of lines */
   border: 1px solid black;     /* Optional: Add a border */
-  background-color: #f0f0f0;   /* Optional: Add a background color */
+  background-color: black;   /* Optional: Add a background color */
   font-size: 15px;  
   align-self: center;  
   padding: 8px; 
@@ -157,7 +161,7 @@ body {
 .content-section {
   margin-top: 20px;
   padding: 20px;
-  background-color: #f4f4f4;
+  background-color: black;
   display: none; /* Hidden by default */
   width: 340px;
   overflow: hidden;
@@ -177,9 +181,11 @@ body {
 }
 
 .chess-board-label{
+  color: yellow;
   font-size: 12pt;
   font-weight: bold;
-  justify-content: center;   
+  justify-content: center;  
+  justify-items: center; 
 }
 
 .start-screen {
@@ -198,7 +204,7 @@ body {
 .start-screen button {
   padding: 10px 20px;        /* Add some padding to the button */
   font-size: 24px;           /* Make the button text larger */
-  background-color: rgb(233, 20, 20); /* Green background */
+  background-color: white; /* Green background */
   color: black;             /* White text */
   border: 6px;              /* No border */
   border-color : black;
