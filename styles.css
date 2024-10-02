@@ -69,7 +69,7 @@ body {
 .textbox {
   display: block;              /* Ensures the label takes up the full width */
   width: 340px;                /* Set a constant width */
-  height: 100px;               /* Set a constant height */
+  height: 120px;               /* Set a constant height */
   overflow: hidden;            /* Hide overflow if text exceeds the height */
   text-overflow: ellipsis;     /* Show an ellipsis (...) if the text is too long */      /* Allow words to break at the end of lines */
   border: 1px solid black;     /* Optional: Add a border */
@@ -207,15 +207,15 @@ body {
 .start-screen button {
   padding: 10px 20px;        /* Add some padding to the button */
   font-size: 24px;           /* Make the button text larger */
-  background-color: white; /* Green background */
-  color: black;             /* White text */
-  border: 6px;              /* No border */
+  background-color:  #6e979e;
+  color: black;             /* White text */    
   border-color : black;
+  border-width: 6px;
   border-radius: 10px;       /* Rounded corners */
   cursor: pointer;           /* Change cursor on hover */
-  height: 60px;
-  width: 120px;
-  margin-top: 180px; 
+  height: 280px;
+  width: 280px;
+  margin-top: 40px; 
 }
 
 .start-screen button:hover {
