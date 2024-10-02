@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MazeChess Deploy Test</title>
+    <title>MazeChess - Daily Chess Challenges</title>
     <link rel="stylesheet" href="styles.css">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PL6YEDWDPD"></script>
@@ -39,12 +39,13 @@
 
         <!-- Chessboard -->
         <div id="chessboardcontainer">
-            <div class="chessboard" id="chessboard"></div>
             <label id="chessboardlabel">Mazechess Challenge - mazechessgame.com</label>
+            <div class="chessboard" id="chessboard"></div>
+            <!-- Text Area below chessboard -->
+            <label class="textbox" id="inputText" readonly="true"></label>
         </div>
 
-        <!-- Text Area below chessboard -->
-        <label class="textbox" id="inputText" readonly="true"></label>
+    
 
         <!-- Buttons below chessboard -->
         <div id="button-box" class="button-box">
@@ -54,7 +55,7 @@
                 <button onclick="selectBishop()"><span class="button-chess-icon">♝</span> Bishop</button>
                 <button onclick="selectKnight()"><span class="button-chess-icon">♞</span> Knight</button>
                 <button onclick="selectRook()"><span class="button-chess-icon">♜</span> Rook</button>
-                <button id="btnClipboard" onclick="copyChessboardToClipboard()">Copy</button>
+                <button id="btnClipboard" onclick="copyChessboardToClipboard()">Clipboard</button>
             </div>
             <div id="training-grounds-row" class="training-grounds-row">
                 <label class="training-grounds-text">Train</label>

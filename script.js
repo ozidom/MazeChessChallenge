@@ -180,12 +180,14 @@ function parseChessboardFile(content, date) {
     return []; // No match for the date
 }
 
-
-
 // Function to generate random blocked spaces with types (LAVA, Water, etc.)
 function generateBlockedSpaces(level) {
     blockedSpaces = []; // Reset blocked spaces array
-    for (let i = 0; i < level*20; i++) {
+    var hardness = level*20;
+    if (level==4)
+        hardness += 20;
+
+    for (let i = 0; i < hardness; i++) {
         let x = String.fromCharCode(65 + Math.floor(Math.random() * 8)); // Random letter from 'a' to 'h'
         let y = Math.floor(Math.random() * 8) + 1; // Random number from 1 to 8
         if (!(x=="H" && y==8) && !(x=="A" && y==1)){
@@ -316,7 +318,10 @@ function movePiece(location) {
     if (destination=='H8') {
         let endTime = new Date();
         let completionTime = (endTime - startTime) / 1000; // Time in seconds
-        alertText("🏆🏆🏆You have won - number of moves " + moveCount + " in a time (sec) : " + completionTime + "🏆🏆🏆");
+        alertText("🏆🏆🏆You have won in " + moveCount + "moves and in " + completionTime + "seconds 🏆🏆🏆. Reload page to play again or try out a training room.");
+        isGameStarted = false;
+        moveCount = 0;
+        blockedSpaces =  [];
     }
 }
 

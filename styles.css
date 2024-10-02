@@ -69,14 +69,13 @@ body {
 .textbox {
   display: block;              /* Ensures the label takes up the full width */
   width: 340px;                /* Set a constant width */
-  height: 70px;               /* Set a constant height */
+  height: 100px;               /* Set a constant height */
   overflow: hidden;            /* Hide overflow if text exceeds the height */
-  text-overflow: ellipsis;     /* Show an ellipsis (...) if the text is too long */
-  word-wrap: break-word;       /* Allow words to break at the end of lines */
+  text-overflow: ellipsis;     /* Show an ellipsis (...) if the text is too long */      /* Allow words to break at the end of lines */
   border: 1px solid black;     /* Optional: Add a border */
   background-color: black;   /* Optional: Add a background color */
-  font-size: 15px;  
-  align-self: center;  
+  font-size: 12px;  
+  text-align: center; 
   padding: 8px; 
   box-sizing: border-box;
 }
@@ -96,7 +95,7 @@ body {
   justify-content: center;     /* Center the buttons horizontally */
   align-items: center;         /* Vertically align buttons to the center */
   padding: 2px; 
-  background-color: #eeeed2;
+  background-color: black;
 
 }
 
@@ -125,7 +124,7 @@ body {
 
 /* Navigation bar */
 .navbar {
-  background-color: grey;
+  background-color: black;
   overflow: hidden;
   padding: 5px 0;
   text-align: center;
@@ -165,6 +164,10 @@ body {
   display: none; /* Hidden by default */
   width: 340px;
   overflow: hidden;
+}
+
+.content-section h2 {
+  color: #6e979e;
 }
 
 .sponsor-section {
