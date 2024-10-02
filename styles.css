@@ -197,7 +197,7 @@ body {
   left: 0;
   width: 100vw;              /* Full width */
   height: 100vh;             /* Full height */
-  background-color: rgba(0, 0, 0  , 0.15); /* Semi-transparent background */
+  background-color: rgba(0, 0, 0  , 0.5); /* Semi-transparent background */
   display: flex;             /* Use flexbox to center the button */
   justify-content: center;   /* Center horizontally */
   align-items:first baseline;       /* Center vertically */
