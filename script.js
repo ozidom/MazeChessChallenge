@@ -524,6 +524,7 @@ function showTrainingGrounds() {
 // Helper function to hide the game area
 function hideGameArea() {
     //document.getElementById("startButton").style.visibility = !isGameStarted;
+    document.getElementById("inputText").style.display = 'none';
     document.getElementById("training-grounds-row").style.display = 'none';
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('chessboard').style.display = 'none'; // Hide chessboard
@@ -540,9 +541,7 @@ function btnTG(level){
   // Event listener for the copy button
   //document.getElementById('copyButton').addEventListener('click', copyChessboardToClipboard);
     document.addEventListener('DOMContentLoaded', function() {
-        //document.getElementByClass("training-grounds-row").style.visibility = false;
         isTrainingRoom = false;
-        
         initGame(0); // Call init when DOM is ready
   });
 
