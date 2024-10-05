@@ -4,7 +4,7 @@ body {
   flex-direction: column;
   align-items: center;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  background-color: black;
+  background: radial-gradient(#23313F, #16191B);
   color: white;
 }
 
@@ -22,9 +22,13 @@ body {
   width: 100vw;
   max-width: 340px;
   aspect-ratio: 1;
-  border: 1px solid black;
-  box-shadow: 4px 7px 14px -8px black;
+  /* border: 1px solid black; */  
+  /* box-shadow: 4px 7px 14px -8px black; */
+  filter: drop-shadow(0 20px 20px rgba(0,0,0,0.5));
   box-sizing: border-box;
+  margin: 16px 0;
+  color: black;
+  background-image: url('images/lava.jpeg');
 }
 
 .chessboard div {
@@ -34,32 +38,32 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 25px;
+  transition: background-color 200ms;
 }
 
-.chessboard div:hover {
-  opacity: 0.75;
+.chessboard .white:hover,
+.chessboard .black:hover {
+  background-color:white;
   cursor: pointer;
 }
 
 .black {
-  background-color: rgb(58, 67, 90);
+  background-color: #405779;
 }
 
 .white {
-  background-color: #6e979e;
+  background-color: #889CB9;
 }
 
 .blue {
   /* background-image: url('images/water.png'); */
-  background-color: rgb(14, 10, 10);
+  /* background-color: rgb(14, 10, 10); */
 }
 
 .red {
   /* background-image: url('images/Lava.png'); */
  /* background-color:  rgb(32, 30, 30);*/
-  box-shadow: 0 0 2px black;
-
-
+  /* box-shadow: 0 0 2px black; */
 }
 
 .button-chess-icon {
@@ -72,8 +76,8 @@ body {
   height: 120px;               /* Set a constant height */
   overflow: hidden;            /* Hide overflow if text exceeds the height */
   text-overflow: ellipsis;     /* Show an ellipsis (...) if the text is too long */      /* Allow words to break at the end of lines */
-  border: 1px solid black;     /* Optional: Add a border */
-  background-color: black;   /* Optional: Add a background color */
+  /* border: 1px solid black;     Optional: Add a border */
+  /*background-color: black;    Optional: Add a background color */
   font-size: 12px;  
   text-align: center; 
   padding: 8px; 
@@ -89,14 +93,15 @@ body {
   
 }
 
-.chess-button-row,.social-button-row {
+.chess-button-row,
+.social-button-row {
   display: flex;               /* Use flexbox for button alignment */
   gap: 5px;                   /* Space between buttons */
   justify-content: center;     /* Center the buttons horizontally */
   align-items: center;         /* Vertically align buttons to the center */
-  padding: 2px; 
-  background-color: black;
-
+  padding: 4px;
+  background-color: rgba(0,0,0,0.25);
+  border-radius: 999px;
 }
 
 .social-button-row {
@@ -108,28 +113,37 @@ body {
 
 .training-grounds-row {
   border-radius: 5px;
-  background-color: black;
+  /* background-color: #eeeed2; */
   margin-top: 6px;
-  align-items: center; 
-  padding: 2px;
+  align-items: center;
+  padding: 4px;
   display: none;
+  gap:4px;
 }
 
 .button-box button {
   padding: 2px;
   font-size: 12px;
   flex-grow: 1;
+  border-radius: 999px;
+  border: none;
+  background-color: #405779;
+  cursor: pointer;
+  min-height: 32px;
+  transition: background-color 200ms;
 }
-
+.button-box button:hover {
+  background-color: white;
+}
 
 /* Navigation bar */
 .navbar {
-  background-color: black;
+  /* background-color: black; */
   overflow: hidden;
   padding: 5px 0;
   text-align: center;
   width: 340px;
-  border: 1px solid black; 
+  /* border: 1px solid black; */
   box-sizing: border-box;
 }
 
@@ -152,15 +166,17 @@ body {
 }
 
 .navbar ul li a:hover {
-  background-color: #575757;
-  border-radius: 5px;
+  background-color: white;
+  color: #405779;
+  border-radius: 99px;
 }
 
 /* Dynamic content section */
 .content-section {
-  margin-top: 20px;
-  padding: 20px;
-  background-color: black;
+  margin-top: 32px;
+  padding: 8px 0;
+  /* background-color: black; */
+  border-top: solid 1px #889CB9;
   display: none; /* Hidden by default */
   width: 340px;
   overflow: hidden;
@@ -193,7 +209,7 @@ body {
 
 .start-screen {
   position: fixed;            /* Fixes the position relative to the viewport */
-  top: 45px;
+  top: 50px;
   left: 0;
   width: 100vw;              /* Full width */
   height: 100vh;             /* Full height */
@@ -207,9 +223,9 @@ body {
 .start-screen button {
   padding: 10px 20px;        /* Add some padding to the button */
   font-size: 24px;           /* Make the button text larger */
-  background-color:  #6e979e;
-  color: black;             /* White text */    
-  border-color : black;
+  background-color:  #e3eeff;
+  color: #405779;             /* White text */    
+  border:none; 
   border-width: 6px;
   border-radius: 10px;       /* Rounded corners */
   cursor: pointer;           /* Change cursor on hover */
@@ -219,5 +235,8 @@ body {
 }
 
 .start-screen button:hover {
-  background-color: grey; /* Darker green on hover */
+  color: black;
+  background: white;
 }
+styles.css
+Displaying styles.css.
