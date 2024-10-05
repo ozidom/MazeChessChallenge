@@ -113,7 +113,6 @@ function isPathClear(current, destination) {
     } else {
         return false; // Invalid move for this piece
     }
-
     return true; // Path is clear
 }
 
