@@ -5,7 +5,7 @@ body {
   align-items: center;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   background: radial-gradient(#23313F, #16191B);
-  color: white;
+  color: darkorange;
 }
 
 .container {
