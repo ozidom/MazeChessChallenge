@@ -221,10 +221,9 @@ body {
 .start-screen button {
   padding: 10px 20px;        /* Add some padding to the button */
   font-size: 24px;           /* Make the button text larger */
-  background-color:  #e3eeff;
+  background-color:  #889CB9;
   color: #405779;             /* White text */    
-  border:none; 
-  border-width: 6px;
+  border-width: 2px;
   border-radius: 10px;       /* Rounded corners */
   cursor: pointer;           /* Change cursor on hover */
   height: 280px;
@@ -234,7 +233,7 @@ body {
 
 .start-screen button:hover {
   color: black;
-  background: white;
+  background-color: #405779;
 }
 styles.css
 Displaying styles.css.
