@@ -125,7 +125,7 @@ body {
   flex-grow: 1;
   border-radius: 999px;
   border: none;
-  background-color: #405779;
+  background-color: white;
   cursor: pointer;
   min-height: 32px;
   transition: background-color 200ms;
