@@ -317,7 +317,7 @@ function movePiece(location) {
     if (destination=='H8') {
         let endTime = new Date();
         let completionTime = (endTime - startTime) / 1000; // Time in seconds
-        alertText("🏆🏆🏆You have won in " + moveCount + " moves and in " + completionTime + " seconds 🏆🏆🏆. Reload page to play again or try out a training room.");
+        alertText("🏆🏆🏆You have won in " + moveCount + " moves and in " + completionTime + "seconds 🏆🏆🏆. Reload page to play again or try out a training room.");
         isGameStarted = false;
         moveCount = 0;
         blockedSpaces =  [];

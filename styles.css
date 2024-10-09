@@ -77,7 +77,7 @@ body {
   text-overflow: ellipsis;     /* Show an ellipsis (...) if the text is too long */      /* Allow words to break at the end of lines */
   /* border: 1px solid black;     Optional: Add a border */
   /*background-color: black;    Optional: Add a background color */
-  font-size: 12px;  
+  font-size: 15px;  
   text-align: center; 
   box-sizing: border-box;
   background-color:  radial-gradient(#23313F, #16191B);
