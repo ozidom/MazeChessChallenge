@@ -121,7 +121,7 @@ body {
 }
 
 .button-box button {
-  font-size: 12px;
+  font-size: 18px;
   flex-grow: 1;
   border-radius: 999px;
   border: none;
