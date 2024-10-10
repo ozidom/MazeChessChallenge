@@ -1,3 +1,5 @@
+// Mazechess.js
+
 // Global Vars
 let startTime;
 let currentPiece;
@@ -15,7 +17,7 @@ let bishopImage = "♝";
 
 
 // Define an array of available pieces
-const pieces = ['♚', '♜', '♞', '♝'];
+const pieces = [kingImage   , rookImage, knightImage, bishopImage];
 
 // Define an array to store blocked spaces
 let blockedSpaces = [];
@@ -33,6 +35,7 @@ class Piece {
     }
 }
 
+// Function to get the date from the browser
 function getTodayDate() {
     const today = new Date();
     const year = today.getFullYear();
@@ -41,6 +44,7 @@ function getTodayDate() {
     return `${year}-${month}-${day}`; // Format: YYYY-MM-DD
 }
 
+// Function to create the game
 function initGame(level) {
     document.getElementById("inputText").innerHTML = GAME_TEXT;
     
@@ -116,7 +120,7 @@ function isPathClear(current, destination) {
     return true; // Path is clear
 }
 
-// Update piece classes to check for blocked spaces
+// Class to implement King
 class King extends Piece {
     isValidMove(current, destination) {
         let dx = Math.abs(destination.charCodeAt(0) - current.charCodeAt(0));
@@ -125,6 +129,7 @@ class King extends Piece {
     }
 }
 
+// Class to implement Rook
 class Rook extends Piece {
     isValidMove(current, destination) {
         // Rook can move horizontally or vertically
@@ -133,6 +138,7 @@ class Rook extends Piece {
     }
 }
 
+// Class to implement Knight
 class Knight extends Piece {
     isValidMove(current, destination) {
         let dx = Math.abs(destination.charCodeAt(0) - current.charCodeAt(0));
@@ -141,6 +147,7 @@ class Knight extends Piece {
     }
 }
 
+// Class to implement Bishop
 class Bishop extends Piece {
     isValidMove(current, destination) {
         let dx = Math.abs(destination.charCodeAt(0) - current.charCodeAt(0));
@@ -149,7 +156,7 @@ class Bishop extends Piece {
         return isDiagonalMove && isPathClear(current, destination);
     }
 }
-//FUNCTIONS TO LOAD THE BLOCKED SPACES
+// Function to load the bloacked space into an array
 function loadBlockedSpaces() {
     blockedSpaces = []; 
     const chessboardConfig = new ChessboardBlockedSpaces();
@@ -167,7 +174,7 @@ function loadBlockedSpaces() {
     }   
 }
 
-// Parse the chessboard file and return blocked squares for the current date
+// Function to parse the chessboard file (chessboards.js) and return blocked squares for the current date
 function parseChessboardFile(content, date) {
     const lines = content.split('\n');
     for (const line of lines) {
@@ -195,7 +202,7 @@ function generateBlockedSpaces(level) {
         }
     }
 }
-
+// Function to generate chessboard
 function generateChessboard() {
     const chessboard = document.getElementById('chessboard');
     chessboard.innerHTML = "";
@@ -234,7 +241,8 @@ function generateChessboard() {
       }
     }
   }
-
+  
+  // Function to handle any clicks on the chessboard
   function handleClick(event) {
     const column = event.target.getAttribute('data-column');
     const row = event.target.getAttribute('data-row');
@@ -246,19 +254,14 @@ function generateChessboard() {
     moveCount++;
   }
 
-// Example function to determine space type (blocked or not)
+// Function to determine space type (blocked or not)
 function getSpaceType(position) {
     // You can adjust this function to return different types based on your requirements
     let blockedSpace = blockedSpaces.find(space => space.space === position);
     return blockedSpace ? blockedSpace.type : null;
 }
 
-// // Function to get the type of blocked space at a given position
-// function getSpaceType(position) {
-//     let space = blockedSpaces.find(blockedSpace => blockedSpace.space === position);
-//     return space ? space.type : null;
-// }
-
+// Function to move a piece
 function movePiece(location) {
     let current = currentLocation;
     let destination = location;
@@ -307,13 +310,6 @@ function movePiece(location) {
     currentLocation = destination;
     piece.moveCount++;
 
-    // TODO : For a move involving multiple square lets mark them on the board
-    //document.getElementById(current).textContent = ''; 
-    //this should be set to the label of the cell not ''
-
-    // Example: Update the chessboard
-    //renderChessboard();
-
     if (destination=='H8') {
         let endTime = new Date();
         let completionTime = (endTime - startTime) / 1000; // Time in seconds
@@ -329,6 +325,7 @@ function isValidInput(input) {
     return /^[A-H][1-8]$/.test(input);
 }
 
+// Function to get the element from the dom by location on the board
 function getElementByLocation(location) {
     const column = location.charAt(0).toUpperCase(); // Extract column letter, capitalize to match data-column
     const row = location.charAt(1); // Extract row number
@@ -337,35 +334,40 @@ function getElementByLocation(location) {
     return document.querySelector(`[data-column="${column}"][data-row="${row}"]`);
   }
 
+// Function to select King
 function selectKing() {
-    moveCount++;
-    currentPiece = kingImage;
-    document.getElementById(currentLocation).textContent = currentPiece;
+    selectPiece(kingImage);
 }
 
+// Function to select Rook
 function selectRook() {
-    moveCount++;
-    currentPiece = rookImage;
-    document.getElementById(currentLocation).textContent = currentPiece;
+    selectPiece(rookImage);
 }
 
+// Function to select Knight
 function selectKnight() {
-    moveCount++;
-    currentPiece =  knightImage;
-    document.getElementById(currentLocation).textContent = currentPiece;
+    selectPiece(knightImage);
 }
 
+// Function to select Bishop
 function selectBishop() {
+    selectPiece(bishopImage);
+}
+
+// Function to select Piece
+function selectPiece(pieceImage) {
     moveCount++;
-    currentPiece = bishopImage;
+    currentPiece = pieceImage;
     document.getElementById(currentLocation).textContent = currentPiece;
 }
 
+// Function to display alert text
 function alertText(textBody){
     const textarea = document.getElementById('inputText');
     textarea.innerHTML = textBody;
 }
 
+// Function to start the game
 function startGame() {
     if (isTrainingRoom)
     {
@@ -375,39 +377,16 @@ function startGame() {
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('content').style.display = 'none'; 
     isGameStarted = true;
-    //document.getElementById('container').style.display = 'block'; 
     document.getElementById('sponsors').style.display = 'block'; 
     document.getElementById('sponsors').innerHTML = SPONSOR_TEXT;
-    //document.getElementById('inputText').style.display = 'inline'; // Hide chessboard area
-    //document.getElementById('chessboard').style.display = 'inline'; // Hide chessboard
 }
 
-function generateShareableText(completionTime) {
-    return `🏆 I completed the MazeChess Challenge in ${completionTime} seconds! Can you beat my time? #MazeChessChallenge #Chess`;
-}
-
-//SOCIAL MEDIA CODE
-
-function shareOnTwitter() {
-    const completionTime = 45; // Example time; replace with actual completion time
-    const text = generateShareableText(completionTime);
-    const url = encodeURIComponent(window.location.href); // Current page URL
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${url}`;
-    window.open(twitterUrl, '_blank');
-}
-
-function shareOnFacebook() {
-    const completionTime = 45; // Example time; replace with actual completion time
-    const text = generateShareableText(completionTime);
-    const url = encodeURIComponent(window.location.href); // Current page URL
-    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${encodeURIComponent(text)}`;
-    window.open(facebookUrl, '_blank');
-}
-
+// Function to handle the training grounds level buttons
 function btnTrainingGrounds() {
     document.getElementById("training-grounds-row").style.display = true;
 }
 
+// Function to create the chessboard
 function createChessboard() {
     const chessboard = document.getElementById('chessboard');
     const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
@@ -421,7 +400,8 @@ function createChessboard() {
     }
   }
 
-  function copyChessboardToClipboard() {
+// Function to copy the board to chessboard
+function copyChessboardToClipboard() {
     const chessboardElement = document.getElementById('chessboardcontainer');
 
     // Use html2canvas to convert the chessboard div to a canvas
@@ -442,6 +422,7 @@ function createChessboard() {
     });
 }
 
+// Function to copy the board to chessboard for a mobile device if the method:copyChessboardToClipboard fails
 function fallbackCopyToClipboard(dataUrl) {
     const tempLink = document.createElement('a');
     tempLink.href = dataUrl;
@@ -492,6 +473,7 @@ function showSupport() {
     contentDiv.style.display = 'block';
 }
 
+// Function to show the "Contact" section
 function showContact() {
     hideGameArea();
     document.getElementById("startScreen").style.display = 'none';
@@ -500,6 +482,7 @@ function showContact() {
     contentDiv.style.display = 'block';
 }
 
+// Function to show the training grounds
 function showTrainingGrounds() {
     if (!isGameStarted) {
         document.getElementById('inputText').style.display = 'flex'; // Show chessboard area
@@ -522,7 +505,6 @@ function showTrainingGrounds() {
 
 // Helper function to hide the game area
 function hideGameArea() {
-    //document.getElementById("startButton").style.visibility = !isGameStarted;
     document.getElementById("inputText").style.display = 'none';
     document.getElementById("training-grounds-row").style.display = 'none';
     document.getElementById('startScreen').style.display = 'none';
@@ -537,9 +519,8 @@ function btnTG(level){
     initGame(level); 
 }
 
-  // Event listener for the copy button
-  //document.getElementById('copyButton').addEventListener('click', copyChessboardToClipboard);
-    document.addEventListener('DOMContentLoaded', function() {
+  // Event listener for the onload event
+      document.addEventListener('DOMContentLoaded', function() {
         isTrainingRoom = false;
         initGame(0); // Call init when DOM is ready
   });
