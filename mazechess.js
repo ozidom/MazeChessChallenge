@@ -491,7 +491,7 @@ function startGame() {
     document.getElementById('content').style.display = 'none'; 
     isGameStarted = true;
     document.getElementById('sponsors').style.display = 'block'; 
-    document.getElementById('sponsors').innerHTML = SPONSOR_TEXT;
+    document.getElementById('sponsors').innerHTML = TEXT_CONSTANTS.sponsor.text;
     initGame(0);
 }
 
