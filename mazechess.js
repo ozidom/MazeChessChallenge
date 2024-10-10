@@ -63,7 +63,8 @@ function initGame(level) {
     }
         else {
         document.getElementById("chessboard").value = "";
-        loadBlockedSpaces();
+        if (isGameStarted)
+            loadBlockedSpaces();
     }
     
     generateChessboard(); // Generate the chessboard after generating blocked spaces
@@ -386,6 +387,7 @@ function startGame() {
     isGameStarted = true;
     document.getElementById('sponsors').style.display = 'block'; 
     document.getElementById('sponsors').innerHTML = SPONSOR_TEXT;
+    initGame(0);
 }
 
 // Function to handle the training grounds level buttons
@@ -519,6 +521,7 @@ function hideGameArea() {
     document.getElementById('button-box').style.display = 'none'; // Hide chessboard
 }
 
+// Function to handle the training ground buttons
 function btnTG(level){
     moveCount = 0;
     blockedSpaces =  [];
@@ -528,14 +531,9 @@ function btnTG(level){
 
   // Event listener for the onload event
       document.addEventListener('DOMContentLoaded', function() {
-
-        // Get the current URL
+        isGameStarted = false;
         const currentUrl = window.location.href;
-
-        // Create a URL object
         const url = new URL(currentUrl);
-
-        // Check if there are any query parameters
         if (url.search) {
             const params = new URLSearchParams(url.search);
             dateBoardSelect = params.get('date')

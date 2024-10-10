@@ -207,7 +207,7 @@ body {
 
 .start-screen {
   position: fixed;            /* Fixes the position relative to the viewport */
-  top: 50px;
+  top: 45px;
   left: 0;
   width: 100vw;              /* Full width */
   height: 100vh;             /* Full height */
@@ -219,21 +219,18 @@ body {
 }
 
 .start-screen button {
-  padding: 10px 20px;        /* Add some padding to the button */
-  font-size: 24px;           /* Make the button text larger */
-  background-color:  #889CB9;
-  color: #405779;             /* White text */    
-  border-width: 2px;
-  border-radius: 10px;       /* Rounded corners */
-  cursor: pointer;           /* Change cursor on hover */
-  height: 280px;
-  width: 280px;
-  margin-top: 40px; 
+  font-size: 18px;
+  border-radius: 999px;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  min-height: 32px;
+  transition: background-color 200ms;         /* Change cursor on hover */
+  margin-top: 140px; 
+  width: 100px;
 }
 
 .start-screen button:hover {
   color: black;
   background-color: #405779;
 }
-styles.css
-Displaying styles.css.
