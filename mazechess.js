@@ -19,6 +19,7 @@ let bishopImage = "♝";
 
 // Define an array of available pieces
 const pieces = [kingImage   , rookImage, knightImage, bishopImage];
+var usedPieces = [];
 
 // Define an array to store blocked spaces
 let blockedSpaces = [];
@@ -53,13 +54,13 @@ function getTodayDate() {
 
 // Function to create the game
 function initGame(level) {
-    document.getElementById("inputText").innerHTML = GAME_TEXT;
+    document.getElementById("inputText").innerHTML = TEXT_CONSTANTS.game.text;
     
     currentLocation = "A1";
     if (isTrainingRoom){
 
         document.getElementById("chessboard").value = "";
-        generateBlockedSpaces(level); // Call generateBlockedSpaces() before generating the chessboard
+        blockedSpaces = generateBlockedSpaces(level); // Call generateBlockedSpaces() before generating the chessboard
     }
         else {
         document.getElementById("chessboard").value = "";
@@ -194,8 +195,8 @@ function parseChessboardFile(content, date) {
     return []; // No match for the date
 }
 
-// Function to generate random blocked spaces with types (LAVA, Water, etc.)
-function generateBlockedSpaces(level) {
+// TODO DELETE - Old Function to generate random blocked spaces with types (LAVA, Water, etc.)
+function generateBlockedSpaces3(level) {
     blockedSpaces = []; // Reset blocked spaces array
     var hardness = level*20;
     if (level==4)
@@ -210,6 +211,100 @@ function generateBlockedSpaces(level) {
         }
     }
 }
+
+// Function to generate randon blocked squares
+function generateBlockedSpaces2(level) {
+    const blockedSpaces = []; // Reset blocked spaces array
+    const hardness = level === 4 ? level * 20 + 20 : level * 20; // Calculate hardness
+    const maxBlockedSpaces = Math.min(hardness, 40); // Ensure a maximum limit
+
+    while (blockedSpaces.length < maxBlockedSpaces) {
+        const x = String.fromCharCode(65 + Math.floor(Math.random() * 8)); // Random letter from 'A' to 'H'
+        const y = Math.floor(Math.random() * 8) + 1; // Random number from 1 to 8
+        const space = `${x}${y}`;
+
+        // Ensure A1 and H8 are always free and space is not already blocked
+        if (space !== 'A1' && space !== 'H8' && !blockedSpaces.some(s => s.space === space)) {
+            const type = Math.random() < 0.5 ? 'LAVA' : 'WATER'; // Randomly assign type
+            blockedSpaces.push({ space: space, type: type });
+        }
+    }
+
+    return blockedSpaces; // Return the generated blocked spaces
+}
+
+function generateBlockedSpaces(level) {
+    const blockedSpaces = []; // Reset blocked spaces array
+    let hardness;
+
+    // Increase hardness for level 4 significantly
+    if (level === 4) {
+        hardness = level * 20 + 20; // Ensure enough blocked spaces
+    } else {
+        hardness = level * 20; // Calculate hardness for other levels
+    }
+
+    const maxBlockedSpaces = Math.min(hardness, 40); // Ensure a maximum limit
+
+    // Function to check if the blocked spaces create an impossible challenge
+    const isSolvable = (spaces) => {
+        // Create a chessboard representation
+        const board = Array.from({ length: 8 }, () => Array(8).fill(0));
+        
+        // Mark blocked spaces
+        spaces.forEach(space => {
+            const x = space.charCodeAt(0) - 65; // Convert 'A' to 0, 'B' to 1, ..., 'H' to 7
+            const y = parseInt(space[1]) - 1; // Convert '1' to 0, '2' to 1, ..., '8' to 7
+            board[y][x] = 1; // Mark blocked space
+        });
+
+        // Implement a simple pathfinding algorithm (BFS) to check for a path from A1 (0, 0) to H8 (7, 7)
+        const queue = [[0, 0]];
+        const directions = [
+            [1, 0], [-1, 0], [0, 1], [0, -1], // Rook-like moves
+            [1, 1], [1, -1], [-1, 1], [-1, -1], // Bishop-like moves
+        ];
+
+        while (queue.length > 0) {
+            const [currY, currX] = queue.shift();
+            if (currY === 7 && currX === 7) return true; // Reached H8
+
+            directions.forEach(([dy, dx]) => {
+                let newY = currY + dy;
+                let newX = currX + dx;
+
+                // Check movement for Kings (1 step in any direction)
+                if (dy === 0 && dx === 0) return; // Skip zero movement
+                if (newY >= 0 && newY < 8 && newX >= 0 && newX < 8 && board[newY][newX] === 0) {
+                    queue.push([newY, newX]);
+                    board[newY][newX] = 1; // Mark as visited
+                }
+            });
+        }
+
+        return false; // No path found
+    };
+
+    while (blockedSpaces.length < maxBlockedSpaces) {
+        const x = String.fromCharCode(65 + Math.floor(Math.random() * 8)); // Random letter from 'A' to 'H'
+        const y = Math.floor(Math.random() * 8) + 1; // Random number from 1 to 8
+        const space = `${x}${y}`;
+
+        // Ensure A1 and H8 are always free and space is not already blocked
+        if (space !== 'A1' && space !== 'H8' && !blockedSpaces.some(s => s.space === space)) {
+            const type = Math.random() < 0.5 ? 'LAVA' : 'WATER'; // Randomly assign type
+            blockedSpaces.push({ space: space, type: type });
+
+            // Check if the blocked spaces still allow a path
+            if (!isSolvable(blockedSpaces.map(s => s.space))) {
+                blockedSpaces.pop(); // Remove last space if it creates an impossible challenge
+            }
+        }
+    }
+
+    return blockedSpaces; // Return the generated blocked spaces
+}
+
 // Function to generate chessboard
 function generateChessboard() {
     const chessboard = document.getElementById('chessboard');
@@ -316,7 +411,7 @@ function movePiece(location) {
     // Update destination cell with piece
     document.getElementById(destination).textContent = pieceName;
     currentLocation = destination;
-    piece.moveCount++;
+    //piece.moveCount++;
 
     if (destination=='H8') {
         let endTime = new Date();
@@ -325,6 +420,9 @@ function movePiece(location) {
         isGameStarted = false;
         moveCount = 0;
         blockedSpaces =  [];
+    }
+    else {
+        alertText('Move count ' + moveCount);
     }
 }
 
@@ -364,9 +462,15 @@ function selectBishop() {
 
 // Function to select Piece
 function selectPiece(pieceImage) {
-    moveCount++;
-    currentPiece = pieceImage;
-    document.getElementById(currentLocation).textContent = currentPiece;
+    if (!usedPieces.includes(pieceImage)){
+        usedPieces.push(pieceImage);
+        moveCount++;
+        currentPiece = pieceImage;
+        document.getElementById(currentLocation).textContent = currentPiece;
+    }
+    else {
+        alertText('You have already used ' + pieceImage);
+    }
 }
 
 // Function to display alert text
@@ -377,6 +481,7 @@ function alertText(textBody){
 
 // Function to start the game
 function startGame() {
+    usedPieces = [];
     if (isTrainingRoom)
     {
         isTrainingRoom = false;
@@ -460,7 +565,7 @@ function showHelp() {
     hideGameArea();
     document.getElementById("startScreen").style.display = 'none';
     const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = HELP_TEXT;
+    contentDiv.innerHTML = TEXT_CONSTANTS.help.text;
     contentDiv.style.display = 'block';
     //document.getElementById("startScreen").style.visibility = !isGameStarted;
 }
@@ -469,7 +574,7 @@ function showWhy() {
     hideGameArea();
     document.getElementById("startScreen").style.display = 'none';
     const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = WHY_TEXT;
+    contentDiv.innerHTML = TEXT_CONSTANTS.about.text;
     contentDiv.style.display = 'block';
 }
 
@@ -478,7 +583,7 @@ function showSupport() {
     hideGameArea();
     document.getElementById("startScreen").style.display = 'none';
     const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = HELP_US_TEXT;
+    contentDiv.innerHTML = TEXT_CONSTANTS.support.text;
     contentDiv.style.display = 'block';
 }
 
@@ -487,7 +592,7 @@ function showContact() {
     hideGameArea();
     document.getElementById("startScreen").style.display = 'none';
     const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = CONTACT_TEXT;
+    contentDiv.innerHTML = TEXT_CONSTANTS.contact.text;
     contentDiv.style.display = 'block';
 }
 
