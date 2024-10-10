@@ -8,6 +8,7 @@ let previousLocation;
 let isTrainingRoom;
 let isGameStarted = false;  
 let moveCount = 0;
+let dateBoardSelect = null;
 
 // Game images
 let kingImage = "♚";
@@ -35,9 +36,15 @@ class Piece {
     }
 }
 
-// Function to get the date from the browser
+// Function to get the date from the browser but this can be overwritten by a querysting in the form of
+// ?date=2024-10-01 ie 1st of October 
 function getTodayDate() {
-    const today = new Date();
+    var today = new Date();
+
+    // if the query string has a valid date then use that
+    if (dateBoardSelect !== null){
+        today = new Date(dateBoardSelect);
+    }
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-based, so +1
     const day = String(today.getDate()).padStart(2, '0');
@@ -521,7 +528,22 @@ function btnTG(level){
 
   // Event listener for the onload event
       document.addEventListener('DOMContentLoaded', function() {
+
+        // Get the current URL
+        const currentUrl = window.location.href;
+
+        // Create a URL object
+        const url = new URL(currentUrl);
+
+        // Check if there are any query parameters
+        if (url.search) {
+            const params = new URLSearchParams(url.search);
+            dateBoardSelect = params.get('date')
+        } 
         isTrainingRoom = false;
         initGame(0); // Call init when DOM is ready
+
+
+        
   });
 
