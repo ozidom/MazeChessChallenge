@@ -158,9 +158,10 @@ body {
 
 .navbar ul li a {
   text-decoration: none;
-  color: white;
-  font-size: 18px;
-  padding: 5px 10px;
+  background-color: white;
+  font-size: 9px;
+  padding: 7px 5px;
+  border-radius: 99px;
 }
 
 .navbar ul li a:hover {
@@ -207,7 +208,7 @@ body {
 
 .start-screen {
   position: fixed;            /* Fixes the position relative to the viewport */
-  top: 45px;
+  top: 38px;
   left: 0;
   width: 100vw;              /* Full width */
   height: 100vh;             /* Full height */
