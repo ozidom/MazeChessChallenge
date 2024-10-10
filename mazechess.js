@@ -196,7 +196,7 @@ function parseChessboardFile(content, date) {
 }
 
 // TODO DELETE - Old Function to generate random blocked spaces with types (LAVA, Water, etc.)
-function generateBlockedSpaces3(level) {
+function generateBlockedSpaces(level) {
     blockedSpaces = []; // Reset blocked spaces array
     var hardness = level*20;
     if (level==4)
@@ -210,10 +210,11 @@ function generateBlockedSpaces3(level) {
             blockedSpaces.push({ space: `${x}${y}`, type: type });
         }
     }
+    return blockedSpaces; // Return the generated blocked spaces
 }
 
 // Function to generate randon blocked squares
-function generateBlockedSpaces2(level) {
+function generateBlockedSpaces3(level) {
     const blockedSpaces = []; // Reset blocked spaces array
     const hardness = level === 4 ? level * 20 + 20 : level * 20; // Calculate hardness
     const maxBlockedSpaces = Math.min(hardness, 40); // Ensure a maximum limit
@@ -233,7 +234,7 @@ function generateBlockedSpaces2(level) {
     return blockedSpaces; // Return the generated blocked spaces
 }
 
-function generateBlockedSpaces(level) {
+function generateBlockedSpaces2(level) {
     const blockedSpaces = []; // Reset blocked spaces array
     let hardness;
 
