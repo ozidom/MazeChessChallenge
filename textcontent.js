@@ -7,7 +7,7 @@ const CONTACT_TEXT = "<h2>(first) Contact Us</h2><p>Keep an eye on the social me
 */
 const TEXT_CONSTANTS = {
     game: {
-        text: "<p>Click START. Choose ♚ ♝ ♜ or ♞. Move from the bottom left to the top right in the fewest moves. Cannot move on blocked squares but Knights can jump over them. Switch piece for 1 move.</p>"
+        text: "<p>Click START. Choose ♚ ♝ ♜ or ♞. Move from the bottom left to the top right in the fewest moves. Cannot move on blocked squares but Knights can jump over them. Switch piece for 1 move. Can use a piece once only.</p>"
     },
     help: {
         text: `
