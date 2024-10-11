@@ -1,34 +1,47 @@
+html, body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   background: radial-gradient(#23313F, #16191B);
-  color: darkorange;
+  background-repeat: no-repeat;
+  background-color: #16191B;
+  color: #889CB9;
+}
+
+.wrapper {
+  /* Used to center content, define width in 1 place */
+  margin: 0 auto;
+  width: 100%;
+  max-width: 340px;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: 10px;
+  row-gap: 32px;
+}
+
+.chessboardcontainer{
+  position: relative;
+  width: 100%;
 }
 
 .chessboard {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
-  width: 100vw;
-  max-width: 340px;
+  width: 100%;
   aspect-ratio: 1;
-  /* border: 1px solid black; */  
-  /* box-shadow: 4px 7px 14px -8px black; */
-  filter: drop-shadow(0 20px 20px rgba(0,0,0,0.5));
   box-sizing: border-box;
-  margin: 2px 0;
-  color: white;
   background-image: url('images/Ice.jpg');
+  filter: drop-shadow(0 20px 20px rgba(0,0,0,0.5));
+  color: white;
+  overflow: hidden;
 }
 
 .chessboard div {
@@ -48,10 +61,12 @@ body {
 
 .black {
   background-color: #405779;
+  border-bottom: solid 5px rgba(0,0,0,0.3);
 }
 
 .white {
   background-color: #889CB9;
+  border-bottom: solid 5px rgba(0,0,0,0.3);
 }
 
 .blue {
@@ -71,7 +86,6 @@ body {
 
 .textbox {
   display: block;              /* Ensures the label takes up the full width */
-  width: 340px;                /* Set a constant width */
   height: 120px;               /* Set a constant height */
   overflow: hidden;            /* Hide overflow if text exceeds the height */
   text-overflow: ellipsis;     /* Show an ellipsis (...) if the text is too long */      /* Allow words to break at the end of lines */
@@ -83,12 +97,15 @@ body {
   background-color:  radial-gradient(#23313F, #16191B);
 }
 
+.textbox p {
+  margin: 0;
+}
+.textbox p+p {
+  margin-top: 1em;
+}
+
 .button-box {
-  margin-top: 2px;
-  display: block;
-  width: 340px;
-  overflow: hidden;
-  align-content: center;
+  width: 100%;
 }
 
 .chess-button-row,
@@ -102,14 +119,6 @@ body {
   border-radius: 999px;
 }
 
-.chess-button-row-clip
- {             /* Use flexbox for button alignment */
-  gap: 5px;                   /* Space between buttons */
-  justify-content: center;     /* Center the buttons horizontally */
-  padding: 4px;
-  background-color: rgba(0,0,0,0.25);
-  border-radius: 999px;
-}
 .social-button-row {
   border-radius: 5px;
   background-color: hsla(60, 1%, 21%, 0.363);
@@ -119,7 +128,6 @@ body {
 
 .training-grounds-row {
   border-radius: 5px;
-  /* background-color: #eeeed2; */
   margin-top: 2px;
   align-items: center;
   padding: 4px;
@@ -132,49 +140,55 @@ body {
   flex-grow: 1;
   border-radius: 999px;
   border: none;
-  background-color: white;
+  background-color: rgba(0,0,0,0);
+  color: #889CB9;
   cursor: pointer;
   min-height: 32px;
-  transition: background-color 200ms;
+  transition: background-color 150ms;
 }
-.button-box button:hover {
+
+.button-box button:hover,
+.button-box button:focus,
+.button-box button:active {
+  color: black;
+  background-color: #889CB9;
+}
+
+.button-box button:disabled,
+.button-box button[disabled] {
+  cursor: default;
+  opacity: 0.5;
+  background-color: rgba(0,0,0,0);
+  color: black;
+}
+
+.button-box button.selected {
+  color: black;
   background-color: white;
 }
 
-.button-box button:active {
-  background-color: yellow;
-}
-
-.button-box button:focus {
-  background-color: yellow;
-}
 
 /* Navigation bar */
 .navbar {
-  /* background-color: black; */
-  overflow: hidden;
-  padding: 5px 0;
-  text-align: center;
-  width: 340px;
-  /* border: 1px solid black; */
-  box-sizing: border-box;
+  display: block;
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 .navbar ul {
   list-style-type: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
+  display: flex;
 }
 
 .navbar ul li {
-  display: inline;
   padding: 5px 5px;
 }
 
 .navbar ul li a {
+  color: #889CB9;
   text-decoration: none;
-  background-color: white;
-  font-size: 9px;
+  font-size: 12px;
   padding: 7px 5px;
   border-radius: 99px;
 }
@@ -189,7 +203,7 @@ body {
 .content-section {
   margin-top: 32px;
   padding: 2px 0;
-  /* background-color: black; */
+
   border-top: solid 1px #889CB9;
   display: none; /* Hidden by default */
   width: 340px;
@@ -222,15 +236,15 @@ body {
 }
 
 .start-screen {
-  position: fixed;            /* Fixes the position relative to the viewport */
-  top: 38px;
+  position: absolute; /* absolute can place it above content but within it's parent */
+  top: 0;
   left: 0;
-  width: 100vw;              /* Full width */
-  height: 100vh;             /* Full height */
-  background-color: rgba(0, 0, 0  , 0.5); /* Semi-transparent background */
+  right: 0;
+  bottom: 0;
+  background-color: rgba(64,87,121, 0.8); /* Semi-transparent background */
   display: flex;             /* Use flexbox to center the button */
   justify-content: center;   /* Center horizontally */
-  align-items:first baseline;       /* Center vertically */
+  align-items:center;        /* Center vertically */
   z-index: 1000;             /* Ensure it appears on top of other content */
 }
 
@@ -240,13 +254,13 @@ body {
   border: none;
   background-color: white;
   cursor: pointer;
-  min-height: 32px;
-  transition: background-color 200ms;         /* Change cursor on hover */
-  margin-top: 140px; 
-  width: 100px;
+  min-height: 44px;
+  padding: 0 1.5em;
+  transition: all 100ms;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .start-screen button:hover {
-  color: black;
-  background-color: #405779;
+  box-shadow: 0 0 25px white;
 }
