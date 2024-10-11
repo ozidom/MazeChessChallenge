@@ -141,6 +141,14 @@ body {
   background-color: white;
 }
 
+.button-box button:active {
+  background-color: yellow;
+}
+
+.button-box button:focus {
+  background-color: yellow;
+}
+
 /* Navigation bar */
 .navbar {
   /* background-color: black; */

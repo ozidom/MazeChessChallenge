@@ -19,7 +19,7 @@ let bishopImage = "♝";
 
 // Define an array of available pieces
 const pieces = [kingImage   , rookImage, knightImage, bishopImage];
-var usedPieces = [];
+let usedPieces = [];
 
 // Define an array to store blocked spaces
 let blockedSpaces = [];
@@ -195,115 +195,141 @@ function parseChessboardFile(content, date) {
     return []; // No match for the date
 }
 
+function loadComplexPath() {
+    const path = []; // Array to hold the path items
+    const pieces = [new Knight(), new Rook(), new Bishop(), new King()];
+
+    // Shuffle the pieces to ensure random usage order
+    const shuffledPieces = pieces.sort(() => Math.random() - 0.5);
+    
+    let currentX = 0; // Starting column (A)
+    let currentY = 0; // Starting row (1)
+
+    // Start the path with the initial position A1
+    path.push({ space: "A1"});
+
+    // Generate the path by using each piece in shuffled order
+    for (const piece of shuffledPieces) {
+        let pieceUsed = false;
+        
+        // Attempt to find a valid move for the current piece
+        for (let attempts = 0; attempts < 10; attempts++) {
+            // Generate potential moves for the current piece
+            const possibleMoves = [];
+
+            for (let col = 0; col < 8; col++) {
+                for (let row = 0; row < 8; row++) {
+                    const destination = `${String.fromCharCode(65 + col)}${row + 1}`; // Convert to chess notation
+                    if (piece.isValidMove(`${String.fromCharCode(65 + currentX)}${currentY + 1}`, destination)) {
+                        possibleMoves.push(destination);
+                    }
+                }
+            }
+
+            if (possibleMoves.length > 0) {
+                // Randomly select a valid move
+                const selectedMove = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+                //const type = Math.random() < 0.5 ? 'LAVA' : 'WATER';
+
+                // Add move to path
+                path.push({ space: selectedMove});
+                
+                // Update current position
+                currentX = selectedMove.charCodeAt(0) - 65; // Update column index
+                currentY = parseInt(selectedMove[1]) - 1; // Update row index
+
+                pieceUsed = true;
+                break; // Exit the attempt loop after successfully using the piece
+            }
+        }
+
+        // If the piece was not used successfully, exit the loop
+        if (!pieceUsed) {
+            console.error(`Could not use piece: ${piece.constructor.name}`);
+            break;
+        }
+    }
+
+    // Ensure the last move is to H8
+    if (!path.some(item => item.space === "H8")) {
+        path.push({ space: "H8"});
+    }
+
+    return path; // Return the generated complex path
+}
+
+
+
+
 // TODO DELETE - Old Function to generate random blocked spaces with types (LAVA, Water, etc.)
 function generateBlockedSpaces(level) {
     blockedSpaces = []; // Reset blocked spaces array
+    var path = [];
     var hardness = level*20;
-    if (level==4)
-        hardness += 20;
+
+    path = loadComplexPath(level);
 
     for (let i = 0; i < hardness; i++) {
         let x = String.fromCharCode(65 + Math.floor(Math.random() * 8)); // Random letter from 'a' to 'h'
         let y = Math.floor(Math.random() * 8) + 1; // Random number from 1 to 8
-        if (!(x=="H" && y==8) && !(x=="A" && y==1)){
-            let type = Math.random() < 0.5 ? 'LAVA' : 'Water'; // Randomly assign type
-            blockedSpaces.push({ space: `${x}${y}`, type: type });
+        let type = Math.random() < 0.5 ? 'LAVA' : 'Water'; // Randomly assign type
+        var item = { space: `${x}${y}`, type: type };
+        var location = { space: `${x}${y}`};
+        if (!(x=="H" && y==8) && !(x=="A" && y==1) && !path.includes(location)) {          
+            blockedSpaces.push(item);
         }
     }
-    return blockedSpaces; // Return the generated blocked spaces
-}
-
-// Function to generate randon blocked squares
-function generateBlockedSpaces3(level) {
-    const blockedSpaces = []; // Reset blocked spaces array
-    const hardness = level === 4 ? level * 20 + 20 : level * 20; // Calculate hardness
-    const maxBlockedSpaces = Math.min(hardness, 40); // Ensure a maximum limit
-
-    while (blockedSpaces.length < maxBlockedSpaces) {
-        const x = String.fromCharCode(65 + Math.floor(Math.random() * 8)); // Random letter from 'A' to 'H'
-        const y = Math.floor(Math.random() * 8) + 1; // Random number from 1 to 8
-        const space = `${x}${y}`;
-
-        // Ensure A1 and H8 are always free and space is not already blocked
-        if (space !== 'A1' && space !== 'H8' && !blockedSpaces.some(s => s.space === space)) {
-            const type = Math.random() < 0.5 ? 'LAVA' : 'WATER'; // Randomly assign type
-            blockedSpaces.push({ space: space, type: type });
-        }
-    }
-
     return blockedSpaces; // Return the generated blocked spaces
 }
 
 function generateBlockedSpaces2(level) {
-    const blockedSpaces = []; // Reset blocked spaces array
-    let hardness;
-
-    // Increase hardness for level 4 significantly
-    if (level === 4) {
-        hardness = level * 20 + 20; // Ensure enough blocked spaces
-    } else {
-        hardness = level * 20; // Calculate hardness for other levels
-    }
-
+    var blocked = []; // blocked spaces array
+    const hardness = level === 4 ? level * 20 + 20 : level * 20; // Calculate hardness
     const maxBlockedSpaces = Math.min(hardness, 40); // Ensure a maximum limit
 
-    // Function to check if the blocked spaces create an impossible challenge
-    const isSolvable = (spaces) => {
-        // Create a chessboard representation
-        const board = Array.from({ length: 8 }, () => Array(8).fill(0));
+    // Create a simple path from A1 to H8
+    const path = ['A1']; // Starting point
+    let currentX = 0; // Corresponds to 'A'
+    let currentY = 0; // Corresponds to '1'
+
+    // Generate a longer path with detours
+    while (currentX < 7 || currentY < 7) {
+        // Randomly choose to move right or up, but allow for some detours
+        const moveDirection = Math.random();
         
-        // Mark blocked spaces
-        spaces.forEach(space => {
-            const x = space.charCodeAt(0) - 65; // Convert 'A' to 0, 'B' to 1, ..., 'H' to 7
-            const y = parseInt(space[1]) - 1; // Convert '1' to 0, '2' to 1, ..., '8' to 7
-            board[y][x] = 1; // Mark blocked space
-        });
-
-        // Implement a simple pathfinding algorithm (BFS) to check for a path from A1 (0, 0) to H8 (7, 7)
-        const queue = [[0, 0]];
-        const directions = [
-            [1, 0], [-1, 0], [0, 1], [0, -1], // Rook-like moves
-            [1, 1], [1, -1], [-1, 1], [-1, -1], // Bishop-like moves
-        ];
-
-        while (queue.length > 0) {
-            const [currY, currX] = queue.shift();
-            if (currY === 7 && currX === 7) return true; // Reached H8
-
-            directions.forEach(([dy, dx]) => {
-                let newY = currY + dy;
-                let newX = currX + dx;
-
-                // Check movement for Kings (1 step in any direction)
-                if (dy === 0 && dx === 0) return; // Skip zero movement
-                if (newY >= 0 && newY < 8 && newX >= 0 && newX < 8 && board[newY][newX] === 0) {
-                    queue.push([newY, newX]);
-                    board[newY][newX] = 1; // Mark as visited
-                }
-            });
-        }
-
-        return false; // No path found
-    };
-
-    while (blockedSpaces.length < maxBlockedSpaces) {
-        const x = String.fromCharCode(65 + Math.floor(Math.random() * 8)); // Random letter from 'A' to 'H'
-        const y = Math.floor(Math.random() * 8) + 1; // Random number from 1 to 8
-        const space = `${x}${y}`;
-
-        // Ensure A1 and H8 are always free and space is not already blocked
-        if (space !== 'A1' && space !== 'H8' && !blockedSpaces.some(s => s.space === space)) {
-            const type = Math.random() < 0.5 ? 'LAVA' : 'WATER'; // Randomly assign type
-            blockedSpaces.push({ space: space, type: type });
-
-            // Check if the blocked spaces still allow a path
-            if (!isSolvable(blockedSpaces.map(s => s.space))) {
-                blockedSpaces.pop(); // Remove last space if it creates an impossible challenge
+        // Decide to move right or up
+        if (moveDirection < 0.4 && currentX < 7) { // 40% chance to move right
+            currentX++;
+        } else if (moveDirection < 0.8 && currentY < 7) { // 40% chance to move up
+            currentY++;
+        } else if (currentX > 0 && currentY > 0 && Math.random() < 0.5) { // 20% chance to move back (detour)
+            // Randomly move back left or down
+            if (Math.random() < 0.5) {
+                currentX--; // Move left
+            } else {
+                currentY--; // Move down
             }
         }
+
+        // Push the new position into the path
+        path.push(String.fromCharCode(65 + currentX) + (currentY + 1));
     }
 
-    return blockedSpaces; // Return the generated blocked spaces
+    // Mark the path spaces so they cannot be blocked
+    const pathSet = new Set(path);
+
+    while (blocked.length < maxBlockedSpaces) {
+        let x = String.fromCharCode(65 + Math.floor(Math.random() * 8)); // Random letter from 'A' to 'H'
+        let y = Math.floor(Math.random() * 8) + 1; // Random number from 1 to 8
+        const space = `${x}${y}`;
+
+        // Ensure A1 and H8 are always free, and not blocking the valid path
+        if (space !== 'A1' && space !== 'H8' && !pathSet.has(space)) {
+            let type = Math.random() < 0.5 ? 'LAVA' : 'WATER'; // Randomly assign type
+            blocked.push({ space: space, type: type });
+        }
+    }
+    return blocked;
 }
 
 // Function to generate chessboard
@@ -421,6 +447,7 @@ function movePiece(location) {
         isGameStarted = false;
         moveCount = 0;
         blockedSpaces =  [];
+        usedPieces = [];
     }
     else {
         alertText('Move count ' + moveCount);
@@ -631,6 +658,7 @@ function hideGameArea() {
 function btnTG(level){
     moveCount = 0;
     blockedSpaces =  [];
+    usedPieces = [];
     isTrainingRoom = true;
     initGame(level); 
 }
