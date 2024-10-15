@@ -7,7 +7,7 @@ const CONTACT_TEXT = "<h2>(first) Contact Us</h2><p>Keep an eye on the social me
 */
 const TEXT_CONSTANTS = {
     game: {
-        text: "<p>Click START. Choose ♚ ♝ ♜ or ♞. Move from the bottom left to the top right in the fewest moves and must collect any gold (gold squares). Cannot move on blocked squares but Knights can jump over them. Switch piece for 1 move. Can use a piece once only.</p>"
+        text: "<p>Click START. Choose ♚ ♝ ♜ or ♞. Switch anytime during the game. Move from the bottom left to the top right in the fewest moves and must collect any gold (gold squares). Cannot move on blocked squares but Knights can jump over them. Can use a piece once only.</p>"
     },
     help: {
         text: `
@@ -22,8 +22,7 @@ const TEXT_CONSTANTS = {
                 <li>Full House: All squares must be visited.</li>
                 <li>Royal Flush: Use all 4 pieces (King, Knight, Bishop, Rook).</li>
                 <li>Solo: Complete the challenge with only one piece.</li>
-                <li>Knight's Tour: Use the Knight to visit every square without repeating.</li>
-                <li>Two-Piece Tango: Use exactly two pieces, switching at least once.</li>
+                <li>Two-Piece Tango: Use exactly two pieces</li>
                 <li>Cornered King: Start at A1 with the King, end at H8, touching all four corners.</li>
                 <li>Knight's Journey: Reach H8 in a set number of moves using only the Knight.</li>
             </ul>`
