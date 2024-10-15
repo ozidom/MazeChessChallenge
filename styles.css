@@ -240,10 +240,13 @@ body {
   font-size: 10pt;
 }
 
-#minititle
+.title
 {
+  font-size: 1rem;
+  font-weight: normal;
   text-align: center;
   color: darkorange;
+  margin: 20px 0 24px 0;
 }
 
 .chess-board-label{
