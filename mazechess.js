@@ -1,4 +1,3 @@
-// Mazechess.js
 
 // Global Vars
 let startTime;
@@ -15,11 +14,14 @@ let kingImage = "♚";
 let rookImage = "♜";
 let knightImage = "♞";
 let bishopImage = "♝";
+let goldImage = "💰";
 
 
 // Define an array of available pieces
 const pieces = [kingImage   , rookImage, knightImage, bishopImage];
 let usedPieces = [];
+let gold = [];
+let goldCollected = [];
 
 // Define an array to store blocked spaces
 let blockedSpaces = [];
@@ -55,6 +57,7 @@ function getTodayDate() {
 // Function to create the game
 function initGame(level) {
     document.getElementById("inputText").innerHTML = TEXT_CONSTANTS.game.text;
+    goldCollected = [];
     
     currentLocation = "A1";
     if (isTrainingRoom){
@@ -75,7 +78,7 @@ function initGame(level) {
 
 // Function to check if a space is blocked
 function isBlocked(space) {
-    return blockedSpaces.some(blockedSpace => blockedSpace.space === space);
+    return blockedSpaces.some(blockedSpace => blockedSpace.space === space && blockedSpace.type != "GOLD");
 }
 
 // Function to check if the path between two spaces is clear
@@ -179,8 +182,22 @@ function loadBlockedSpaces() {
         }
     } 
     else {
-        alertText("No blocked squares for today's date.");
+        //alertText("No blocked squares for today's date.");
     }   
+
+    const rawGold = chessboardConfig.getGoldByDate(today);
+    if (rawGold.length > 0) {
+        for(var goldSpace of rawGold)
+        {
+            var coord = goldSpace.split('');
+            var goldItem = `${coord[0]}${coord[1]}`;
+            blockedSpaces.push({ space: goldItem , type: 'GOLD' });
+            gold.push(goldItem);
+        }
+    } 
+    else {
+       // alertText("No gold squares for today's date.");
+    }  
 }
 
 // Function to parse the chessboard file (chessboards.js) and return blocked squares for the current date
@@ -356,6 +373,9 @@ function generateChessboard() {
             else if (spaceType == 'LAVA') {
                 square.className =  "red";
             }
+            else if (spaceType == 'GOLD') {
+                square.className =  "gold";
+            }
         }
 
         //create the labels
@@ -395,7 +415,7 @@ function getSpaceType(position) {
 function movePiece(location) {
     let current = currentLocation;
     let destination = location;
-   
+    var messages = "";
     // Validate inputs
     if (!isValidInput(current) || !isValidInput(destination)) {
         alertText("Invalid input. Please enter valid coordinates (e.g., A1).");
@@ -405,7 +425,7 @@ function movePiece(location) {
     // Check if destination is blocked
     if (isBlocked(destination)) {
         alertText("Destination is blocked. Choose another destination.");
-        return;
+        return;`    `
     }
 
     let pieceName = document.getElementById(current).textContent;
@@ -440,7 +460,18 @@ function movePiece(location) {
     currentLocation = destination;
     //piece.moveCount++;
 
-    if (destination=='H8') {
+    //check if we can collected gold and haven't collected it from this location before
+    if (gold.includes(currentLocation) && !goldCollected.includes(currentLocation)) {
+        goldCollected.push(currentLocation);
+        messages += " Gold collected";
+    }
+
+    if (destination=='H8' && (gold.length > goldCollected.length)) {
+        alertText("You have not collected all the gold");
+        return;
+    }
+
+    if (destination=='H8' && (gold.length == goldCollected.length)) {
         let endTime = new Date();
         let completionTime = (endTime - startTime) / 1000; // Time in seconds
         alertText("🏆🏆🏆You have won in " + moveCount + " moves and in " + completionTime + "seconds 🏆🏆🏆. Reload page to play again or try out a training room.");
@@ -450,7 +481,7 @@ function movePiece(location) {
         usedPieces = [];
     }
     else {
-        alertText('Move count ' + moveCount);
+        alertText('Move count ' + moveCount + messages);
     }
 }
 
@@ -678,4 +709,3 @@ function btnTG(level){
 
         
   });
-

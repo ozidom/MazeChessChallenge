@@ -46,12 +46,22 @@ body {
   cursor: pointer;
 }
 
+.chessboard .white:active,
+.chessboard .black:active {
+  color: black !important;
+  background-color: grey;
+}
+
 .black {
   background-color: #405779;
 }
 
 .white {
   background-color: #889CB9;
+}
+
+.gold {
+  background-color: #d0c82b;
 }
 
 .blue {
