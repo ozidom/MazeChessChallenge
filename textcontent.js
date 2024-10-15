@@ -14,7 +14,7 @@ const TEXT_CONSTANTS = {
             <h2>Help and Rules</h2>
             <p>♚ Kings move one space any direction, ♜ Rooks (look like castles) move in cardinal directions (N,S,E and W), Bishops move diagonal, and ♞ Knights move in an L shape but can jump spaces.</p>
             <p>A knight moves in an L shape: two squares in one direction, then one square sideways, and can jump over other pieces on the board.</p>
-            <p>You can switch pieces but can only use a piece once per board. Avoid obstacles like lava, chasms, and water.</p>
+            <p>You can switch pieces but can only use a piece once per board. Avoid obstacles like lava, chasms, and water. Collect any gold. If there is gold on the board (gold squares) you must land on each one before advancing to H8.</p>
             <p>Check out the training grounds and use the challenge rating to practice.</p>
             <h2>Additional Challenges</h2>
             <ul>
@@ -39,10 +39,9 @@ const TEXT_CONSTANTS = {
     },
     about: {
         text: `
-            <h2>Why and Thanks</h2>
-            <p><b>Why</b> did we make this? Mazechess started as a simpler TTRPG (like D&D or Pathfinder). These games are fun but can be complex and time-consuming.</p>
-            <p>We created Mazechess as a faster, simpler version of a TTRPG. It's part of an optional ruleset for the Mazechess TTRPG now adapted into this web game.</p>
-            <p><b>What</b> is Mazechess? It's a dungeon crawl challenge where your chess piece represents a dungeon-crawling adventurer, moving from A1 to H8 while avoiding obstacles.</p>
+            <h2>Why, What and Thanks</h2>
+            <p><b>Why</b> did we make this? We made this for our friends to play a quick and easy game and to have a little bit of chess and a little bit of a good old fashion dungeoncrawling.</p>
+            <p><b>What</b> is Mazechess? It's a chess inspire3d dungeon crawl challenge where your chess piece represents a dungeon-crawling adventurer, moving from A1 to H8, collecting gold, while avoiding obstacles.</p>
             <h2>Thanks</h2>
             <ul>
                 <li>The Mazechess Team</li>
@@ -56,11 +55,15 @@ const TEXT_CONSTANTS = {
     contact: {
         text: `
             <h2>Contact</h2>
-            <p>Keep an eye on our social media:</p>
             <ul>
-                <li>Twitter: @mazechessgame</li>
-                <li>Facebook: @dungeonbard</li>
+                <li>Twitter:    @mazechessgame</li>
+                <li>Twitter:    @dungeonbard</li>
+                <li>Mastodon:   @dungeonbard</li>
+                <li>Bluesky:    @dungeonbard</li>
+                <li>Reddit:     /r/mazechess</li>
+                <li>Tikok:      @mazechess</li>
             </ul>
+            
             <p>For inquiries, email us at bardofthedungeon.com.</p>`
     }
 };

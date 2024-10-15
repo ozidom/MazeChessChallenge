@@ -282,7 +282,7 @@ function loadComplexPath() {
 function generateBlockedSpaces(level) {
     blockedSpaces = []; // Reset blocked spaces array
     var path = [];
-    var hardness = level*20;
+    var hardness = level*14;
 
     path = loadComplexPath(level);
 
@@ -296,6 +296,20 @@ function generateBlockedSpaces(level) {
             blockedSpaces.push(item);
         }
     }
+
+    //randomly create the gold
+    var goldSpaces = (level*3);
+    for (let i = 0; i < goldSpaces; i++) {
+        let x = String.fromCharCode(65 + Math.floor(Math.random() * 8)); // Random letter from 'a' to 'h'
+        let y = Math.floor(Math.random() * 8) + 1; // Random number from 1 to 8
+        var item = { space: `${x}${y}`, type: 'GOLD'};
+        if (!(x=="H" && y==8) && !(x=="A" && y==1) && !blockedSpaces.includes(location))
+        {
+            blockedSpaces.push(item);
+        }
+    }
+
+
     return blockedSpaces; // Return the generated blocked spaces
 }
 
@@ -411,6 +425,23 @@ function getSpaceType(position) {
     return blockedSpace ? blockedSpace.type : null;
 }
 
+// Function to display the modal when the game is over
+function showModal(message) {
+    document.getElementById("modalMessage").innerHTML = message;
+    document.getElementById("gameOverModal").style.display = "block"; // Show the modal
+}
+
+// Function to close the modal
+function closeModal() {
+    document.getElementById("gameOverModal").style.display = "none"; // Hide the modal
+}
+
+// Function to restart the game
+function restartGame() {
+    closeModal(); // Close the modal
+    location.reload(); // Reload the page to restart the game
+}
+
 // Function to move a piece
 function movePiece(location) {
     let current = currentLocation;
@@ -474,7 +505,8 @@ function movePiece(location) {
     if (destination=='H8' && (gold.length == goldCollected.length)) {
         let endTime = new Date();
         let completionTime = (endTime - startTime) / 1000; // Time in seconds
-        alertText("🏆🏆🏆You have won in " + moveCount + " moves and in " + completionTime + "seconds 🏆🏆🏆. Reload page to play again or try out a training room.");
+        //alertText("🏆🏆🏆You have won in " + moveCount + " moves and in " + completionTime + "seconds 🏆🏆🏆. Reload page to play again or try out a training room.");
+        showModal(`🏆 You have won in ${moveCount} moves and in ${completionTime} seconds! 🏆`);
         isGameStarted = false;
         moveCount = 0;
         blockedSpaces =  [];
