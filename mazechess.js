@@ -169,7 +169,7 @@ class Bishop extends Piece {
     }
 }
 // Function to load the bloacked space into an array
-function loadBlockedSpaces() {
+function loadBlockedSpaces2() {
     blockedSpaces = []; 
     const chessboardConfig = new ChessboardBlockedSpaces();
     const today = getTodayDate(); // You can replace this with dynamic date logic if needed
@@ -199,6 +199,88 @@ function loadBlockedSpaces() {
        // alertText("No gold squares for today's date.");
     }  
 }
+
+let enemies = [];
+let playerHP = 2;  // Player starts with 2 HP
+
+// Function to load blocked spaces, gold, and enemies
+function loadBlockedSpaces() {
+    blockedSpaces = []; 
+    enemies = [];
+    const chessboardConfig = new ChessboardBlockedSpaces();
+    const today = getTodayDate();
+    const rawSpaces = chessboardConfig.getBoardByDate(today);
+    //const rawGold = chessboardConfig.getGoldByDate(today);
+    //const rawEnemies = chessboardConfig.getEnemyByDate(today);
+
+    // Load blocked spaces
+    if (rawSpaces.locations.length > 0) {
+        rawSpaces.locations.forEach(space => {
+            blockedSpaces.push({ space: space, type: 'LAVA' });
+        });
+    }
+
+    // Load gold locations
+    if (rawSpaces.gold.length > 0) {
+        rawSpaces.gold.forEach(goldSpace => {
+            blockedSpaces.push({ space: goldSpace, type: 'GOLD' });
+            gold.push(goldSpace);
+        });
+    }
+
+    // Load enemies
+    if (rawSpaces.enemies.length > 0) {
+        rawSpaces.enemies.forEach(enemySpace => {
+            let type = enemySpace[0];  // First character is the enemy type
+            let position = enemySpace.slice(1);  // Remaining part is the position
+            enemies.push({ type: type, position: position });
+        });
+    }
+}
+
+// Function to check if an enemy is in range and attacks the player
+function checkEnemyAttack(position) {
+    enemies.forEach((enemy, index) => {
+        let inRange = false;
+        switch (enemy.type) {
+            case 'B':  // Bishop
+                inRange = isBishopAttack(enemy.position, position);
+                break;
+            case 'N':  // Knight
+                inRange = isKnightAttack(enemy.position, position);
+                break;
+        }
+
+        if (inRange) {
+            alertText("You have been attacked by an enemy at " + enemy.position);
+            playerHP--;  // Decrease HP
+            enemies.splice(index, 1);  // Remove the enemy after attack
+
+            // Check if game is over
+            if (playerHP <= 0) {
+                showModal("Game Over! You were defeated by enemies.");
+                return;
+            } else {
+                alertText("You have " + playerHP + " HP remaining.");
+            }
+        }
+    });
+}
+
+// Function to check if the player moves into a Bishop's attack range (diagonal)
+function isBishopAttack(enemyPosition, playerPosition) {
+    let dx = Math.abs(enemyPosition.charCodeAt(0) - playerPosition.charCodeAt(0));
+    let dy = Math.abs(parseInt(enemyPosition[1]) - parseInt(playerPosition[1]));
+    return dx === dy;
+}
+
+// Function to check if the player moves into a Knight's attack range
+function isKnightAttack(enemyPosition, playerPosition) {
+    let dx = Math.abs(enemyPosition.charCodeAt(0) - playerPosition.charCodeAt(0));
+    let dy = Math.abs(parseInt(enemyPosition[1]) - parseInt(playerPosition[1]));
+    return (dx === 1 && dy === 2) || (dx === 2 && dy === 1);
+}
+
 
 // Function to parse the chessboard file (chessboards.js) and return blocked squares for the current date
 function parseChessboardFile(content, date) {
@@ -363,8 +445,67 @@ function generateBlockedSpaces2(level) {
     return blocked;
 }
 
-// Function to generate chessboard
+// Function to generate the chessboard
 function generateChessboard() {
+    const chessboard = document.getElementById('chessboard');
+    chessboard.innerHTML = "";  // Clear the chessboard
+    const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+
+    // Iterate over each row and column to create the chessboard
+    for (let row = 8; row >= 1; row--) {  // Row from 8 to 1 (bottom to top)
+        for (let col = 0; col < 8; col++) {
+            const square = document.createElement('div');
+            const alphaCoords = columns[col] + row;
+            square.className = (row + col) % 2 === 0 ? 'white' : 'black';
+            square.setAttribute('id', alphaCoords);
+            square.setAttribute('data-column', columns[col]);
+            square.setAttribute('data-row', row);  // Row from 1 to 8
+            
+            // Check if the square contains an enemy
+            const enemy = enemies.find(e => e.position === alphaCoords);
+            if (enemy) {
+                switch (enemy.type) {
+                    case 'B':  // Bishop enemy
+                        square.textContent = "♝";  // Display enemy Bishop
+                        break;
+                    case 'N':  // Knight enemy
+                        square.textContent = "♞";  // Display enemy Knight
+                        break;
+                    // Add more cases here for other enemy types, like Rook (♜) or King (♚)
+                }
+                square.classList.add('enemy');  // Add an enemy class for styling if needed
+            }
+
+            // Check if the square contains gold
+            let spaceType = getSpaceType(alphaCoords);
+            if (spaceType) {
+                if (spaceType == 'Water') {
+                    square.className = "blue";
+                } else if (spaceType == 'LAVA') {
+                    square.className = "red";
+                } else if (spaceType == 'GOLD') {
+                    square.className = "gold";
+                }
+            }
+
+            // Create the start (🚩) and finish (🏁) labels
+            if (row === 8 && col === 7) {
+                square.textContent = "🏁";  // Finish point
+            }
+            if (row === 1 && col === 0) {
+                square.textContent = "🚩";  // Start point
+            }
+
+            // Handle clicks on the squares
+            square.addEventListener('click', handleClick);
+            chessboard.appendChild(square);
+        }
+    }
+}
+
+
+// Function to generate chessboard
+function generateChessboard3() {
     const chessboard = document.getElementById('chessboard');
     chessboard.innerHTML = "";
     const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
@@ -442,8 +583,81 @@ function restartGame() {
     location.reload(); // Reload the page to restart the game
 }
 
-// Function to move a piece
 function movePiece(location) {
+    let current = currentLocation;
+    let destination = location;
+    var messages = "";
+
+    // Validate move
+    if (!isValidInput(current) || !isValidInput(destination)) {
+        alertText("Invalid input. Please enter valid coordinates (e.g., A1).");
+        return;
+    }
+
+    // Check if destination is blocked
+    if (isBlocked(destination)) {
+        alertText("Destination is blocked. Choose another destination.");
+        return;
+    }
+
+    let pieceName = document.getElementById(current).textContent;
+
+    // Validate move based on piece type
+    let piece;
+    switch (pieceName) {
+        case kingImage:
+            piece = new King();
+            break;
+        case rookImage:
+            piece = new Rook();
+            break;
+        case knightImage:
+            piece = new Knight();
+            break;
+        case bishopImage:
+            piece = new Bishop();
+            break;
+        default:
+            alertText("Invalid piece.");
+            return;
+    }
+
+    if (!piece.isValidMove(current, destination)) {
+        alertText("Invalid move for the selected piece.");
+        return;
+    }
+
+    // Update destination cell with piece
+    document.getElementById(destination).textContent = pieceName;
+    currentLocation = destination;
+
+    // Check for enemy attacks
+    checkEnemyAttack(destination);
+
+    // Collect gold if available
+    if (gold.includes(currentLocation) && !goldCollected.includes(currentLocation)) {
+        goldCollected.push(currentLocation);
+        messages += " Gold collected";
+    }
+
+    if (destination === 'H8' && gold.length > goldCollected.length) {
+        alertText("You have not collected all the gold");
+        return;
+    }
+
+    if (destination === 'H8' && gold.length === goldCollected.length) {
+        let endTime = new Date();
+        let completionTime = (endTime - startTime) / 1000;  // Time in seconds
+        showModal(`🏆 You have won in ${moveCount} moves and in ${completionTime} seconds! 🏆`);
+        resetGame();
+    } else {
+        alertText('Move count ' + moveCount + messages);
+    }
+}
+
+
+// Function to move a piece
+function movePiece2(location) {
     let current = currentLocation;
     let destination = location;
     var messages = "";
@@ -676,6 +890,10 @@ function showSupport() {
     const contentDiv = document.getElementById('content');
     contentDiv.innerHTML = TEXT_CONSTANTS.support.text;
     contentDiv.style.display = 'block';
+}
+
+function updateHPDisplay() {
+    document.getElementById('playerHP').textContent = "HP: " + playerHP;
 }
 
 // Function to show the "Contact" section

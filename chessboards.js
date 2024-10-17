@@ -41,7 +41,7 @@ class ChessboardBlockedSpaces {
             { date: "2024-10-14", gold :["B2"], locations: [ "A8", "B8", "C8", "D8", "E8", "F8", "A7", "C7", "D7", "F7", "A6", "B6", "D6", "E6", "F6", "A5", "C5", "D5", "E5", "G5", "B4", "C4", "D4", "A3", "C3", "D3", "E3", "A2", "C2", "E2", "F2", "G2", "H2", "B1", "C1", "D1", "E1", "F1", "G1" ]},
             { date: "2024-10-15", gold :["H3"], locations: ["B7", "C7", "D7", "E7", "F7", "B6", "C6", "D6", "E6", "F6", "G6", "A5", "G5", "H5", "A4", "B4", "C4", "D4", "F4", "A3", "B3", "C3", "D3", "F3", "G3", "A2", "F2", "G2", "H2", "B1", "C1", "D1", "E1", "H1"]},
             { "date": "2024-10-16", "gold" :["C8","E8","G1"], "locations": ["D8", "B7", "C7", "D7", "E7", "F7", "E6", "B5", "C5", "F5", "A4", "B4", "C4", "E4", "G4", "A3", "C3", "E3", "F3", "H3", "A2", "D2", "F2", "G2", "B1", "C1", "D1", "E1", "F1", "H1" ] },
-            { "date": "2024-10-17", "gold": [ "F8", "D3", "H1" ], "locations": [ "C8", "G8", "B7", "C7", "D7", "F7", "G7", "B6", "C6", "D6", "F6", "G6", "F5", "G5", "B4", "C4", "D4", "E4", "G4", "B3", "C3", "E3", "F3", "C2", "D2", "E2", "F2", "G2", "C1", "D1", "E1", "F1", "G1" ] },
+            { "date": "2024-10-17", "gold": ["C8", "E8", "G1"], "enemies": ["BE5", "NG7"],"locations": ["D8", "B7", "C7", "D7", "E7", "F7", "E6", "B5", "C5", "F5", "A4", "B4", "C4", "E4", "G4", "A3", "C3", "E3", "F3", "H3", "A2", "D2", "F2", "G2", "B1", "C1", "D1", "E1", "F1", "H1"]},
             { "date": "2024-10-18", "gold" :["C8","E8","G1"], "locations": ["D8", "B7", "C7", "D7", "E7", "F7", "E6", "B5", "C5", "F5", "A4", "B4", "C4", "E4", "G4", "A3", "C3", "E3", "F3", "H3", "A2", "D2", "F2", "G2", "B1", "C1", "D1", "E1", "F1", "H1" ] },
             { "date": "2024-10-19", "gold" :["C8","E8","G1"], "locations": ["D8", "B7", "C7", "D7", "E7", "F7", "E6", "B5", "C5", "F5", "A4", "B4", "C4", "E4", "G4", "A3", "C3", "E3", "F3", "H3", "A2", "D2", "F2", "G2", "B1", "C1", "D1", "E1", "F1", "H1" ] },
             { "date": "2024-10-20", "gold" :["C8","E8","G1"], "locations": ["D8", "B7", "C7", "D7", "E7", "F7", "E6", "B5", "C5", "F5", "A4", "B4", "C4", "E4", "G4", "A3", "C3", "E3", "F3", "H3", "A2", "D2", "F2", "G2", "B1", "C1", "D1", "E1", "F1", "H1" ] },
@@ -55,7 +55,15 @@ class ChessboardBlockedSpaces {
         const entry = this.data.find(config => config.date === date);
         
         // Return the blocked locations or an empty array if no match is found
-        return entry ? entry.locations : [];
+        return entry ? entry : [];
+    }
+
+    getEnemyByDate(date) {
+        // Find the entry that matches the given date
+        const entry = this.data.find(config => config.date === date);
+        
+        // Return the blocked locations or an empty array if no match is found
+        return entry ? entry.enemies : [];
     }
 
     // Method to retrieve blocked spaces by date

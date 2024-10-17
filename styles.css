@@ -336,3 +336,8 @@ body {
   text-decoration: none;
   cursor: pointer;
 }
+
+.enemy {
+  background-color: rgba(255, 0, 0, 0.5);  /* Red overlay for enemy spaces */
+  color: white;  /* Ensure text (enemy piece) is visible */
+}
