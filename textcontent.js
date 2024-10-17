@@ -24,7 +24,7 @@ const TEXT_CONSTANTS = {
                 <li>Solo: Complete the challenge with only one piece.</li>
                 <li>Two-Piece Tango: Use exactly two pieces</li>
                 <li>Cornered King: Start at A1 with the King, end at H8, touching all four corners.</li>
-                <li>Knight's Journey: Reach H8 in a set number of moves using only the Knight.</li>
+                <li>Speed run - complete all three levels of the training grounds</li>
             </ul>`
     },
     support: {
