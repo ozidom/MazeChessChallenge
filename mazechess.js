@@ -1,4 +1,3 @@
-
 // Global Vars
 let startTime;
 let currentPiece;
@@ -16,7 +15,6 @@ let knightImage = "♞";
 let bishopImage = "♝";
 let goldImage = "💰";
 
-
 // Define an array of available pieces
 const pieces = [kingImage   , rookImage, knightImage, bishopImage];
 let usedPieces = [];
@@ -25,34 +23,6 @@ let goldCollected = [];
 
 // Define an array to store blocked spaces
 let blockedSpaces = [];
-
-// Define classes for each piece
-class Piece {
-    constructor(name) {
-        this.name = name;
-        this.moveCount = 0;
-    }
-
-    isValidMove(current, destination) {
-        // Default implementation for generic piece
-        return true;
-    }
-}
-
-// Function to get the date from the browser but this can be overwritten by a querysting in the form of
-// ?date=2024-10-01 ie 1st of October 
-function getTodayDate() {
-    var today = new Date();
-
-    // if the query string has a valid date then use that
-    if (dateBoardSelect !== null){
-        today = new Date(dateBoardSelect);
-    }
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-based, so +1
-    const day = String(today.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`; // Format: YYYY-MM-DD
-}
 
 // Function to create the game
 function initGame(level) {
@@ -132,42 +102,7 @@ function isPathClear(current, destination) {
     return true; // Path is clear
 }
 
-// Class to implement King
-class King extends Piece {
-    isValidMove(current, destination) {
-        let dx = Math.abs(destination.charCodeAt(0) - current.charCodeAt(0));
-        let dy = Math.abs(parseInt(destination[1]) - parseInt(current[1]));
-        return dx <= 1 && dy <= 1;
-    }
-}
 
-// Class to implement Rook
-class Rook extends Piece {
-    isValidMove(current, destination) {
-        // Rook can move horizontally or vertically
-        let isStraightMove = current[0] === destination[0] || current[1] === destination[1];
-        return isStraightMove && isPathClear(current, destination);
-    }
-}
-
-// Class to implement Knight
-class Knight extends Piece {
-    isValidMove(current, destination) {
-        let dx = Math.abs(destination.charCodeAt(0) - current.charCodeAt(0));
-        let dy = Math.abs(parseInt(destination[1]) - parseInt(current[1]));
-        return (dx === 1 && dy === 2) || (dx === 2 && dy === 1);
-    }
-}
-
-// Class to implement Bishop
-class Bishop extends Piece {
-    isValidMove(current, destination) {
-        let dx = Math.abs(destination.charCodeAt(0) - current.charCodeAt(0));
-        let dy = Math.abs(parseInt(destination[1]) - parseInt(current[1]));
-        let isDiagonalMove = dx === dy;
-        return isDiagonalMove && isPathClear(current, destination);
-    }
-}
 // Function to load the bloacked space into an array
 function loadBlockedSpaces() {
     blockedSpaces = []; 
@@ -275,9 +210,6 @@ function loadComplexPath() {
     return path; // Return the generated complex path
 }
 
-
-
-
 // TODO DELETE - Old Function to generate random blocked spaces with types (LAVA, Water, etc.)
 function generateBlockedSpaces(level) {
     blockedSpaces = []; // Reset blocked spaces array
@@ -311,56 +243,6 @@ function generateBlockedSpaces(level) {
 
 
     return blockedSpaces; // Return the generated blocked spaces
-}
-
-function generateBlockedSpaces2(level) {
-    var blocked = []; // blocked spaces array
-    const hardness = level === 4 ? level * 20 + 20 : level * 20; // Calculate hardness
-    const maxBlockedSpaces = Math.min(hardness, 40); // Ensure a maximum limit
-
-    // Create a simple path from A1 to H8
-    const path = ['A1']; // Starting point
-    let currentX = 0; // Corresponds to 'A'
-    let currentY = 0; // Corresponds to '1'
-
-    // Generate a longer path with detours
-    while (currentX < 7 || currentY < 7) {
-        // Randomly choose to move right or up, but allow for some detours
-        const moveDirection = Math.random();
-        
-        // Decide to move right or up
-        if (moveDirection < 0.4 && currentX < 7) { // 40% chance to move right
-            currentX++;
-        } else if (moveDirection < 0.8 && currentY < 7) { // 40% chance to move up
-            currentY++;
-        } else if (currentX > 0 && currentY > 0 && Math.random() < 0.5) { // 20% chance to move back (detour)
-            // Randomly move back left or down
-            if (Math.random() < 0.5) {
-                currentX--; // Move left
-            } else {
-                currentY--; // Move down
-            }
-        }
-
-        // Push the new position into the path
-        path.push(String.fromCharCode(65 + currentX) + (currentY + 1));
-    }
-
-    // Mark the path spaces so they cannot be blocked
-    const pathSet = new Set(path);
-
-    while (blocked.length < maxBlockedSpaces) {
-        let x = String.fromCharCode(65 + Math.floor(Math.random() * 8)); // Random letter from 'A' to 'H'
-        let y = Math.floor(Math.random() * 8) + 1; // Random number from 1 to 8
-        const space = `${x}${y}`;
-
-        // Ensure A1 and H8 are always free, and not blocking the valid path
-        if (space !== 'A1' && space !== 'H8' && !pathSet.has(space)) {
-            let type = Math.random() < 0.5 ? 'LAVA' : 'WATER'; // Randomly assign type
-            blocked.push({ space: space, type: type });
-        }
-    }
-    return blocked;
 }
 
 // Function to generate chessboard
@@ -605,118 +487,6 @@ function createChessboard() {
     }
   }
 
-// Function to copy the board to chessboard
-function copyChessboardToClipboard() {
-    const chessboardElement = document.getElementById('chessboardcontainer');
-
-    // Use html2canvas to convert the chessboard div to a canvas
-    html2canvas(chessboardElement).then(canvas => {
-        canvas.toBlob(blob => {
-            if (blob) {
-                const item = new ClipboardItem({ 'image/png': blob });
-                navigator.clipboard.write([item]).then(() => {
-                    alertText('Chessboard copied to clipboard as an image!');
-                }).catch(err => {
-                    console.error('Error copying to clipboard: ', err);
-                    fallbackCopyToClipboard(canvas.toDataURL()); // Fallback for mobile browsers
-                });
-            } else {
-                console.error('Error creating blob from canvas');
-            }
-        });
-    });
-}
-
-// Function to copy the board to chessboard for a mobile device if the method:copyChessboardToClipboard fails
-function fallbackCopyToClipboard(dataUrl) {
-    const tempLink = document.createElement('a');
-    tempLink.href = dataUrl;
-    tempLink.download = 'chessboard.png';
-    document.body.appendChild(tempLink);
-    tempLink.click();
-    document.body.removeChild(tempLink);
-    alertText('Chessboard copied to clipboard as an image! (Fallback method)');
-}
-
-  // Function to show the "Home" content
-function showHome() {
-    if (!isGameStarted)
-        document.getElementById('startScreen').style.display = 'flex';
-    else    
-        document.getElementById('startScreen').style.display = 'none';
-    document.getElementById("training-grounds-row").style.display = 'none';
-    document.getElementById('inputText').style.display = 'flex'; // Show chessboard area
-    document.getElementById('button-box').style.display = 'grid'; // Show chessboard area
-    document.getElementById('chessboard').style.display = 'grid'; // Show chessboard
-    document.getElementById('content').style.display = 'none'; // Hide dynamic content
-}
-
-// Function to show the "Help" section
-function showHelp() {
-    hideGameArea();
-    document.getElementById("startScreen").style.display = 'none';
-    const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = TEXT_CONSTANTS.help.text;
-    contentDiv.style.display = 'block';
-    //document.getElementById("startScreen").style.visibility = !isGameStarted;
-}
-// Function to show the "Y" section
-function showWhy() {
-    hideGameArea();
-    document.getElementById("startScreen").style.display = 'none';
-    const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = TEXT_CONSTANTS.about.text;
-    contentDiv.style.display = 'block';
-}
-
-// Function to show the "Support" section
-function showSupport() {
-    hideGameArea();
-    document.getElementById("startScreen").style.display = 'none';
-    const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = TEXT_CONSTANTS.support.text;
-    contentDiv.style.display = 'block';
-}
-
-// Function to show the "Contact" section
-function showContact() {
-    hideGameArea();
-    document.getElementById("startScreen").style.display = 'none';
-    const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = TEXT_CONSTANTS.contact.text;
-    contentDiv.style.display = 'block';
-}
-
-// Function to show the training grounds
-function showTrainingGrounds() {
-    if (!isGameStarted) {
-        document.getElementById('inputText').style.display = 'flex'; // Show chessboard area
-        document.getElementById('button-box').style.display = 'grid'; // Show chessboard area
-        document.getElementById('chessboard').style.display = 'grid'; // Show chessboard
-        document.getElementById('content').style.display = 'none'; // Hide dynamic content
-        document.getElementById("startScreen").style.display = 'none';
-        document.getElementById("training-grounds-row").style.display = 'flex';
-        if (!isTrainingRoom)
-        {
-            isTrainingRoom = true;
-            btnTG(1);
-        }
-    }
-    else
-    {
-        alertText("You can't start a training ground while you are playing a game. Refresh the page to start again.");
-    }
-}
-
-// Helper function to hide the game area
-function hideGameArea() {
-    document.getElementById("inputText").style.display = 'none';
-    document.getElementById("training-grounds-row").style.display = 'none';
-    document.getElementById('startScreen').style.display = 'none';
-    document.getElementById('chessboard').style.display = 'none'; // Hide chessboard
-    document.getElementById('button-box').style.display = 'none'; // Hide chessboard
-}
-
 // Function to handle the training ground buttons
 function btnTG(level){
     moveCount = 0;
@@ -736,8 +506,5 @@ function btnTG(level){
             dateBoardSelect = params.get('date')
         } 
         isTrainingRoom = false;
-        initGame(0); // Call init when DOM is ready
-
-
-        
+        initGame(0); // Call init when DOM is ready   
   });
