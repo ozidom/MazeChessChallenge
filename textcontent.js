@@ -26,8 +26,10 @@ const TEXT_CONSTANTS = {
                 <li>Cornered King: Start at A1 with the King, end at H8, touching all four corners.</li>
                 <li>Speed run - complete all three levels of the training grounds</li>
             </ul>
-            <h2>Help and Rules</h2>
-            `
+            <h2>Rules</h2>
+            <ul>
+                <li>4 Corners: Visit all 4 corners of the board.</li>
+            </ul>`
     },
     support: {
         text: `
