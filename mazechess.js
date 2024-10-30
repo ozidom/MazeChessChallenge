@@ -110,7 +110,7 @@ function isPathClear(current, destination) {
 function loadBlockedSpaces() {
     blockedSpaces = []; 
     const chessboardConfig = new ChessboardBlockedSpaces();
-    const today = getTodayDate(); // You can replace this with dynamic date logic if needed
+    const today = getTodayDateUTC(); // You can replace this with dynamic date logic if needed
     const rawSpaces = chessboardConfig.getBoardByDate(today);
     if (rawSpaces.length > 0) {
         for(var blockedSpace of rawSpaces)
@@ -300,7 +300,6 @@ function generateChessboard() {
 
     var position =`${column}${row}`;
     movePiece(position);
-    moveCount++;
   }
 
 // Function to determine space type (blocked or not)
@@ -374,6 +373,7 @@ function movePiece(location) {
     // Update destination cell with piece
     document.getElementById(destination).textContent = pieceName;
     currentLocation = destination;
+    moveCount++;
     //piece.moveCount++;
 
     //check if we can collected gold and haven't collected it from this location before

@@ -23,7 +23,7 @@
             const data = await response.json();
 
             // Display the high scores
-            displayHighScores(data,'highscoresmoves',"Lowest times");
+            displayHighScores(data,'highscoresmoves',"Lowest moves");
             //displayHighScores(data.highScoresByTime,'highscoresmoves',"Fastest Moves");
 
         } catch (error) {
@@ -38,7 +38,7 @@
         // Clear any existing content
         highScoresDiv.innerHTML = '';
         const header = document.createElement('h2');  // Just 'h2' instead of '<H2>'
-        header.textContent = name + 'for today (GMT)';  // Set the text content separately
+        header.textContent = name + ' for today (GMT)';  // Set the text content separately
         highScoresDiv.appendChild(header);  
 
         // Loop through the scores and create divs for each entry
@@ -47,8 +47,8 @@
             const scoreDiv = document.createElement('div');
             
             // Set the content to show the name, moves, and time
-            scoreDiv.textContent = `Moves: ${score.moves}, ${score.username}, Time: ${score.time}`;
-            
+            scoreDiv.textContent = `${score.moves}, ${score.username}`;
+            //scoreDiv.textContent = `${score.moves}, ${score.username}, Time: ${score.time}`;
             // Add some styling or classes (optional)
             scoreDiv.style.marginBottom = '10px';
             scoreDiv.style.padding = '1px';
