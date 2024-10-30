@@ -7,6 +7,7 @@ let isTrainingRoom;
 let isGameStarted = false;  
 let moveCount = 0;
 let dateBoardSelect = null;
+let username;
 
 // Game images
 let kingImage = "♚";
@@ -27,6 +28,8 @@ let blockedSpaces = [];
 // Function to create the game
 function initGame(level) {
     document.getElementById("inputText").innerHTML = TEXT_CONSTANTS.game.text;
+    document.getElementById("userName").innerHTML = "Name: " + username;
+
     goldCollected = [];
     
     currentLocation = "A1";
@@ -389,6 +392,9 @@ function movePiece(location) {
         let completionTime = (endTime - startTime) / 1000; // Time in seconds
         //alertText("🏆🏆🏆You have won in " + moveCount + " moves and in " + completionTime + "seconds 🏆🏆🏆. Reload page to play again or try out a training room.");
         showModal(`🏆 You have won in ${moveCount} moves and in ${completionTime} seconds! 🏆`);
+        if (!isTrainingRoom) {
+            submitHighScore(username, moveCount, completionTime); //TODO eventually we will only call this when the score is better than the highest scores
+        }
         isGameStarted = false;
         moveCount = 0;
         blockedSpaces =  [];
@@ -505,6 +511,8 @@ function btnTG(level){
             const params = new URLSearchParams(url.search);
             dateBoardSelect = params.get('date')
         } 
+        fetchHighScores();
+        username = getUsername();
         isTrainingRoom = false;
         initGame(0); // Call init when DOM is ready   
   });

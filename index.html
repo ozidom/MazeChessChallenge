@@ -19,7 +19,9 @@
     
 </head>
 <body>
-    
+    <div class="wrapper">
+        <img src="/images/mazechess-logo.png" ></img>
+    </div>
     <!-- Navigation Menu -->
     <nav class="navbar">
         <ul class="wrapper">
@@ -28,14 +30,13 @@
             <li><a href="#" onclick="showWhy()" title="Why did we make this?">WHY</a></li>
             <li><a href="#" onclick="showSupport()" title="Support Us">SUPPORT</a></li>
             <li><a href="#" onclick="showContact()" title="Contact (first)">CONTACT</a></li>
+            <li><a href="#" onclick="showSettings()" title="Settings">⚙️</a></li>
             <li><a href="#" onclick="showTrainingGrounds()" title="Training grounds">TRAIN</a></li>
         </ul>
     </nav>
 
     <div class="wrapper">
-        
-        <h1 class="title">mazechessgame.com #mazechess</h1>
-
+    
         <div class="container">
             <!-- Chessboard -->
             <div id="chessboardcontainer" class="chessboardcontainer">
@@ -43,8 +44,9 @@
                     <button id="startButton" onclick="startGame()">Start</button>
                 </div>
                 <div class="chessboard" id="chessboard"></div>
+                <div class="title" id="userName"></div>
             </div>
-
+            
             <!-- Buttons below chessboard -->
             <div id="button-box" class="button-box">
                 <div class="chess-button-row">
@@ -83,7 +85,8 @@
     <!-- Dynamic Content Area -->
     <div class="wrapper">
         <div id="content" class="content-section"></div>
-        <div id="sponsors" class="content-section"></div>
+        <div id="highscoresmoves">No Scores yet today (GMT)</div>
+        <div id="sponsors" class="content-section">No Sponsors yet</div>
     </div>
     <script src="chessboards.js"></script>
     <script src="mazechess.js"></script>
@@ -92,5 +95,7 @@
     <script src="textcontent.js"></script>
     <script src="menu.js"></script>
     <script src="utility.js"></script>
+    <script src="username.js"></script>
+    <script src="highscore.js"></script>
 </body>
 </html>

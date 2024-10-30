@@ -25,7 +25,9 @@ const TEXT_CONSTANTS = {
                 <li>Two-Piece Tango: Use exactly two pieces</li>
                 <li>Cornered King: Start at A1 with the King, end at H8, touching all four corners.</li>
                 <li>Speed run - complete all three levels of the training grounds</li>
-            </ul>`
+            </ul>
+            <h2>Help and Rules</h2>
+            `
     },
     support: {
         text: `
@@ -64,5 +66,13 @@ const TEXT_CONSTANTS = {
             </ul>
             
             <p>For inquiries, email us at bardofthedungeon.com.</p>`
+    },
+    settings: {
+        text: `
+            <h2>Settings</h2>
+            <label for="username">Name</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username">
+            <button onclick="generateRandomUsername()">Rnd</button>
+            <button onclick="saveUsername()">Save</button>`
     }
 };

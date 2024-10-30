@@ -47,6 +47,32 @@ function showContact() {
     contentDiv.style.display = 'block';
 }
 
+// Function to show the "Contact" section
+function showSettings() {
+    hideGameArea();
+    document.getElementById("startScreen").style.display = 'none';
+    const contentDiv = document.getElementById('content');
+    contentDiv.innerHTML = TEXT_CONSTANTS.settings.text;
+    contentDiv.style.display = 'block';
+}
+
+function saveUsername() {
+    const usernameInput = document.getElementById('username').value;
+    if (usernameInput) {
+        setUsername(usernameInput);
+        document.getElementById('username-feedback').innerText = `Username set to: ${usernameInput}`;
+        document.getElementById("userName").innerHTML = "Name: " + usernameInput;
+    } else {
+        document.getElementById('username-feedback').innerText = "Please enter a username.";
+    }
+}
+
+function generateRandomUsername() {
+    const randomUsername = setRandomUsername();
+    document.getElementById('username').value = randomUsername;
+    document.getElementById('username-feedback').innerText = `Random username generated: ${randomUsername}`;
+}
+
 // Function to show the training grounds
 function showTrainingGrounds() {
     if (!isGameStarted) {
