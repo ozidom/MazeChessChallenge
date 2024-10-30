@@ -23,7 +23,7 @@
             const data = await response.json();
 
             // Display the high scores
-            displayHighScores(data,'highscoresmoves',"Lowest moves");
+            displayHighScores(data,'highscoresmoves',"Fastest moves");
             //displayHighScores(data.highScoresByTime,'highscoresmoves',"Fastest Moves");
 
         } catch (error) {
@@ -47,7 +47,7 @@
             const scoreDiv = document.createElement('div');
             
             // Set the content to show the name, moves, and time
-            scoreDiv.textContent = `${score.moves}, ${score.username}`;
+            scoreDiv.textContent = `${score.moves} ${score.username}`;
             //scoreDiv.textContent = `${score.moves}, ${score.username}, Time: ${score.time}`;
             // Add some styling or classes (optional)
             scoreDiv.style.marginBottom = '10px';
