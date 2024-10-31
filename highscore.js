@@ -20,10 +20,13 @@
             }
 
             // Parse the JSON response
-            const data = await response.json();
+            const dataMoves = await response.json();
 
             // Display the high scores
-            displayHighScores(data,'highscoresmoves',"Fastest moves");
+            displayLowestMoves(dataMoves,'highscoresmoves',"Fastest moves");
+
+        
+            displayFastestTimes(dataTimes,'highscorestimes',"Fastest times");
             //displayHighScores(data.highScoresByTime,'highscoresmoves',"Fastest Moves");
 
         } catch (error) {
@@ -32,12 +35,39 @@
     }
 
         // Function to display the high scores on the page
-    function displayHighScores(scores,element,name) {
+    function displayLowestMoves(scores,element,name) {
         const highScoresDiv = document.getElementById(element);
 
         // Clear any existing content
         highScoresDiv.innerHTML = '';
         const header = document.createElement('h2');  // Just 'h2' instead of '<H2>'
+        header.textContent = name + ' for today (GMT)';  // Set the text content separately
+        highScoresDiv.appendChild(header);  
+
+        // Loop through the scores and create divs for each entry
+        scores.forEach(score => {
+            // Create a new div element
+            const scoreDiv = document.createElement('div');
+            
+            // Set the content to show the name, moves, and time
+            scoreDiv.textContent = `${score.moves} ${score.username}`;
+            //scoreDiv.textContent = `${score.moves}, ${score.username}, Time: ${score.time}`;
+            // Add some styling or classes (optional)
+            scoreDiv.style.marginBottom = '10px';
+            scoreDiv.style.padding = '1px';
+            scoreDiv.style.border = '0';
+
+            // Append the div to the high-scores container
+            highScoresDiv.appendChild(scoreDiv);
+        });
+    }
+
+    function displayFastestTimes(scores,element,name) {
+        const highScoresDiv = document.getElementById(element);
+
+        // Clear any existing content
+        highScoresDiv.innerHTML = '';
+        const header = document.createElement('h4');  // Just 'h2' instead of '<H2>'
         header.textContent = name + ' for today (GMT)';  // Set the text content separately
         highScoresDiv.appendChild(header);  
 

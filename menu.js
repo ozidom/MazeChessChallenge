@@ -39,11 +39,11 @@ function showSupport() {
 }
 
 // Function to show the "Contact" section
-function showContact() {
+function showAbout() {
     hideGameArea();
     document.getElementById("startScreen").style.display = 'none';
     const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = TEXT_CONSTANTS.contact.text;
+    contentDiv.innerHTML = TEXT_CONSTANTS.about.text;
     contentDiv.style.display = 'block';
 }
 
@@ -57,14 +57,12 @@ function showSettings() {
 }
 
 function saveUsername() {
-    const usernameInput = document.getElementById('username').value;
-    if (usernameInput) {
+    const usernameInput = document.getElementById('userNameInput').value;
+    if (usernameInput != "") {
         setUsername(usernameInput);
-        document.getElementById('username-feedback').innerText = `Username set to: ${usernameInput}`;
+        //document.getElementById('username-feedback').innerText = `Username set to: ${usernameInput}`;
         document.getElementById("userName").innerHTML = "Name: " + usernameInput;
-    } else {
-        document.getElementById('username-feedback').innerText = "Please enter a username.";
-    }
+    } 
 }
 
 function generateRandomUsername() {

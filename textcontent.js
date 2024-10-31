@@ -12,9 +12,8 @@ const TEXT_CONSTANTS = {
     help: {
         text: `
             <h2>Help and Rules</h2>
-            <p>♚ Kings move one space any direction, ♜ Rooks (look like castles) move in cardinal directions (N,S,E and W), Bishops move diagonal, and ♞ Knights move in an L shape but can jump spaces.</p>
-            <p>A knight moves in an L shape: two squares in one direction, then one square sideways, and can jump over other pieces on the board.</p>
-            <p>You can switch pieces but can only use a piece once per board. Avoid obstacles like lava, chasms, and water. Collect any gold. If there is gold on the board (gold squares) you must land on each one before advancing to H8.</p>
+            <p>♚ Kings move one space any direction, ♜ Rooks (look like castles) move in cardinal directions (N,S,E and W), Bishops move diagonal, and ♞ Knights moves in an L shape: two squares in one direction, then one square sideways, and can jump over other pieces on the board.</p>
+            <p>You can switch pieces but can only use a piece once per board. Avoid obstacles like lava, chasms, and water. If there is gold on the board (gold squares) you must land on each one before advancing to H8.</p>
             <p>Check out the training grounds and use the challenge rating to practice.</p>
             <h2>Additional Challenges</h2>
             <ul>
@@ -25,38 +24,20 @@ const TEXT_CONSTANTS = {
                 <li>Two-Piece Tango: Use exactly two pieces</li>
                 <li>Cornered King: Start at A1 with the King, end at H8, touching all four corners.</li>
                 <li>Speed run - complete all three levels of the training grounds</li>
-            </ul>
-            <h2>Rules</h2>
-            <ul>
-                <li>4 Corners: Visit all 4 corners of the board.</li>
-            </ul>`
-    },
-    support: {
-        text: `
-            <h2>We need your help!!!</h2>
-            <p>We need your help and support to get the word out about Mazechess.</p>
-            <ul>
-                <li>Share the link with friends.</li>
-                <li>Use the Clipboard button and send an image or tag #mazechess on social media.</li>
             </ul>`
     },
     about: {
         text: `
-            <h2>Why, What and Thanks</h2>
+            <h2>About</h2>
+             <h2>Why</h2>
             <p><b>Why</b> did we make this? We made this for our friends to play a quick and easy game and to have a little bit of chess and a little bit of a good old fashion dungeoncrawling.</p>
             <p><b>What</b> is Mazechess? It's a chess inspire3d dungeon crawl challenge where your chess piece represents a dungeon-crawling adventurer, moving from A1 to H8, collecting gold, while avoiding obstacles.</p>
             <h2>Thanks</h2>
+            A massive thanks to the following:
             <ul>
                 <li>The Mazechess Team</li>
                 <li>Inkarnate.com (background tiles/images)</li>
-            </ul>`
-    },
-    sponsor: {
-        text: `<h2>Sponsors</h2>
-               <p>Thanks to our sponsors:...</p>`
-    },
-    contact: {
-        text: `
+            </ul>
             <h2>Contact</h2>
             <ul>
                 <li>Twitter:    @mazechessgame</li>
@@ -67,13 +48,25 @@ const TEXT_CONSTANTS = {
                 <li>Tikok:      @mazechess</li>
             </ul>
             
-            <p>For inquiries, email us at bardofthedungeon.com.</p>`
+            <p>For inquiries, email us at bardofthedungeon.com.</p>
+
+            <h2>We need you</h2>
+            <p>We need your help and support to get the word out about Mazechess.</p>
+            <ul>
+                <li>Share the link with friends.</li>
+                <li>Use the Clipboard button and send an image or tag #mazechess on social media.</li>
+            </ul>
+            `
+    },
+    sponsor: {
+        text: `<h2>Sponsors</h2>
+               <p>Thanks to our sponsors:...</p>`
     },
     settings: {
         text: `
             <h2>Settings</h2>
             <label for="username">Name</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username">
+            <input type="text" id="userNameInput" name="username" placeholder="Enter your username">
             <button onclick="generateRandomUsername()">Rnd</button>
             <button onclick="saveUsername()">Save</button>`
     }
