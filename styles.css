@@ -13,6 +13,10 @@ body {
   color: #889CB9;
 }
 
+h4 {
+  size: 10pt;
+}
+
 .wrapper {
   /* Used to center content, define width in 1 place */
   margin: 0 auto;
@@ -187,6 +191,7 @@ body {
 .navbar {
   display: block;
   background-color: rgba(0, 0, 0, 0.25);
+  font-size: 14pt;
 }
 
 .navbar ul {
@@ -337,5 +342,5 @@ body {
 }
 
 #highscores{ 
-  font-size: 10pt;
+  font-size: 8pt;
 }

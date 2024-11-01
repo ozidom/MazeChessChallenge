@@ -3,7 +3,7 @@
 function getTodayDateUTC() {
     var date = new Date();
     if (dateBoardSelect !== null){
-        utcToday = new Date(dateBoardSelect);
+        date = new Date(dateBoardSelect);
     }
     const year = date.getUTCFullYear();
     const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-based, so +1
