@@ -25,10 +25,6 @@
             // Display the high scores
             displayLowestMoves(dataMoves,'highscoresmoves',"Fastest moves");
 
-        
-            displayFastestTimes(dataTimes,'highscorestimes',"Fastest times");
-            //displayHighScores(data.highScoresByTime,'highscoresmoves',"Fastest Moves");
-
         } catch (error) {
             console.error("Failed to fetch high scores:", error);
         }

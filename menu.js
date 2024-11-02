@@ -57,28 +57,15 @@ function showSettings() {
 }
 
 function saveUsername() {
-    const usernameInput = document.getElementById('username').value;
-    const userNameFeedback = document.getElementById('username-feedback');
-    if (usernameInput) {
+    const usernameInput = document.getElementById('userNameInput').value;
+    //const userNameFeedback = document.getElementById('username-feedback');
         setUsername(usernameInput);
-        if (userNameFeedback){
-            userNameFeedback.innerText = `Username set to: ${usernameInput}`;
-        }
         document.getElementById("userName").innerHTML = "Name: " + usernameInput;
-    } else {
-        if (userNameFeedback){
-            userNameFeedback.innerText = "Please enter a username.";
-        }
-    }
 }
 
 function generateRandomUsername() {
     const randomUsername = setRandomUsername();
-    document.getElementById('username').value = randomUsername;
-    const userNameFeedback = document.getElementById('username-feedback');
-    if (userNameFeedback){
-        userNameFeedback.innerText = `Random username generated: ${randomUsername}`;
-    }
+    document.getElementById('userNameInput').value = randomUsername;
 }
 
 // Function to show the training grounds
