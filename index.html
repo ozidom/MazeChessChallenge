@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,11 +18,14 @@
     
 </head>
 <body>
-    <div class="wrapper">
-        <img src="/images/mazechess-logo.png" ></img>
-    </div>
+
     <!-- Navigation Menu -->
     <nav class="navbar">
+        <h1 class="title wrapper">
+            <span class="sr-only">Maze Chess</span>
+            <img src="images/mazechess-logo.png" alt=""/>
+        </h1>
+
         <ul class="wrapper">
             <li><a href="#" onclick="showHome()" title="Home">🏠</a></li>
             <li><a href="#" onclick="showTrainingGrounds()" title="Training grounds">Training </a></li>
@@ -69,13 +71,14 @@
             <!-- Modal HTML (hidden by default) -->
             <div id="gameOverModal" class="modal">
                 <div class="modal-content">
-                    <span class="close-button" onclick="closeModal()">&times;</span>
+                    <button class="close-button" onclick="closeModal()">&times;</button>
                     <h2>Congratulations!</h2>
                     <p id="modalMessage">🏆 You have won the game! 🏆</p>
                     <button onclick="restartGame()" class="modal-button">Play Daily Challenge</button>
                     <button onclick="copyChessboardToClipboard()" class="modal-button">Copy to Clipboard</button>
                 </div>
             </div>
+            
         </div>
 
     </div>
@@ -86,6 +89,7 @@
         <div id="highscoresmoves">No Scores yet today (GMT)</div>
         <div id="sponsors" class="content-section">No Sponsors yet</div>
     </div>
+
     <script src="chessboards.js"></script>
     <script src="mazechess.js"></script>
     <script src="piece.js"></script>
