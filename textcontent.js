@@ -7,13 +7,13 @@ const CONTACT_TEXT = "<h2>(first) Contact Us</h2><p>Keep an eye on the social me
 */
 const TEXT_CONSTANTS = {
     game: {
-        text: "<p>Click START. Choose ♚ ♝ ♜ or ♞. Switch anytime during the game. Move from the bottom left to the top right in the fewest moves and must collect any gold (gold squares). Cannot move on blocked squares but Knights can jump over them. Can use a piece once only.</p>"
+        text: "<p>Click START. Choose ♚ ♝ ♜ or ♞. Switch to another piece anytime during the game. Move from the bottom left to the top right in the fewest moves and must collect any gold (gold squares). Cannot move on blocked squares but Knights can jump over them.</p>"
     },
     help: {
         text: `
             <h2>Help and Rules</h2>
             <p>♚ Kings move one space any direction, ♜ Rooks (look like castles) move in cardinal directions (N,S,E and W), Bishops move diagonal, and ♞ Knights moves in an L shape: two squares in one direction, then one square sideways, and can jump over other pieces on the board.</p>
-            <p>You can switch pieces but can only use a piece once per board. Avoid obstacles like lava, chasms, and water. If there is gold on the board (gold squares) you must land on each one before advancing to H8.</p>
+            <p>You can switch pieces any time. Avoid obstacles like ice, lava, chasms, and water. If there is gold on the board (gold squares) you must land on each one before advancing to H8.</p>
             <p>Check out the training grounds and use the challenge rating to practice.</p>
             <h2>Additional Challenges</h2>
             <ul>

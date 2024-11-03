@@ -366,7 +366,7 @@ function movePiece(location) {
     }
 
     if (!piece.isValidMove(current, destination)) {
-        alertText("Invalid move for the selected piece.");
+        alertText("Invalid move for the selected piece. You are at " + destination);
         return;
     }
 
@@ -401,7 +401,7 @@ function movePiece(location) {
         usedPieces = [];
     }
     else {
-        alertText('Move count ' + moveCount + messages);
+        alertText('Move to ' + destination + ',count ' + moveCount + messages);
     }
 }
 
@@ -441,15 +441,13 @@ function selectBishop() {
 
 // Function to select Piece
 function selectPiece(pieceImage) {
-    if (!usedPieces.includes(pieceImage)){
+        if (moveCount>0){
+            moveCount++;//only incerement after they have made there first move
+            alertText('Move count ' + moveCount);
+        }
         usedPieces.push(pieceImage);
-        moveCount++;
         currentPiece = pieceImage;
         document.getElementById(currentLocation).textContent = currentPiece;
-    }
-    else {
-        alertText('You have already used ' + pieceImage);
-    }
 }
 
 // Function to display alert text
