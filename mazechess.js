@@ -323,6 +323,7 @@ function closeModal() {
 // Function to restart the game
 function restartGame() {
     closeModal(); // Close the modal
+    document.getElementById('btnRestartGame').style.display = 'block';
     location.reload(); // Reload the page to restart the game
 }
 
@@ -332,6 +333,11 @@ function movePiece(location) {
     let destination = location;
     var messages = "";
     // Validate inputs
+    if (!isGameStarted && !isTrainingRoom){
+        return;
+    }
+
+
     if (!isValidInput(current) || !isValidInput(destination)) {
         alertText("Invalid input. Please enter valid coordinates (e.g., A1).");
         return;
@@ -396,6 +402,7 @@ function movePiece(location) {
             submitHighScore(username, moveCount, completionTime); //TODO eventually we will only call this when the score is better than the highest scores
         }
         isGameStarted = false;
+        isTrainingRoom = false;
         moveCount = 0;
         blockedSpaces =  [];
         usedPieces = [];
@@ -469,6 +476,7 @@ function startGame() {
     isGameStarted = true;
     document.getElementById('sponsors').style.display = 'block'; 
     document.getElementById('sponsors').innerHTML = TEXT_CONSTANTS.sponsor.text;
+    document.getElementById('btnRestartGame').style.display = 'grid';
     initGame(0);
 }
 

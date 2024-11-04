@@ -8,6 +8,7 @@ function showHome() {
     document.getElementById('inputText').style.display = 'flex'; // Show chessboard area
     document.getElementById('button-box').style.display = 'grid'; // Show chessboard area
     document.getElementById('chessboard').style.display = 'grid'; // Show chessboard
+    document.getElementById('highscoresmoves').style.display = 'grid'; 
     document.getElementById('content').style.display = 'none'; // Hide dynamic content
 }
 
@@ -77,6 +78,7 @@ function showTrainingGrounds() {
         document.getElementById('content').style.display = 'none'; // Hide dynamic content
         document.getElementById("startScreen").style.display = 'none';
         document.getElementById("training-grounds-row").style.display = 'flex';
+        document.getElementById('highscoresmoves').style.display = 'none'; // Hide chessboard
         if (!isTrainingRoom)
         {
             isTrainingRoom = true;
@@ -96,4 +98,5 @@ function hideGameArea() {
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('chessboard').style.display = 'none'; // Hide chessboard
     document.getElementById('button-box').style.display = 'none'; // Hide chessboard
+    document.getElementById('highscoresmoves').style.display = 'none'; // Hide chessboard
 }

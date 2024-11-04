@@ -400,3 +400,36 @@ h4 {
 #highscores{ 
   font-size: 8pt;
 }
+
+#btnRestartGame{
+  display: none;
+  display: inline-flex;
+  align-items: center;
+  text-align: center;
+}
+
+.settings{
+  border-radius: 5px;
+  margin-top: 2px;
+  align-items: center;
+  padding: 4px;
+  gap:4px;
+}
+
+.settings button{
+  flex-grow: 1;
+  border-radius: 999px;
+  border: none;
+  background-color: rgba(0,0,0,0);
+  color: #889CB9;
+  cursor: pointer;
+  min-height: 32px;
+  transition: background-color 150ms;
+}
+
+.settings button:hover,
+.settings button:focus,
+.settings button:active {
+  color: black;
+  background-color: #889CB9;
+}

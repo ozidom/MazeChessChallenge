@@ -1,3 +1,23 @@
+function copyChessboardToClipboard() {
+    const chessboardElement = document.getElementById('chessboardcontainer');
+    // Use html2canvas to convert the chessboard div to a canvas
+    html2canvas(chessboardElement).then(canvas => {
+        canvas.toBlob(blob => {
+            if (blob) {
+                const item = new ClipboardItem({ 'image/png': blob });
+                navigator.clipboard.write([item]).then(() => {
+                    alertText('Chessboard copied to clipboard as an image!');
+                }).catch(err => {
+                    console.error('Error copying to clipboard: ', err);
+                    fallbackCopyToClipboard(canvas.toDataURL()); // Fallback for mobile browsers
+                });
+            } else {
+                console.error('Error creating blob from canvas');
+            }
+        });
+    });
+}
+
 // Function to copy the board to chessboard for a mobile device if the method:copyChessboardToClipboard fails
 function fallbackCopyToClipboard(dataUrl) {
     const tempLink = document.createElement('a');
