@@ -433,3 +433,27 @@ h4 {
   color: black;
   background-color: #889CB9;
 }
+
+
+#notification {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #FFF;
+  color: #16191B;
+  padding: 8px 20px;
+  z-index: 1000;
+  border-radius: 8px;
+  font-weight: bold;
+  opacity: 0;
+  bottom: -64px;
+
+  transition-property: opacity, bottom;
+  transition-duration: 0.2s,    0.3s;
+}
+
+#notification.show {
+  bottom: 32px;
+  opacity: 1;
+}

@@ -87,7 +87,7 @@ function showTrainingGrounds() {
     }
     else
     {
-        alertText("You can't start a training ground while you are playing a game. Refresh the page to start again.");
+        alertText("Finish game to start training");
     }
 }
 

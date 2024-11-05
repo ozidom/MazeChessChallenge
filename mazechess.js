@@ -339,13 +339,15 @@ function movePiece(location) {
 
 
     if (!isValidInput(current) || !isValidInput(destination)) {
-        alertText("Invalid input. Please enter valid coordinates (e.g., A1).");
+        alertText("Can't move here");
+        console.log("Invalid input. Please enter valid coordinates (e.g., A1).");
         return;
     }
 
     // Check if destination is blocked
     if (isBlocked(destination)) {
-        alertText("Destination is blocked. Choose another destination.");
+        alertText("Can't move here");
+        console.log("Destination is blocked. Choose another destination.")
         return;`    `
     }
 
@@ -367,12 +369,13 @@ function movePiece(location) {
             piece = new Bishop();
             break;
         default:
-            alertText("Invalid piece.");
+            alertText("Select a piece");
             return;
     }
 
     if (!piece.isValidMove(current, destination)) {
-        alertText("Invalid move for the selected piece. You are at " + destination);
+        alertText("Can't move here");
+        console.log("Invalid move for the selected piece. You are at " + destination);
         return;
     }
 
@@ -396,7 +399,6 @@ function movePiece(location) {
     if (destination=='H8' && (gold.length == goldCollected.length)) {
         let endTime = new Date();
         let completionTime = (endTime - startTime) / 1000; // Time in seconds
-        //alertText("🏆🏆🏆You have won in " + moveCount + " moves and in " + completionTime + "seconds 🏆🏆🏆. Reload page to play again or try out a training room.");
         showModal(`🏆 You have won in ${moveCount} moves and in ${completionTime} seconds! 🏆`);
         if (!isTrainingRoom) {
             submitHighScore(username, moveCount, completionTime); //TODO eventually we will only call this when the score is better than the highest scores
@@ -408,7 +410,8 @@ function movePiece(location) {
         usedPieces = [];
     }
     else {
-        alertText('Move to ' + destination + ',count ' + moveCount + messages);
+        // alertText('Move to ' + destination + ',count ' + moveCount + messages);
+        console.log('Move to ' + destination + ',count ' + moveCount + messages);
     }
 }
 
@@ -449,8 +452,8 @@ function selectBishop() {
 // Function to select Piece
 function selectPiece(pieceImage) {
         if (moveCount>0){
-            moveCount++;//only incerement after they have made there first move
-            alertText('Move count ' + moveCount);
+            moveCount++; //only incerement after they have made there first move
+            alertText('Moves +1');
         }
         usedPieces.push(pieceImage);
         currentPiece = pieceImage;
@@ -459,8 +462,17 @@ function selectPiece(pieceImage) {
 
 // Function to display alert text
 function alertText(textBody){
-    const textarea = document.getElementById('inputText');
-    textarea.innerHTML = textBody;
+    // Add text
+    const notification = document.getElementById('notification');
+    notification.innerHTML = textBody;
+    // Reset any animation stuff
+    if ( notification.classList.contains('show') ){
+        notification.className.replace("show", "");
+        clearTimeout(timer);
+    }
+    // Initiate animation stuff
+    notification.className = "show";
+    timer = setTimeout(function(){ notification.className = notification.className.replace("show", ""); }, 1500);
 }
 
 // Function to start the game
