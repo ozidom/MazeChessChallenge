@@ -44,7 +44,6 @@
                     <button id="startButton" onclick="startGame()">Start</button>
                 </div>
                 <div class="chessboard" id="chessboard"></div>
-                <div class="title" id="userName"></div>
             </div>
             
             <!-- Buttons below chessboard -->
@@ -57,6 +56,7 @@
                     <button onclick="selectRook()">♜</button>
                     <button id="btnRestartGame" onclick="restartGame()">RESET</button>
                 </div>
+
                 <div id="training-grounds-row" class="training-grounds-row">
                     <!-- <label class="training-grounds-text">Train</label> -->
                     <button id="btnLow" onclick="btnTG(1)">Low</button>
@@ -66,6 +66,18 @@
                 </div>
             </div>
 
+            <!-- Game Stats -->
+            <div class="gamestats">
+                <div id="userName" class="gamestats-name"></div>
+                <div class="gamestats-gold">
+                    <div class="gamestats-gold-item collected"></div>
+                    <div class="gamestats-gold-item collected"></div>
+                    <div class="gamestats-gold-item"></div>
+                    <div class="gamestats-gold-item"></div>
+                </div>
+                <div class="gamestats-moves">0</div>
+            </div>
+            
             <!-- Text Area below chessboard -->
             <label class="textbox" id="inputText" readonly="true" style="display: none;"></label>
 

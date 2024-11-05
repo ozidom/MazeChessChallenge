@@ -28,7 +28,7 @@ let blockedSpaces = [];
 // Function to create the game
 function initGame(level) {
     document.getElementById("inputText").innerHTML = TEXT_CONSTANTS.game.text;
-    document.getElementById("userName").innerHTML = "Name: " + username;
+    document.getElementById("userName").innerHTML = username;
 
     goldCollected = [];
     
