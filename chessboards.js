@@ -66,11 +66,12 @@ class ChessboardBlockedSpaces {
             { "date": "2024-11-08", "gold": [ "A8", "C8", "E6", "H6", "A4", "H2", "E1" ], "locations": [ "B8", "A7", "F7", "G7", "H7", "A6", "C6", "B5", "C5", "D5", "E5", "F5", "G4", "H4", "A3", "C3", "E3", "F3", "H3", "A2", "B2", "C2", "E2", "F2", "G2", "C1" ] },
             { "date": "2024-11-09", "gold": [ "C8", "A6", "E5", "H5", "A4", "H2" ], "locations": [ "G8", "E7", "F7", "B6", "F6", "G6", "H6", "A5", "C5", "D5", "F5", "G5", "E4", "G4", "B3", "D3", "F3", "H3", "C2", "D2", "G2", "D1", "E1" ] },
             { "date": "2024-11-10", "gold": [ "D8", "B7", "C6", "H5", "D4", "H3", "E2" ], "locations": [ "A8", "B8", "C8", "C7", "G7", "B6", "H6", "B5", "C5", "D5", "E5", "C4", "E4", "H4", "D3", "E3", "F3", "G3", "C2", "D2", "F2", "G2" ] },
-            { "date": "2024-11-11", "gold": [ "A8", "C6", "G6", "B4", "D4", "G4", "G1" ], "locations": [ "B7", "C7", "D7", "E7", "G7", "H7", "B6", "D6", "B5", "F5", "G5", "C4", "F4", "D3", "G3", "H3", "F2", "G2", "E1", "F1" ] }]
-        }
-
-    // Method to retrieve blocked spaces by date
-    getBoardByDate(date) {
+            { "date": "2024-11-11", "gold": [ "A8", "C6", "G6", "B4", "D4", "G4", "G1" ], "locations": [ "B7", "C7", "D7", "E7", "G7", "H7", "B6", "D6", "B5", "F5", "G5", "C4", "F4", "D3", "G3", "H3", "F2", "G2", "E1", "F1" ]},
+            { "date": "2024-11-12", "gold": [ "A8", "C6", "A5", "G5", "H5", "A4", "C3", "H2", "E1" ], "locations": [ "B7", "F7", "A6", "B6", "D6", "G6", "H6", "B5", "C5", "D5", "F5", "B4", "C4", "D4", "H4", "A3", "B3", "D3", "E3", "F3", "G3", "A2", "B2", "C2", "F2", "G2", "C1", "D1", "F1", "G1", "H1"] },
+            { "date": "2024-11-13", "gold": [ "A8", "D8", "C4", "F4", "C2", "E2", "H1" ], "locations": [ "C8", "A7", "B7", "D7", "E7", "C6", "B5", "E5", "F5", "G5", "B4", "E4", "C3", "E3", "F3", "G3", "H3", "D2", "F2", "H2" ] } ] 
+    }
+        // Method to retrieve blocked spaces by date
+        getBoardByDate(date) {
         // Find the entry that matches the given date
         const entry = this.data.find(config => config.date === date);
         
