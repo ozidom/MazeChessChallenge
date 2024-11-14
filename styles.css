@@ -59,7 +59,7 @@ h4 {
   width: 100%;
   aspect-ratio: 1;
   /* box-sizing: border-box; */
-  background-image: url('images/Ice.jpg');
+  background-image: url('images/stonesmall.jpg');
   filter: drop-shadow(0 20px 20px rgba(0,0,0,0.5));
   color: white;
   /* overflow: hidden; */
