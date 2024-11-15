@@ -60,8 +60,10 @@ function showSettings() {
 function saveUsername() {
     const usernameInput = document.getElementById('userNameInput').value;
     //const userNameFeedback = document.getElementById('username-feedback');
-        setUsername(usernameInput);
+       if (setUsername(usernameInput)) {
         document.getElementById("userName").innerHTML = "Name: " + usernameInput;
+       }
+        
 }
 
 function generateRandomUsername() {

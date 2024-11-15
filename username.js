@@ -5,9 +5,36 @@ const firstNames = ["Buster", "Shorty", "T-bone", "Cutie", "Speedy", "Giggles", 
     "Blinky", "Pip", "Dizzy", "Noodles", "Scrappy", "Snickers", "Waffles", "Twitchy", "Sparky", "Chippy"];
 
 // Array of comedic surnames
-const surnames = ["McFizz", "Fluffybottom", "Wigglesworth", "Snickerdoodle", "Funklebottom", "Muffintop", "Pickles", "Tickleface",
-  "Snugglepaws", "Jellyroll", "Dinglehopper", "Bumblefoot", "Wobbletoes", "Crumblesnatch", "Fizzlesnort", 
-  "Bopadoo", "Twinklefist", "Sneezywhistle", "Fuzzbucket", "Gigglesnuff"];
+const surnames = ["McFizz", "Wigglesworth", "Pickles", "Tickleface",
+  "Snugglepaws", "Jellyroll", "Dinglehopper", "Bumblefoot", "Wobbletoes", "Fizzlesnort", 
+  "Bopadoo", "Twinkles", "Sneezywhistle", "Fuzzbucket", "Gigglesnuff"];
+
+  const encodedWords = "WyJmdWNrIiwgImN1bnQiLCAiYXJzZWhvbGUiLCAic2hpdCJd";
+
+  // Decode it when needed
+  function decodeWords(encoded) {
+      return JSON.parse(atob(encoded));
+  }
+
+function containsInappropriateWords(input) {
+  const inappropriateWords = decodeWords(encodedWords);
+  const lowerInput = input.toLowerCase();
+  return inappropriateWords.some(word => lowerInput.includes(word));
+}
+
+function sanitizeInput(input) {
+  const sanitized = input.replace(/[<>/'"]/g, ''); // Remove potentially harmful characters
+  return sanitized;
+}
+
+function validateUsername(input) {
+    const sanitized = sanitizeInput(input);
+    if (containsInappropriateWords(sanitized)) {
+        //alert("Username contains inappropriate content.");
+        return false;
+    }
+    return true;
+}
 
 // Function to set a random username if none exists in local storage
 function setRandomUsername() {
@@ -22,6 +49,7 @@ function setRandomUsername() {
 // Function to get the username from local storage, or generate one if not found
 function getUsername() {
   let username = localStorage.getItem('username');
+
   if (!username) {
   username = setRandomUsername();
   }
@@ -30,5 +58,9 @@ function getUsername() {
 
 // Function to set a specific username to local storage
 function setUsername(username) {
-  localStorage.setItem('username', username);
+  if (validateUsername(username)) {
+    localStorage.setItem('username', username);
+    return true;
+  }
+  return false;
 }

@@ -27,6 +27,7 @@ let blockedSpaces = [];
 
 // Function to create the game
 function initGame(level) {
+    username = getUsername();
     document.getElementById("inputText").innerHTML = TEXT_CONSTANTS.game.text;
     document.getElementById("userName").innerHTML = "Name: " + username;
 
@@ -345,7 +346,7 @@ function movePiece(location) {
 
     // Check if destination is blocked
     if (isBlocked(destination)) {
-        alertText("Destination is blocked. Choose another destination.");
+        alertText("Destination is blocked. Choose another destination.You are at " + currentLocation);
         return;`    `
     }
 
@@ -372,7 +373,7 @@ function movePiece(location) {
     }
 
     if (!piece.isValidMove(current, destination)) {
-        alertText("Invalid move for the selected piece. You are at " + destination);
+        alertText("Invalid move for the selected piece. You are at " + currentLocation);
         return;
     }
 
