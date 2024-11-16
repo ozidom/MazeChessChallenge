@@ -45,7 +45,7 @@ const TEXT_CONSTANTS = {
                 <li>Mastodon:   @dungeonbard</li>
                 <li>Bluesky:    @dungeonbard</li>
                 <li>Reddit:     /r/mazechess</li>
-                <li>Tikok:      @mazechess</li>
+                <li>Tiktok:      @mazechess</li>
             </ul>
             
             <p>For inquiries, email us at bardofthedungeon.com.</p>
