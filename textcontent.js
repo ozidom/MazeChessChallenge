@@ -40,12 +40,13 @@ const TEXT_CONSTANTS = {
             </ul>
             <h2>Contact</h2>
             <ul>
-                <li>Twitter:    @mazechessgame</li>
-                <li>Twitter:    @dungeonbard</li>
+                <li>X:          @mazechessgame</li>
+                <li>X:          @dungeonbard</li>
                 <li>Mastodon:   @dungeonbard</li>
                 <li>Bluesky:    @dungeonbard</li>
                 <li>Reddit:     /r/mazechess</li>
-                <li>Tiktok:      @mazechess</li>
+                <li>Tiktok:     @mazechess</li>
+                <li>Youtube     @dungeonbard</li>
             </ul>
             
             <p>For inquiries, email us at bardofthedungeon.com.</p>
