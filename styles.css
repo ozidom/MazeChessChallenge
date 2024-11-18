@@ -1,5 +1,6 @@
 
 
+
 html, body {
   min-height: 100%;
   margin: 0;
@@ -27,6 +28,7 @@ body {
 h2 {
   color: #c2d8f9;
   font-size: 1.1rem;
+  margin-top: 0;
 }
 
 h4 {
@@ -44,7 +46,8 @@ h4 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  padding: 20px 0;
+  gap: 20px;
 }
 
 .chessboardcontainer{
@@ -59,7 +62,7 @@ h4 {
   width: 100%;
   aspect-ratio: 1;
   /* box-sizing: border-box; */
-  background-image: url('images/stonesmall.jpg');
+  background-image: url('images/Ice.jpg');
   filter: drop-shadow(0 20px 20px rgba(0,0,0,0.5));
   color: white;
   /* overflow: hidden; */
@@ -155,6 +158,14 @@ h4 {
   border-radius: 999px;
 }
 
+.divider {
+  width: 2px;
+  align-self: stretch;
+  margin: 6px 0;
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 99px;
+}
+
 .social-button-row {
   border-radius: 5px;
   background-color: hsla(60, 1%, 21%, 0.363);
@@ -216,7 +227,6 @@ h4 {
   display: block;
   background-color: rgba(0, 0, 0, 0.25);
   font-size: 14pt;
-  margin-bottom: 16px;
 }
 
 .navbar ul {
@@ -250,9 +260,8 @@ h4 {
 
 /* Dynamic content section */
 .content-section {
-  margin-top: 32px;
-  padding: 2px 0;
-  border-top: solid 1px #889CB9;
+  padding-top: 16px;
+  border-top: solid 2px rgba(0,0,0,0.25);
   display: none; /* Hidden by default */
   width: 340px;
   overflow: hidden;
@@ -282,7 +291,7 @@ h4 {
 .title {
   display: flex;
   justify-content: center;
-  padding: 8px 0 0 0;
+  padding: 16px 0 12px 0;
 }
 .title img {
   display: block;
@@ -356,7 +365,6 @@ h4 {
 
 .modal-content h2 {
   color: #405779;
-  margin-top: 0;
 }
 
 .modal-button {
@@ -401,11 +409,20 @@ h4 {
   font-size: 8pt;
 }
 
+#highscoresmoves {
+  border-top: solid 2px rgba(0,0,0,0.25);
+  padding: 16px 0;
+}
+
+#highscoresmoves h2 {
+  margin-top: 0;
+}
+
 #btnRestartGame{
   display: none;
   display: inline-flex;
   align-items: center;
-  text-align: center;
+  justify-content: center;
 }
 
 .settings{
@@ -432,4 +449,74 @@ h4 {
 .settings button:active {
   color: black;
   background-color: #889CB9;
+}
+
+
+#notification {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #FFF;
+  color: #16191B;
+  padding: 8px 20px;
+  z-index: 1000;
+  border-radius: 8px;
+  font-weight: bold;
+  opacity: 0;
+  bottom: -64px;
+
+  transition-property: opacity, bottom;
+  transition-duration: 0.2s,    0.3s;
+}
+
+#notification.show {
+  bottom: 32px;
+  opacity: 1;
+}
+
+
+
+/* Game stats */
+
+.gamestats {
+  display: flex;
+  align-self:stretch;
+  gap: 8px;
+  padding: 0 8px 0 0;
+  align-items: center;
+}
+
+.gamestats-name {
+  flex-grow: 1;
+  /* https://css-tricks.com/snippets/css/truncate-string-with-ellipsis/ */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gamestats-moves {
+  color: #fff;
+  font-weight: bold;
+}
+
+.gamestats-gold {
+  display: flex;
+  gap: 4px;
+  padding-right: 4px;
+}
+
+.gamestats-gold-item {
+  display: block;
+  border: dashed 1px #889CB9;
+  width: 12px;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  box-sizing: border-box;
+}
+
+.gamestats-gold-item.collected {
+  border: none;
+  background: linear-gradient(315deg, #5d4a1f 0%, #9f7928 40%, #d9b042 70%, #ffd200 90%, #FFFFAC 100%);
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
 }

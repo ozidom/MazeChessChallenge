@@ -28,7 +28,8 @@ let blockedSpaces = [];
 // Function to create the game
 function initGame(level) {
     username = getUsername();
-    document.getElementById("inputText").innerHTML = TEXT_CONSTANTS.game.text;
+    //document.getElementById("inputText").innerHTML = TEXT_CONSTANTS.game.text;
+    alertText(TEXT_CONSTANTS.game.text,4000);
     document.getElementById("userName").innerHTML = "Name: " + username;
 
     goldCollected = [];
@@ -459,9 +460,26 @@ function selectPiece(pieceImage) {
 }
 
 // Function to display alert text
-function alertText(textBody){
-    const textarea = document.getElementById('inputText');
-    textarea.innerHTML = textBody;
+function alertText(textBody, timeVal){
+    // const textarea = document.getElementById('inputText');
+    // textarea.innerHTML = textBody;
+        // Add text
+        const notification = document.getElementById('notification');
+        notification.innerHTML = textBody;
+        // Reset any animation stuff
+        if ( notification.classList.contains('show') ){
+            notification.className.replace("show", "");
+            clearTimeout(timer);
+        }
+        // Initiate animation stuff
+        var timeDisplay;
+        notification.className = "show";
+        if (timeVal == null) {
+            timeDisplay = 1500;
+        } else {
+            timeDisplay = timeVal;
+        }
+        timer = setTimeout(function(){ notification.className = notification.className.replace("show", ""); }, timeDisplay);
 }
 
 // Function to start the game
