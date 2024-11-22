@@ -25,20 +25,23 @@
             <span class="sr-only">Maze Chess</span>
             <img src="images/mazechess-logo.png" alt=""/>
         </h1>
-
-        <ul class="wrapper">
-            <li><a href="#" onclick="showHome()" title="Home">🏠</a></li>
-            <li><a href="#" onclick="showTrainingGrounds()" title="Training grounds">Training </a></li>
-            <li><a href="#" onclick="showHelp()" title="Help">Help</a></li>
-               <li><a href="#" onclick="showAbout()" title="What is this all about?">About</a></li>
-            <li><a href="#" onclick="showSettings()" title="Settings">⚙️</a></li>
-        </ul>
+        <div>
+            <ul class="wrapper">
+                <li><a href="#" onclick="showHome()" title="Home">🏠</a></li>
+                <li><a href="#" onclick="showTrainingGrounds()" title="Training grounds">Training </a></li>
+                <li><a href="#" onclick="showHelp()" title="Help">Help</a></li>
+                   <li><a href="#" onclick="showAbout()" title="What is this all about?">About</a></li>
+                <li><a href="#" onclick="showSettings()" title="Settings">⚙️</a></li>
+            </ul>
+        </div>
+        
     </nav>
 
     <div class="wrapper">
     
         <div class="container">
             <!-- Chessboard -->
+            
             <div id="chessboardcontainer" class="chessboardcontainer">
                 <div id="startScreen" class="start-screen">
                     <button id="startButton" onclick="startGame()">Start</button>
@@ -56,8 +59,9 @@
                     <button onclick="selectRook()">♜</button>
                     <div class="divider"></div>
                     <button id="btnRestartGame" onclick="restartGame()">↺</button>
+                    <div id="countdown" >0</div>
                 </div>
-
+               
                 <div id="training-grounds-row" class="training-grounds-row">
                     <!-- <label class="training-grounds-text">Train</label> -->
                     <button id="btnLow" onclick="btnTG(1)">Low</button>
@@ -69,14 +73,8 @@
 
             <!-- Game Stats -->
             <div class="gamestats">
-                <div id="userName" class="gamestats-name"></div>
-                <!-- <div class="gamestats-gold">
-                    <div class="gamestats-gold-item collected"></div>
-                    <div class="gamestats-gold-item collected"></div>
-                    <div class="gamestats-gold-item"></div>
-                    <div class="gamestats-gold-item"></div>
-                </div>
-                <div class="gamestats-moves">0</div> -->
+                <div id="userName" class="gamestats-name"></div> 
+                <div id="location" class="gamestats-name">A1</div> 
             </div>
             
             <!-- Text Area below chessboard -->
@@ -92,7 +90,6 @@
                     <button onclick="copyChessboardToClipboard()" class="modal-button">Copy to Clipboard</button>
                 </div>
             </div>
-            
         </div>
 
     </div>
@@ -100,7 +97,7 @@
     <!-- Dynamic Content Area -->
     <div class="wrapper">
         <div id="content" class="content-section"></div>
-        <div id="highscoresmoves">No Scores yet today (GMT)</div>
+        <div id="highscoresmoves">No scores yet today (GMT)</div>
         <div id="sponsors" class="content-section">No Sponsors yet</div>
     </div>
 

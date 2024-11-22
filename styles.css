@@ -496,6 +496,19 @@ h4 {
 }
 
 .gamestats-moves {
+  display: flex;
+  font-size: 10pt;
+  align-self: center;
+  color: #fff;
+  font-weight: bold;
+}
+
+.gamestats-location {
+  color: #fff;
+  font-weight: bold;
+}
+
+.gamestats-next-board-time {
   color: #fff;
   font-weight: bold;
 }

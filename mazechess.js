@@ -381,6 +381,7 @@ function movePiece(location) {
     // Update destination cell with piece
     document.getElementById(destination).textContent = pieceName;
     currentLocation = destination;
+    document.getElementById('location').textContent = currentLocation;
     moveCount++;
     //piece.moveCount++;
 
@@ -527,16 +528,38 @@ function btnTG(level){
     initGame(level); 
 }
 
+function updateCountdown() {
+    const now = new Date();
+    const nextDay = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1, 0, 0, 0));
+    const timeRemaining = nextDay - now;
+
+    const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
+    const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").textContent = 
+      `Next maze ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }
+
+
+
   // Event listener for the onload event
       document.addEventListener('DOMContentLoaded', function() {
         isGameStarted = false;
-        // const currentUrl = window.location.href;
+        //const currentUrl = window.location.href;
         // const url = new URL(currentUrl);
         // if (url.search) {
         //     const params = new URLSearchParams(url.search);
         //     dateBoardSelect = params.get('date')
         // } 
         fetchHighScores();
+
+        // Update the countdown every second
+        setInterval(updateCountdown, 1000);
+
+        // Initialize immediately
+        updateCountdown();
+
         username = getUsername();
         isTrainingRoom = false;
         initGame(0); // Call init when DOM is ready   
