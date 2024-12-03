@@ -546,12 +546,12 @@ function updateCountdown() {
   // Event listener for the onload event
       document.addEventListener('DOMContentLoaded', function() {
         isGameStarted = false;
-        const currentUrl = window.location.href;
-        const url = new URL(currentUrl);
-        if (url.search) {
-            const params = new URLSearchParams(url.search);
-            dateBoardSelect = params.get('date')
-        } 
+        // const currentUrl = window.location.href;
+        // const url = new URL(currentUrl);
+        // if (url.search) {
+        //     const params = new URLSearchParams(url.search);
+        //     dateBoardSelect = params.get('date')
+        // } 
         fetchHighScores();
 
         // Update the countdown every second
