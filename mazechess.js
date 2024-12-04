@@ -271,6 +271,7 @@ function generateChessboard() {
         const square = document.createElement('div');
         const alphaCoords = columns[col]+row;
         square.className = (row + col) % 2 === 0 ? 'white' : 'black';
+           
         square.setAttribute('id', alphaCoords);
         square.setAttribute('data-column', columns[col]);
         square.setAttribute('data-column-int', col);
@@ -397,8 +398,12 @@ function movePiece(location) {
     // Check if there is a 
     if (["♚", "♜", "♞", "♝"].includes(destinationPiece.textContent)) {
         if (currentPiece == destinationPiece.textContent || !guard.includes(destination)) {
-           destinationPiece.className = (destinationPiece.attributes["data-column-int"].value + destinationPiece.attributes["data-row"].value) % 2 === 0 ? 'white' : 'black';
-           //todo remove the guard from the array
+            var row = Number(destinationPiece.attributes["data-row"].value);
+            var col = Number(destinationPiece.attributes["data-column-int"].value);
+           destinationPiece.className = (row + col) % 2 === 0 ? 'white' : 'black';
+           //remove the guard from the array
+           guard = guard.filter(location => location !== destination);
+
         }
         else {
             alertText("You must take a piece with same type of piece. Choose another destination or switch piece");

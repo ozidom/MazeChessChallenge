@@ -15,7 +15,7 @@ const TEXT_CONSTANTS = {
             <p>Choose ♚ ♝ ♜ or ♞. Switch to another piece anytime during the game. Move from the bottom left to the top right in the fewest moves and must collect any gold (gold squares). Cannot move on blocked squares but Knights can jump over them.</p>
             <p>♚ Kings move one space any direction, ♜ Rooks (look like castles) move in cardinal directions (N,S,E and W), Bishops move diagonal, and ♞ Knights moves in an L shape: two squares in one direction, then one square sideways, and can jump over other pieces on the board.</p>
             <p>You can switch pieces any time. Avoid obstacles like rocks. If there is gold on the board (gold squares) you must land on each one before advancing to H8.</p>
-            <p>Check out the training grounds and use the challenge rating to practice. Any red squares (Guards) can only be removed by using the same type of piece</p>
+            <p>Check out the training grounds and use the challenge rating to practice. Any red squares (Guards) can only be removed by using the same type of piece. You do not need to remove guards to complete a puzzle.</p>
             <h2>Additional Challenges</h2>
             <ul>
                 <li>4 Corners: Visit all 4 corners of the board.</li>
