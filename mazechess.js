@@ -20,6 +20,7 @@ let goldImage = "💰";
 const pieces = [kingImage   , rookImage, knightImage, bishopImage];
 let usedPieces = [];
 let gold = [];
+let guard = [];
 let goldCollected = [];
 
 // Define an array to store blocked spaces
@@ -135,9 +136,18 @@ function loadBlockedSpaces() {
             gold.push(goldItem);
         }
     } 
-    else {
-       // alertText("No gold squares for today's date.");
-    }  
+
+    const rawGuard = chessboardConfig.getGuardByDate(today);
+    if (rawGuard.length > 0) {
+        for(var guardSpace of rawGuard)
+        {
+            var coord = guardSpace.split('');
+            var typeGuard = `${coord[0]}`;
+            var guardItem = `${coord[1]}${coord[2]}`;
+            blockedSpaces.push({ space: guardItem , type: typeGuard});
+            guard.push(guardItem);
+        }
+    } 
 }
 
 // Function to parse the chessboard file (chessboards.js) and return blocked squares for the current date
@@ -263,6 +273,7 @@ function generateChessboard() {
         square.className = (row + col) % 2 === 0 ? 'white' : 'black';
         square.setAttribute('id', alphaCoords);
         square.setAttribute('data-column', columns[col]);
+        square.setAttribute('data-column-int', col);
         square.setAttribute('data-row', row);  // Row from 1 to 8
         
         // Apply styling for blocked spaces based on type
@@ -276,6 +287,10 @@ function generateChessboard() {
             }
             else if (spaceType == 'GOLD') {
                 square.className =  "gold";
+            }
+            else if (["♚", "♜", "♞", "♝"].includes(spaceType)) {
+                square.textContent = spaceType;
+                square.className =  "guard";
             }
         }
 
@@ -334,6 +349,7 @@ function movePiece(location) {
     let current = currentLocation;
     let destination = location;
     var messages = "";
+    var destinationPiece = getElementByLocation(destination);
     // Validate inputs
     if (!isGameStarted && !isTrainingRoom){
         return;
@@ -346,7 +362,7 @@ function movePiece(location) {
     }
 
     // Check if destination is blocked
-    if (isBlocked(destination)) {
+    if (isBlocked(destination && !["♚", "♜", "♞", "♝"].includes(destinationPiece))) {
         alertText("Destination is blocked. Choose another destination.You are at " + currentLocation);
         return;`    `
     }
@@ -376,6 +392,18 @@ function movePiece(location) {
     if (!piece.isValidMove(current, destination)) {
         alertText("Invalid move for the selected piece. You are at " + currentLocation);
         return;
+    }
+
+    // Check if there is a 
+    if (["♚", "♜", "♞", "♝"].includes(destinationPiece.textContent)) {
+        if (currentPiece == destinationPiece.textContent) {
+           destinationPiece.className = (destinationPiece.attributes["data-column-int"].value + destinationPiece.attributes["data-row"].value) % 2 === 0 ? 'white' : 'black';
+           //todo remove the guard from the array
+        }
+        else {
+            alertText("You must take a piece with same type of piece. Choose another destination or switch piece");
+            return;
+        }
     }
 
     // Update destination cell with piece
@@ -546,12 +574,12 @@ function updateCountdown() {
   // Event listener for the onload event
       document.addEventListener('DOMContentLoaded', function() {
         isGameStarted = false;
-        // const currentUrl = window.location.href;
-        // const url = new URL(currentUrl);
-        // if (url.search) {
-        //     const params = new URLSearchParams(url.search);
-        //     dateBoardSelect = params.get('date')
-        // } 
+        const currentUrl = window.location.href;
+        const url = new URL(currentUrl);
+        if (url.search) {
+            const params = new URLSearchParams(url.search);
+            dateBoardSelect = params.get('date')
+        } 
         fetchHighScores();
 
         // Update the countdown every second

@@ -533,3 +533,9 @@ h4 {
   background: linear-gradient(315deg, #5d4a1f 0%, #9f7928 40%, #d9b042 70%, #ffd200 90%, #FFFFAC 100%);
   box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
 }
+
+.guard
+{
+  color: black;
+  background-color: rgba(255, 0, 0, 1);  /* Red overlay for enemy spaces */
+}

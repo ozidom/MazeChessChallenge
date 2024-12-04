@@ -2,10 +2,10 @@ class ChessboardBlockedSpaces {
     constructor() {
         // Store the raw data within the class as an array of objects
 
-        //proposed change each location to be:
-        // "A1,L" indicating LAVA
-        // "A2,W" indicating Water
-        // "A2,C" indicating Chasm
+        /*let kingImage = "♚";
+        let rookImage = "♜";
+        let knightImage = "♞";
+        let bishopImage = "♝";*/
 
         this.data = [
             { date: "2024-09-16", locations: ["A1", "B1", "C1", "D1", "E1", "F1", "G1", "H1"] },
@@ -87,10 +87,10 @@ class ChessboardBlockedSpaces {
             { "date": "2024-11-29", "gold": [ "C8", "F8", "A7", "C4", "E3", "H3", "A2", "B1", "H1" ], "locations": [ "A8", "B8", "E8", "B7", "C7", "E7", "C6", "D6", "G6", "D5", "E5", "H5", "B4", "E4", "B3", "C3", "E2", "F2", "F1", "G1" ] },
             { "date": "2024-11-30", "gold": [ "A8", "B5", "E5", "A3", "F3", "E1", "H1" ], "locations": [ "A7", "B7", "C7", "E7", "F7", "G7", "A6", "B6", "C6", "D6", "G6", "A5", "C5", "D5", "A4", "C4", "D4", "F4", "G4", "B3", "E3", "G3", "C2", "F2", "H2", "D1", "F1", "G1" ] },
             { "date": "2024-12-01", "gold": [ "A8", "F8", "D6", "B5", "H4", "A3", "D1", "G1" ], "locations": [ "E8", "G8", "A7", "C7", "D7", "E7", "B6", "C6", "E6", "A5", "C5", "D5", "E5", "G5", "H5", "B4", "E4", "F4", "D3", "E3", "G3", "C2", "D2", "F2", "G2", "B1", "C1", "E1", "F1" ] } ,
-            { "date": "2024-12-02", "gold": [ "A8", "D8", "G7", "D6", "A5", "C3", "E3", "H2", "H1" ], "locations": [ "C8", "E8", "B7", "D7", "E7", "F7", "A6", "C6", "G6", "B5", "H5", "B4", "C4", "D4", "E4", "F4", "B3", "F3", "G3", "B2", "C2", "E2", "F2", "G2", "F1" ] },
-            { "date": "2024-12-03", "gold": [ "A8", "G7", "D5", "H5", "C4", "G3", "D1", "F1" ], "locations": [ "C7", "E7", "F7", "E6", "F6", "G6", "B5", "C5", "E5", "F5", "G5", "B4", "E4", "F4", "C3", "D3", "F3", "B2", "C2", "D2", "E2", "B1", "C1", "E1" ] },
-            { "date": "2024-12-04", "gold": [ "E8", "A6", "E5", "C4", "D3", "F3", "D1", "G1" ], "locations": [ "A8", "B8", "C8", "F8", "G8", "A7", "B7", "E7", "F7", "G7", "B6", "D6", "E6", "C5", "D5", "G5", "D4", "E4", "F4", "G4", "H4", "C3", "C2", "D2", "E2", "C1", "E1" ] },
-            { "date": "2024-12-05", "gold": [ "A8", "B8", "A7", "B7", "D5", "H5", "A3", "G2", "H2", "G1", "H1" ], "locations": [ "E8", "D7", "E7", "G7", "C6", "D6", "G6", "A5", "B5", "C5", "G5", "A4", "F4", "G4", "H4", "G3", "H3", "F2", "F1" ] }  ]}
+            { "date": "2024-12-02", "gold": [ "A8", "D8", "G7", "D6", "A5", "C3", "E3", "H2", "H1" ], "guard" : [],"locations": [ "C8", "E8", "B7", "D7", "E7", "F7", "A6", "C6", "G6", "B5", "H5", "B4", "C4", "D4", "E4", "F4", "B3", "F3", "G3", "B2", "C2", "E2", "F2", "G2", "F1" ] },
+            { "date": "2024-12-03", "gold": [ "A8", "G7", "D5", "H5", "C4", "G3", "D1", "F1" ], "guard" : ["♚A2","♞A4"], "locations": [ "C7", "E7", "F7", "E6", "F6", "G6", "B5", "C5", "E5", "F5", "G5", "B4", "E4", "F4", "C3", "D3", "F3", "B2", "C2", "D2", "E2", "B1", "C1", "E1" ] },
+            { "date": "2024-12-04", "gold": [], "guard": [ "♜F6", "♜F5" ], "locations": [ "E7", "D6", "E6", "D5", "E5" ] } ,
+            { "date": "2024-12-05", "gold": [ "A8", "D8", "F5", "H1" ], "guard": [ "♜F8", "♚A7", "♚F2", "♝G2" ], "locations": [ "B8", "C8", "B7", "C7", "D7", "E7", "C6", "F6", "H6", "B5", "G5", "D4", "E4", "F4", "G4", "D3", "G3", "D2", "F1" ] } ]}
         // Method to retrieve blocked spaces by date
         getBoardByDate(date) {
         // Find the entry that matches the given date
@@ -99,6 +99,10 @@ class ChessboardBlockedSpaces {
         // Return the blocked locations or an empty array if no match is found
         return entry ? entry.locations : [];
     }
+      /*let kingImage = "♚";
+        let rookImage = "♜";
+        let knightImage = "♞";
+        let bishopImage = "♝";*/
 
     // Method to retrieve blocked spaces by date
     getGoldByDate(date) {
@@ -107,5 +111,14 @@ class ChessboardBlockedSpaces {
         
         // Return the blocked locations or an empty array if no match is found
         return entry ? entry.gold : [];
+    }
+
+    // Method to retrieve blocked spaces by date for guards
+    getGuardByDate(date) {
+        // Find the entry that matches the given date
+        const entry = this.data.find(config => config.date === date);
+        
+        // Return the blocked locations or an empty array if no match is found
+        return entry ? entry.guard : [];
     }
 }
