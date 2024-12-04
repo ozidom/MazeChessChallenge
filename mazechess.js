@@ -396,7 +396,7 @@ function movePiece(location) {
 
     // Check if there is a 
     if (["♚", "♜", "♞", "♝"].includes(destinationPiece.textContent)) {
-        if (currentPiece == destinationPiece.textContent) {
+        if (currentPiece == destinationPiece.textContent || !guard.includes(destination)) {
            destinationPiece.className = (destinationPiece.attributes["data-column-int"].value + destinationPiece.attributes["data-row"].value) % 2 === 0 ? 'white' : 'black';
            //todo remove the guard from the array
         }
