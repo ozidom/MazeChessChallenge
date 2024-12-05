@@ -403,7 +403,7 @@ function movePiece(location) {
            destinationPiece.className = (row + col) % 2 === 0 ? 'white' : 'black';
            //remove the guard from the array
            guard = guard.filter(location => location !== destination);
-
+           blockedSpaces = blockedSpaces.filter(location => location.space !== destination);         
         }
         else {
             alertText("You must take a piece with same type of piece. Choose another destination or switch piece");
