@@ -46,6 +46,12 @@ function initGame(level) {
         if (isGameStarted)
             loadBlockedSpaces();
     }
+
+    if (blockedSpaces.length === 0 && gold.length === 0)
+    {
+        return;
+        alertText("Still waiting to load todays board");
+    }
     
     generateChessboard(); // Generate the chessboard after generating blocked spaces
     const textarea = document.getElementById('inputText');
@@ -579,14 +585,14 @@ function updateCountdown() {
   // Event listener for the onload event
       document.addEventListener('DOMContentLoaded', function() {
         isGameStarted = false;
-        /*
+        
         const currentUrl = window.location.href;
         const url = new URL(currentUrl);
         if (url.search) {
             const params = new URLSearchParams(url.search);
             dateBoardSelect = params.get('date')
         } 
-        */
+        
 
         fetchHighScores();
 
