@@ -11,20 +11,39 @@ const TEXT_CONSTANTS = {
     },
     help: {
         text: `
+            <h1>Help/About</h1>
             <h2>Help and Rules</h2>
             <p>Choose ♚ ♝ ♜ or ♞. Switch to another piece anytime during the game. Move from the bottom left to the top right in the fewest moves and must collect any gold (gold squares). Cannot move on blocked squares but Knights can jump over them.</p>
             <p>♚ Kings move one space any direction, ♜ Rooks (look like castles) move in cardinal directions (N,S,E and W), Bishops move diagonal, and ♞ Knights moves in an L shape: two squares in one direction, then one square sideways, and can jump over other pieces on the board.</p>
             <p>You can switch pieces any time. Avoid obstacles like rocks. If there is gold on the board (gold squares) you must land on each one before advancing to H8.</p>
             <p>Check out the training grounds and use the challenge rating to practice. Any red squares (Guards) can only be removed by using the same type of piece. You do not need to remove guards to complete a puzzle.</p>
-            <h2>Additional Challenges</h2>
+            <h2>About</h2>
+             <h3>Why</h3>
+            <p><b>Why</b> did we make this? We made this for our friends to play a quick and easy game and to have a little bit of chess and a little bit of a good old fashion dungeoncrawling.</p>
+            <p><b>What</b> is Mazechess? It's a chess inspire3d dungeon crawl challenge where your chess piece represents a dungeon-crawling adventurer, moving from A1 to H8, collecting gold, while avoiding obstacles.</p>
+            <h3>Thanks</h3>
+            A massive thanks to the following:
             <ul>
-                <li>4 Corners: Visit all 4 corners of the board.</li>
-                <li>Full House: All squares must be visited.</li>
-                <li>Royal Flush: Use all 4 pieces (King, Knight, Bishop, Rook).</li>
-                <li>Solo: Complete the challenge with only one piece.</li>
-                <li>Two-Piece Tango: Use exactly two pieces</li>
-                <li>Cornered King: Start at A1 with the King, end at H8, touching all four corners.</li>
-                <li>Speed run - complete all three levels of the training grounds</li>
+                <li>The Mazechess Team</li>
+                <li>Inkarnate.com (background tiles/images)</li>
+            </ul>
+            <h3>Contact</h3>
+            <ul>
+                <li>X:          @mazechessgame</li>
+                <li>Mastodon:   @dungeonbard</li>
+                <li>Bluesky:    @dungeonbard</li>
+                <li>Reddit:     /r/mazechess</li>
+                <li>Tiktok:     @mazechess</li>
+                <li>Youtube     @dungeonbard</li>
+            </ul>
+            
+            <p>For inquiries, email us at bardofthedungeon.com.</p>
+
+            <h3>We need you</h3>
+            <p>We need your help and support to get the word out about Mazechess.</p>
+            <ul>
+                <li>Share the link with friends.</li>
+                <li>Use the Clipboard button and send an image or tag #mazechess on social media.</li>
             </ul>`
     },
     about: {

@@ -10,6 +10,7 @@ function showHome() {
     document.getElementById('chessboard').style.display = 'grid'; // Show chessboard
     document.getElementById('highscoresmoves').style.display = 'grid'; 
     document.getElementById('content').style.display = 'none'; // Hide dynamic content
+    document.getElementById('MakeChessBoardDiv').style.display = 'none';
 }
 
 // Function to show the "Help" section
@@ -18,6 +19,7 @@ function showHelp() {
     document.getElementById("startScreen").style.display = 'none';
     const contentDiv = document.getElementById('content');
     contentDiv.innerHTML = TEXT_CONSTANTS.help.text;
+    document.getElementById('content').style.display = 'grid';
     contentDiv.style.display = 'block';
     //document.getElementById("startScreen").style.visibility = !isGameStarted;
 }
@@ -25,6 +27,7 @@ function showHelp() {
 function showWhy() {
     hideGameArea();
     document.getElementById("startScreen").style.display = 'none';
+    document.getElementById('MakeChessBoard').style.display = 'none';
     const contentDiv = document.getElementById('content');
     contentDiv.innerHTML = TEXT_CONSTANTS.about.text;
     contentDiv.style.display = 'block';
@@ -34,27 +37,32 @@ function showWhy() {
 function showSupport() {
     hideGameArea();
     document.getElementById("startScreen").style.display = 'none';
+    document.getElementById('MakeChessBoardDiv').style.display = 'none';
     const contentDiv = document.getElementById('content');
     contentDiv.innerHTML = TEXT_CONSTANTS.support.text;
     contentDiv.style.display = 'block';
 }
 
 // Function to show the "Contact" section
-function showAbout() {
+function showMake() {
     hideGameArea();
     document.getElementById("startScreen").style.display = 'none';
-    const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = TEXT_CONSTANTS.about.text;
-    contentDiv.style.display = 'block';
+    document.getElementById('MakeChessBoardDiv').style.display = 'grid';
+    document.getElementById('content').style.display = 'none';
+    //document.getElementById('MakeChessBoard').style.display = 'none';
+     
+    CreateMakerMap();
 }
 
 // Function to show the "Contact" section
 function showSettings() {
     hideGameArea();
     document.getElementById("startScreen").style.display = 'none';
+    
     const contentDiv = document.getElementById('content');
     contentDiv.innerHTML = TEXT_CONSTANTS.settings.text;
     contentDiv.style.display = 'block';
+    document.getElementById('MakeChessBoard').style.display = 'none';
 }
 
 function saveUsername() {
@@ -81,6 +89,7 @@ function showTrainingGrounds() {
         document.getElementById("startScreen").style.display = 'none';
         document.getElementById("training-grounds-row").style.display = 'flex';
         document.getElementById('highscoresmoves').style.display = 'none'; // Hide chessboard
+        document.getElementById('MakeChessBoardDiv').style.display = 'none';
         if (!isTrainingRoom)
         {
             isTrainingRoom = true;
@@ -101,4 +110,5 @@ function hideGameArea() {
     document.getElementById('chessboard').style.display = 'none'; // Hide chessboard
     document.getElementById('button-box').style.display = 'none'; // Hide chessboard
     document.getElementById('highscoresmoves').style.display = 'none'; // Hide chessboard
+    document.getElementById('MakeChessBoardDiv').style.display = 'none';
 }

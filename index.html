@@ -29,8 +29,8 @@
             <ul class="wrapper">
                 <li><a href="#" onclick="showHome()" title="Home">🏠</a></li>
                 <li><a href="#" onclick="showTrainingGrounds()" title="Training grounds">Training </a></li>
-                <li><a href="#" onclick="showHelp()" title="Help">Help</a></li>
-                   <li><a href="#" onclick="showAbout()" title="What is this all about?">About</a></li>
+                <li><a href="#" onclick="showHelp()" title="Help">Help/About</a></li>
+                   <li><a href="#" onclick="showMake()" title="Create your own maze">Make Maze</a></li>
                 <li><a href="#" onclick="showSettings()" title="Settings">⚙️</a></li>
             </ul>
         </div>
@@ -101,6 +101,29 @@
         <div id="sponsors" class="content-section">No Sponsors yet</div>
     </div>
 
+    <div id="MakeChessBoardDiv" id="MakeChessboardDiv">
+        <div id="MakeChessboard" id="MakeChessboard"></div>
+        <div id="MakeChessboardControls" id="MakeChessboard">
+            <label>Select</label>
+                <select id="modeSelect">
+                    <option value="blocked">blocked</option>
+                    <option value="gold">gold</option>
+                    <option value="♞">Knight</option>
+                    <option value="♝">Bishop</option>
+                    <option value="♚">King</option>
+                    <option value="♜">Rook</option>
+                </select>
+            <button id="generateBtn">Make</button>
+            <button id="clearBtn">Clear</button>
+            <div>
+                <label id="outputLabel"></label>
+            </div>
+            <div>
+                <label id="output"></label>
+            </div>
+        </div>
+    </div>
+
     <div id="notification" class="toast">
         notification
     </div>
@@ -114,5 +137,6 @@
     <script src="utility.js"></script>
     <script src="username.js"></script>
     <script src="highscore.js"></script>
+    <script src="make.js"></script>
 </body>
 </html>

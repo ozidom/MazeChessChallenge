@@ -419,6 +419,7 @@ function movePiece(location) {
 
     // Update destination cell with piece
     document.getElementById(destination).textContent = pieceName;
+    document.getElementById(currentLocation).style.color = "#1f1f1f";
     currentLocation = destination;
     document.getElementById('location').textContent = currentLocation;
     moveCount++;
