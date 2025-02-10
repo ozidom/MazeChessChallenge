@@ -79,10 +79,6 @@ const TEXT_CONSTANTS = {
             </ul>
             `
     },
-    sponsor: {
-        text: `<h2>Sponsors</h2>
-               <p>Thanks to our sponsors:...</p>`
-    },
     settings: {
         text: `
             <div class="settings">
