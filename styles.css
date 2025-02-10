@@ -454,24 +454,21 @@ h4 {
 
 #notification {
   position: fixed;
-  bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #FFF;
   color: #16191B;
   padding: 8px 20px;
-  z-index: 1000;
   border-radius: 8px;
   font-weight: bold;
   opacity: 0;
-  bottom: -64px;
-
+  bottom: 364px;
   transition-property: opacity, bottom;
   transition-duration: 0.2s,    0.3s;
 }
 
 #notification.show {
-  bottom: 32px;
+  bottom: 5px;
   opacity: 1;
 }
 
@@ -706,7 +703,7 @@ h4 {
   padding: 10px;
   border: 2px solid black;
   background-color: white;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: all 0.3s ease-in-out;
 }
 
