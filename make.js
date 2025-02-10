@@ -4,6 +4,7 @@ const generateBtn = document.getElementById('generateBtn');
 const output = document.getElementById('output');
 const outputLabel = document.getElementById('outputLabel');
 const modeSelect = document.getElementById('modeSelect');
+var selectedItem;
 
 // Create an 8x8 chessboard
 const boardSize = 8;
@@ -27,9 +28,19 @@ for (let y = boardSize; y >= 1; y--) {
     }
 }
 
+function selectMake(button)
+{
+    document.querySelectorAll('.make-button').forEach(btn => btn.classList.remove('selected'));
+
+    // Add 'selected' class to the clicked button
+    button.classList.add('selected');
+    var value = button.textContent;
+    selectedItem = value;
+}
+
 
 function toggleSquare() {
-    const mode = modeSelect.value.trim(); // Get the selected mode
+    const mode = selectedItem; // Get the selected mode
     const modeToClassMap = {
         '♞': 'knight',
         '♝': 'bishop',

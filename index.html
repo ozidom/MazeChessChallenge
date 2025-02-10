@@ -98,23 +98,23 @@
     <div class="wrapper">
         <div id="content" class="content-section"></div>
         <div id="highscoresmoves">No scores yet today (GMT)</div>
-        <div id="sponsors" class="content-section">No Sponsors yet</div>
     </div>
 
     <div id="MakeChessBoardDiv">
         <div id="MakeChessboard"></div>
         <div id="MakeChessboardControls">
-            <label for="modeSelect">Select</label>
-            <select id="modeSelect">
-                <option value="blocked">Blocked</option>
-                <option value="gold">Gold</option>
-                <option value="♞">Knight</option>
-                <option value="♝">Bishop</option>
-                <option value="♚">King</option>
-                <option value="♜">Rook</option>
-            </select>
-            <button id="generateBtn">Make</button>
-            <button id="clearBtn">Clear</button>
+            <div>
+            <label>Select:</label>
+                <button class="make-button" onclick="selectMake(this)">blocked</button>
+                <button class="make-button" onclick="selectMake(this)">gold</button>
+                <button class="make-button" onclick="selectMake(this)">♚</button>
+                <button class="make-button" onclick="selectMake(this)">♝</button>
+                <button class="make-button" onclick="selectMake(this)">♞</button>
+                <button class="make-button" onclick="selectMake(this)">♜</button>
+            </div>
+            <button class="make-button" id="generateBtn">Make</button>
+            <button class="make-button" id="clearBtn">Clear</button>
+            
             <div>
                 <label id="outputLabel"></label>
             </div>

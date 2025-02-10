@@ -700,3 +700,18 @@ h4 {
   font-weight: bold;
   font-size: 18px;
 }
+
+.make-button {
+  font-size: 12px;
+  padding: 10px;
+  border: 2px solid black;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.make-button.selected {
+  background-color: blue;
+  color: white;
+  border-color: darkblue;
+}
