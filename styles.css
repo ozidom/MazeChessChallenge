@@ -534,7 +534,7 @@ h4 {
 .guard
 {
   color: black;
-  background-color: rgba(255, 0, 0, 1);  /* Red overlay for enemy spaces */
+  background-color: rgb(44, 221, 25);  /* Green overlay for enemy spaces for St Pats from rgba(255, 0, 0, 1) */
 }
 
 /*NEW STYLES*/
