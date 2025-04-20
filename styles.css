@@ -712,3 +712,9 @@ h4 {
   color: white;
   border-color: darkblue;
 }
+
+.banner
+{
+  color: yellow;
+  text-align: center;
+}
