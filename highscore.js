@@ -97,7 +97,7 @@
         try {
             var local = "http://localhost:7132/api/HttpScores";
             var remote = "https://mazechesschallengehighscorefunction.azurewebsites.net/api/httpscores";
-            const response = await fetch(local, {
+            const response = await fetch(remote, {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json'
