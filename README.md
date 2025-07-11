@@ -4,14 +4,21 @@ MazeChess is a web-based puzzle game that combines chess piece movement rules wi
 
 ## Development Environment
 
-### Local Development
-- Use VSCode with Live Server extension
-- Right-click on `index.html` and select "Open with Live Server"
-- No build process or package.json - this is a vanilla HTML/CSS/JavaScript project
+### Local Dev
+- Clone MazeChessChalleng
+- Use VSCode 
+- Install Live Server
+- Right click on index.html and click "Open with Live Server"
 
-### Backend (Separate Repository)
-- High scores are managed by a separate Azure Functions backend in the "MazeChessHighScore" repository
-- Azure Storage Extensions required for backend development
+### Back End
+- Clone MazeChessHighScore
+- Use VSCode
+- Install Azure Extensions
+- Install Azure Storage Extensions
+- Install Azure Functions Extensions
+- Make sure the localsettings.json file has the CORS settings 
+
+
 
 ## Core Architecture
 
@@ -62,20 +69,6 @@ https://mazechessgame.com
 ## Analytics
 Google Analytics is integrated.
 Daily challenge to solve using chess strategies
-
-# Local Dev
-- Clone MazeChessChalleng
-- Use VSCode 
-- Install Live Server
-- Right click on index.html and click "Open with Live Server"
-
-# Back End
-- Clone MazeChessHighScore
-- Use VSCode
-- Install Azure Extensions
-- Install Azure Storage Extensions
-- Install Azure Functions Extensions
-- Make sure the localsettings.json file has the CORS settings 
 
 
 
