@@ -5,7 +5,7 @@ class ChessboardBlockedSpaces {
         /*let kingImage = "♚";
         let rookImage = "♜";
         let knightImage = "♞";
-        let bishopImage = "♝";*/
+        let bishopImage = "♝ ";*/
 
         this.data = [
             { date: "2024-09-16", locations: ["A1", "B1", "C1", "D1", "E1", "F1", "G1", "H1"] },
