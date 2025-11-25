@@ -446,7 +446,7 @@ class ChessboardBlockedSpaces {
             {"date": "2025-11-23", "gold": [ "D7", "F7", "C6", "G6", "A5", "B5", "E5", "F5", "H5", "A4", "G4", "B3", "D3", "C2", "F2", "H1" ], "guard": [ "♚F8", "♚G7", "♚H6", "♚A2", "♚B2" ], "locations": [ "A8", "B8", "A7" ] },
             {"date": "2025-11-24", "gold": [ "A6", "B6", "G6", "C5", "A4", "B4", "G4", "B3", "C3", "B2", "D2", "B1", "D1", "G1", "H1" ], "guard": [ "♜D7", "♜E7", "♜F7", "♜G7", "♝F5", "♝F4", "♝F3", "♝F2", "♝F1" ], "locations": [ "A8", "B8", "A7" ] },
             {"date": "2025-11-25", "gold": [ "D8", "B7", "A5", "E5", "D4", "F4", "B3", "F3", "H3", "D2", "H2" ], "guard": [ "♝F7", "♞A6", "♞B6", "♝G6", "♞B5" ], "locations": [ "A8", "B8", "A7", "A4", "A3", "B2", "C2", "C1", "D1", "F1", "G1", "H1" ] },
-            {"date": "2025-11-25", "gold": [ "B8", "A6", "E5", "B4", "B3", "C3", "G3", "A2", "D2", "H2" ], "guard": [ "♝E8", "♝F7", "♝G6", "♚B5", "♚C5", "♚D5", "♝H5", "♚D4", "♚D3" ], "locations": [ "A8", "A7", "G1", "H1" ] }
+            {"date": "2025-11-26", "gold": [ "B8", "A6", "E5", "B4", "B3", "C3", "G3", "A2", "D2", "H2" ], "guard": [ "♝E8", "♝F7", "♝G6", "♚B5", "♚C5", "♚D5", "♝H5", "♚D4", "♚D3" ], "locations": [ "A8", "A7", "G1", "H1" ] }
         ]}
         // Method to retrieve blocked spaces by date
         getBoardByDate(date) {
