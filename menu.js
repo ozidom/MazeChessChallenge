@@ -47,7 +47,7 @@ function showSupport() {
 function showMake() {
     hideGameArea();
     document.getElementById("startScreen").style.display = 'none';
-    document.getElementById('MakeChessBoardDiv').style.display = 'grid';
+    document.getElementById('MakeChessBoardDiv').style.display = 'none';
     document.getElementById('content').style.display = 'none';
     //document.getElementById('MakeChessBoard').style.display = 'none';
      

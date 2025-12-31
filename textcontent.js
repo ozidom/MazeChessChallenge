@@ -61,7 +61,6 @@ const TEXT_CONSTANTS = {
             <h2>Contact</h2>
             <ul>
                 <li>X:          @mazechessgame</li>
-                <li>X:          @dungeonbard</li>
                 <li>Mastodon:   @dungeonbard</li>
                 <li>Bluesky:    @dungeonbard</li>
                 <li>Reddit:     /r/mazechess</li>
