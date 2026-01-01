@@ -44,17 +44,21 @@
         scores.forEach(score => {
             // Create a new div element
             const scoreDiv = document.createElement('div');
-            
-            // Set the content to show the name, moves, and time
-            scoreDiv.textContent = `${score.moves} ${score.username}`;
-            //scoreDiv.textContent = `${score.moves}, ${score.username}, Time: ${score.time}`;
-            // Add some styling or classes (optional)
-            scoreDiv.style.marginBottom = '10px';
-            scoreDiv.style.padding = '1px';
-            scoreDiv.style.border = '0';
+            if (score.isDateHeader){
+                highScoresDiv.appendChild(score.date); // Using username field to pass date headerz
+            }
+            else {
+                // Set the content to show the name, moves, and time
+                scoreDiv.textContent = `${score.moves} ${score.username}`;
+                //scoreDiv.textContent = `${score.moves}, ${score.username}, Time: ${score.time}`;
+                // Add some styling or classes (optional)
+                scoreDiv.style.marginBottom = '10px';
+                scoreDiv.style.padding = '1px';
+                scoreDiv.style.border = '0';
 
-            // Append the div to the high-scores container
-            highScoresDiv.appendChild(scoreDiv);
+                // Append the div to the high-scores container
+                highScoresDiv.appendChild(scoreDiv);
+            }
         });
     }
 
