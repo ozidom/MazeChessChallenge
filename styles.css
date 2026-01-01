@@ -78,9 +78,13 @@ h4 {
   transition: background-color 200ms;
 }
 
-.chessboard .white:hover,
-.chessboard .black:hover {
+.chessboard .white,
+.chessboard .black {
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .chessboard .white:active,
@@ -188,8 +192,12 @@ h4 {
   background-color: rgba(0,0,0,0);
   color: #889CB9;
   cursor: pointer;
-  min-height: 32px;
+  min-height: 44px;
   transition: background-color 150ms;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .training-grounds-row button{
   font-size: 14px;
@@ -250,6 +258,11 @@ h4 {
   font-size: 12px;
   padding: 7px 5px;
   border-radius: 99px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
 }
 
 .navbar ul li a:hover {
@@ -330,6 +343,10 @@ h4 {
   transition: all 100ms;
   font-weight: bold;
   text-transform: uppercase;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .start-screen button:hover {
@@ -374,14 +391,19 @@ h4 {
   font-weight: bold;
   border-radius: 999px;
   border: none;
-  min-height: 32px;
-  padding: 0 8px;
+  min-height: 44px;
+  padding: 8px 16px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .close-button {
   display: block;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   display: grid;
   align-items: center;
   justify-items: center;
@@ -395,6 +417,11 @@ h4 {
   font-size: 28px;
   line-height: 1;
   font-weight: bold;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .close-button:hover,
@@ -440,8 +467,12 @@ h4 {
   background-color: rgba(0,0,0,0);
   color: #889CB9;
   cursor: pointer;
-  min-height: 32px;
+  min-height: 44px;
   transition: background-color 150ms;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .settings button:hover,
@@ -705,6 +736,11 @@ h4 {
   background-color: white;
   cursor: pointer !important;
   transition: all 0.3s ease-in-out;
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .make-button.selected {
