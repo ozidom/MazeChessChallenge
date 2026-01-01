@@ -45,7 +45,8 @@
             // Create a new div element
             const scoreDiv = document.createElement('div');
             if (score.isDateHeader){
-                highScoresDiv.appendChild(score.date); // Using username field to pass date headerz
+                scoreDiv.textContent = `${score.date}`;
+                highScoresDiv.appendChild(scoreDiv); // Using username field to pass date headerz
             }
             else {
                 // Set the content to show the name, moves, and time
