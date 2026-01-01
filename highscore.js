@@ -46,6 +46,10 @@
             const scoreDiv = document.createElement('div');
             if (score.isDateHeader){
                 scoreDiv.textContent = `${score.date}`;
+                scoreDiv.style.marginBottom = '10px';
+                scoreDiv.style.fontWeight = 'bold';
+                scoreDiv.style.padding = '1px';
+                scoreDiv.style.border = '1px solid white';
                 highScoresDiv.appendChild(scoreDiv); // Using username field to pass date headerz
             }
             else {
