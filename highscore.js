@@ -37,7 +37,7 @@
         // Clear any existing content
         highScoresDiv.innerHTML = '';
         const header = document.createElement('h2');  // Just 'h2' instead of '<H2>'
-        header.textContent = name + ' for today (GMT)';  // Set the text content separately
+        header.textContent = name + ' for the last week (GMT)';  // Set the text content separately
         highScoresDiv.appendChild(header);  
 
         // Loop through the scores and create divs for each entry
@@ -49,7 +49,8 @@
                 scoreDiv.style.marginBottom = '10px';
                 scoreDiv.style.fontWeight = 'bold';
                 scoreDiv.style.padding = '1px';
-                scoreDiv.style.border = '1px solid white';
+                scoreDiv.style.fontSize = '16px';
+                //scoreDiv.style.border = '1px solid white';
                 highScoresDiv.appendChild(scoreDiv); // Using username field to pass date headerz
             }
             else {
