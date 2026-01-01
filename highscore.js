@@ -50,6 +50,7 @@
                 scoreDiv.style.fontWeight = 'bold';
                 scoreDiv.style.padding = '1px';
                 scoreDiv.style.fontSize = '16px';
+                scoreDiv.style.color = 'yellow';
                 //scoreDiv.style.border = '1px solid white';
                 highScoresDiv.appendChild(scoreDiv); // Using username field to pass date headerz
             }
