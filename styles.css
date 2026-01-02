@@ -79,7 +79,8 @@ h4 {
 }
 
 .chessboard .white,
-.chessboard .black {
+.chessboard .black,
+.chessboard .gold {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
@@ -88,7 +89,8 @@ h4 {
 }
 
 .chessboard .white:active,
-.chessboard .black:active {
+.chessboard .black:active,
+.chessboard .gold:active {
   color: black;
   background-color: grey;
 }
