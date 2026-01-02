@@ -7,7 +7,7 @@ const CONTACT_TEXT = "<h2>(first) Contact Us</h2><p>Keep an eye on the social me
 */
 const TEXT_CONSTANTS = {
     game: {
-        text: "<p>Collect all gold and move to H8 to win. To remove static enemies (red) you must use same piece to remove. Click Training to play around and click help for the rule</p>"
+        text: "<p>Use ♚ ♝ ♜ or ♞ to move.Collect all gold, move to H8 to win. To remove enemies (red) must use same piece.</p>"
     },
     help: {
         text: `
@@ -16,7 +16,7 @@ const TEXT_CONSTANTS = {
             <p>Choose ♚ ♝ ♜ or ♞. Switch to another piece anytime during the game. Move from the bottom left to the top right in the fewest moves and must collect any gold (gold squares). Cannot move on blocked squares but Knights can jump over them.</p>
             <p>♚ Kings move one space any direction, ♜ Rooks (look like castles) move in cardinal directions (N,S,E and W), Bishops move diagonal, and ♞ Knights moves in an L shape: two squares in one direction, then one square sideways, and can jump over other pieces on the board.</p>
             <p>You can switch pieces any time. Avoid obstacles like rocks. If there is gold on the board (gold squares) you must land on each one before advancing to H8.</p>
-            <p>Check out the training grounds and use the challenge rating to practice. Any red squares (Guards) can only be removed by using the same type of piece. You do not need to remove guards to complete a puzzle.</p>
+            <p>Any red squares (Guards) can only be removed by using the same type of piece. You do not need to remove guards to complete a puzzle.</p>
             <h2>About</h2>
              <h3>Why</h3>
             <p><b>Why</b> did we make this? We made this for our friends to play a quick and easy game and to have a little bit of chess and a little bit of a good old fashion dungeoncrawling.</p>
@@ -37,14 +37,7 @@ const TEXT_CONSTANTS = {
                 <li>Youtube     @dungeonbard</li>
             </ul>
             
-            <p>For inquiries, email us at bardofthedungeon.com.</p>
-
-            <h3>We need you</h3>
-            <p>We need your help and support to get the word out about Mazechess.</p>
-            <ul>
-                <li>Share the link with friends.</li>
-                <li>Use the Clipboard button and send an image or tag #mazechess on social media.</li>
-            </ul>`
+            <p>For inquiries, email us at bardofthedungeon.com.</p>`
     },
     about: {
         text: `
