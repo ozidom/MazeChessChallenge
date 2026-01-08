@@ -77,8 +77,8 @@ const TEXT_CONSTANTS = {
             <h2>Settings</h2>
             <label for="username">Name</label>
             <input type="text" id="userNameInput" name="username" placeholder="Enter your username">
-            <button onclick="generateRandomUsername()">Rnd</button>
-            <button onclick="saveUsername()">Save</button>
+            <button id="randomUsernameBtn">Rnd</button>
+            <button id="saveUsernameBtn">Save</button>
             </div>`
     }
 };

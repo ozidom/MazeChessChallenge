@@ -58,11 +58,44 @@ function showMake() {
 function showSettings() {
     hideGameArea();
     document.getElementById("startScreen").style.display = 'none';
-    
+
     const contentDiv = document.getElementById('content');
     contentDiv.innerHTML = TEXT_CONSTANTS.settings.text;
     contentDiv.style.display = 'block';
-    document.getElementById('MakeChessBoard').style.display = 'none';
+
+    // Safely hide MakeChessBoard if it exists
+    const makeChessBoard = document.getElementById('MakeChessBoard');
+    if (makeChessBoard) {
+        makeChessBoard.style.display = 'none';
+    }
+
+    // Populate the input field with current username
+    const currentUsername = getUsername();
+    const usernameInput = document.getElementById('userNameInput');
+    if (usernameInput) {
+        usernameInput.value = currentUsername;
+    }
+
+    // Add event listeners for the buttons
+    const randomBtn = document.getElementById('randomUsernameBtn');
+    const saveBtn = document.getElementById('saveUsernameBtn');
+
+    if (randomBtn) {
+        randomBtn.addEventListener('click', generateRandomUsername);
+    }
+
+    if (saveBtn) {
+        saveBtn.addEventListener('click', saveUsername);
+    }
+
+    // Also allow saving with Enter key
+    if (usernameInput) {
+        usernameInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                saveUsername();
+            }
+        });
+    }
 }
 
 function saveUsername() {
