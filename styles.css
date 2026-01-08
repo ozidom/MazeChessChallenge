@@ -515,6 +515,7 @@ h4 {
   gap: 8px;
   padding: 0 8px 0 0;
   align-items: center;
+  margin-top: 8px;
 }
 
 .gamestats-name {
