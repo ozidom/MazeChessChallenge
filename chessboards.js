@@ -681,7 +681,9 @@ class ChessboardBlockedSpaces {
             {"date": "2026-07-16", "gold": [ "A8", "E8", "C7", "G7", "C6", "F6", "H6", "C5", "F5", "A4", "D4", "E4", "H2" ], "guard": [ "♚D7", "♞E7", "♞F7", "♚E6", "♞G6", "♚D5", "♞G5", "♞B4", "♚G4", "♞B3", "♞D3", "♞E3", "♞F3", "♞E2", "♞F2" ], "locations": [ "G1", "H1" ] },
             {"date": "2026-07-17", "gold": [ "A8", "E8", "A7", "C7", "A5", "C5", "A3", "C3", "E3", "H2" ], "guard": [ "♚D7", "♚D5", "♚B4", "♚C4", "♚D4", "♚G4", "♚F3", "♚B2", "♚D2", "♚E2", "♚D1" ], "locations": [ "F7", "G7", "F6", "G6", "F5", "G5" ] },
             {"date": "2026-07-18", "gold": [ "A8", "C8", "E8", "C6", "F6", "D5", "E4", "F3", "F1", "H1" ], "guard": [ "♞F8", "♞G8", "♝B7", "♞G7", "♞A6", "♞B6", "♞G6", "♞B5", "♝A4", "♞B4", "♞G4", "♞H4", "♝A3", "♝B3", "♞C3", "♞D3", "♞E3", "♞H3", "♝B2", "♝C2", "♞E2", "♝G2", "♞H2" ], "locations": [ "A7", "D7", "F7", "A5", "C5" ] },
-           { "date": "2026-07-19", "gold": [ "D8", "F7", "G6", "E5", "F5", "G5", "B4", "D4", "G3", "B2", "C2", "F2", "D1", "E1" ], "guard": [ "♞C7", "♞D7", "♞E7", "♚B6", "♚C6", "♚D6", "♞F6", "♞B5", "♚E4", "♚F4", "♚G4", "♚B3", "♚C3", "♚D3", "♞D2", "♞E2" ], "locations": [ "A8", "B8", "A7", "A5", "A4", "A3", "H2", "G1", "H1" ] }        // Method to retrieve blocked spaces by date
+            {"date": "2026-07-19", "gold": [ "D8", "F7", "G6", "E5", "F5", "G5", "B4", "D4", "G3", "B2", "C2", "F2", "D1", "E1" ], "guard": [ "♞C7", "♞D7", "♞E7", "♚B6", "♚C6", "♚D6", "♞F6", "♞B5", "♚E4", "♚F4", "♚G4", "♚B3", "♚C3", "♚D3", "♞D2", "♞E2" ], "locations": [ "A8", "B8", "A7", "A5", "A4", "A3", "H2", "G1", "H1" ] }
+        ]}
+        // Method to retrieve blocked spaces by date
         getBoardByDate(date) {
         // Find the entry that matches the given date
         const entry = this.data.find(config => config.date === date);
